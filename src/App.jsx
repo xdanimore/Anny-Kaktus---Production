@@ -6,10 +6,12 @@ import Landing from "./components/Landing";
 
 const App = () => {
   return (
-    <div>
+    <BrowserRouter>
       <Navbar />
-      <Landing />
-    </div>
+      <Routes>
+        <Route index element={<Landing />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 
