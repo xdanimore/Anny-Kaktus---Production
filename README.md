@@ -9,8 +9,8 @@ Here can be found the source code of the web application, of course, without env
 
 This project was made by:
 
-1. Andrés Rodríguez (Developer).
-2. Alejandro Quintero (Documentation).
-3. Nicolás Polo (Documentation).
+- Andrés Rodríguez (Developer).
+- Alejandro Quintero (Documentation).
+- Nicolás Polo (Documentation).
 
 The purpose of the source code to be public, is to have proof of the hard work that was done to make this project and the effort to make it.
