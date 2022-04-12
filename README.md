@@ -1,5 +1,5 @@
 # Anny Kaktus ~ Production Code
-# Developed by: Andrés Rodríguez (pulgueta_)
+## Developed by: Andrés Rodríguez (pulgueta_)
 
 > Documentation assisted by Alechini && PNicolas_51.
 
@@ -28,6 +28,8 @@ The purpose of the source code to be public, is to have proof of the hard work t
 - Heroicons.
 - TailwindCSS.
 - Firebase.
+
+### End of the project.
 
 Soon, the link to the actual website will be available when is deployed to Firebase.
 
