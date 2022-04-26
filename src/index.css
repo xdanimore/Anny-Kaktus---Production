@@ -8,17 +8,12 @@
   body {
     @apply font-[Inter];
   }
-}
 
-#navlinks {
-  animation: translate 400ms ease;
-}
-
-@keyframes translate {
-  0% {
-    transform: translateY(-100%);
+  .nav-link {
+    @apply mx-10 hover:text-flora-hover transition-all duration-300 ease-in;
   }
-  100% {
-    transform: translateY(0%);
+
+  .mobile {
+    @apply my-7 text-xl
   }
 }
