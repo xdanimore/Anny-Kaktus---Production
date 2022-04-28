@@ -16,9 +16,11 @@ const Landing = () => {
           PLANTAS DECORATIVAS
         </h1>
       </div>
-      <div className="h-[calc(100vh - 55vh)] flex flex-col items-center justify-center">
-        <h1>¡Decoración y detalles para alegrar el alma!</h1>
-        <Link to={'/productos'}>Comprar</Link>
+      <div className="h-auto flex flex-col items-center justify-center text-center">
+        <div className="py-6 px-8">
+          <h1 className="font-bold text-xl mb-4">¡Decoración y detalles para alegrar el alma!</h1>
+          <Link to={"/productos"}>Comprar</Link>
+        </div>
       </div>
     </div>
   );
