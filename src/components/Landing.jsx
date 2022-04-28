@@ -26,7 +26,7 @@ const Landing = () => {
             x: [100, 0],
             opacity: [0, 1],
             transition: {
-              duration: 1.25,
+              duration: 1.5,
             },
           }}
         >

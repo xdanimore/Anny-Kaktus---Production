@@ -24,18 +24,66 @@ const Navbar = () => {
       </motion.div>
 
       <ul className="hidden md:flex font-medium">
-        <li className="nav-link">
+        <motion.li
+          animate={{
+            y: [100, 0],
+            opacity: [0, 1],
+            transition: {
+              delay: 0.5,
+              duration: 1.5,
+              
+            }
+    
+          }}
+          className="nav-link"
+        >
           <Link to={"/"}>Inicio</Link>
-        </li>
-        <li className="nav-link">
+        </motion.li>
+        <motion.li
+          animate={{
+            y: [100, 0],
+            opacity: [0, 1],
+            transition: {
+              delay: .75,
+              duration: 1.5,
+              
+            },
+    
+          }}
+          className="nav-link"
+        >
           <Link to={"/productos"}>Productos</Link>
-        </li>
-        <li className="nav-link">
+        </motion.li>
+        <motion.li
+          animate={{
+            y: [100, 0],
+            opacity: [0, 1],
+            transition: {
+              delay: 1,
+              duration: 1.5,
+              
+            },
+    
+          }}
+          className="nav-link"
+        >
           <Link to={"/contacto"}>Contacto</Link>
-        </li>
-        <li className="nav-link">
+        </motion.li>
+        <motion.li
+          animate={{
+            y: [100, 0],
+            opacity: [0, 1],
+            transition: {
+              delay: 1.25,
+              duration: 1.5,
+              
+            },
+    
+          }}
+          className="nav-link"
+        >
           <Link to={"/carrito"}>Carrito</Link>
-        </li>
+        </motion.li>
       </ul>
 
       <motion.div
