@@ -26,7 +26,7 @@ const Navbar = () => {
       <ul className="hidden md:flex font-medium">
         <motion.li
           animate={{
-            y: [100, 0],
+            y: [-100, 0],
             opacity: [0, 1],
             transition: {
               delay: 0.5,
@@ -41,7 +41,7 @@ const Navbar = () => {
         </motion.li>
         <motion.li
           animate={{
-            y: [100, 0],
+            y: [-100, 0],
             opacity: [0, 1],
             transition: {
               delay: .75,
@@ -56,7 +56,7 @@ const Navbar = () => {
         </motion.li>
         <motion.li
           animate={{
-            y: [100, 0],
+            y: [-100, 0],
             opacity: [0, 1],
             transition: {
               delay: 1,
@@ -71,7 +71,7 @@ const Navbar = () => {
         </motion.li>
         <motion.li
           animate={{
-            y: [100, 0],
+            y: [-100, 0],
             opacity: [0, 1],
             transition: {
               delay: 1.25,
@@ -104,8 +104,8 @@ const Navbar = () => {
       <ul
         className={
           !isOpen
-            ? "absolute top-[-100%] left-0 w-screen h-[50vh] bg-flora-base flex flex-col justify-center items-center rounded-bl-2xl rounded-br-2xl ease-in-out duration-700"
-            : "absolute top-0 left-0 w-screen h-[50vh] bg-flora-base flex flex-col justify-center items-center rounded-bl-2xl rounded-br-2xl ease-in-out duration-700"
+            ? "absolute top-[-100%] left-0 w-screen h-[50vh] bg-flora-base flex flex-col justify-center items-center rounded-b-2xl ease-in-out duration-700"
+            : "absolute top-0 left-0 w-screen h-[50vh] bg-flora-base flex flex-col justify-center items-center rounded-b-2xl ease-in-out duration-700"
         }
       >
         <li className="mobile">
