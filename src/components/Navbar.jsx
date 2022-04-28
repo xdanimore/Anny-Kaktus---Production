@@ -12,6 +12,9 @@ const Navbar = () => {
       <motion.div animate={{
         y: [-100, 0],
         opacity: [0, 1],
+        transition: {
+          duration: 1.25,
+        }
       }}>
         <Link className="text-3xl font-bold" to={"/"}>
           Anny Kaktus
@@ -33,7 +36,14 @@ const Navbar = () => {
         </li>
       </ul>
 
-      <motion.div className="text-xl md:hidden z-10" onClick={handleClick}>
+      <motion.div className="text-xl md:hidden z-10" onClick={handleClick} animate={{
+        y: [-100, 0],
+        opacity: [0, 1],
+        transition: {
+          delay: 0.5,
+          duration: 1.25,
+        }
+      }}>
         {isOpen ? <RiCloseLine /> : <RiMenu3Fill />}
       </motion.div>
 
