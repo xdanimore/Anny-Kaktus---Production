@@ -5,7 +5,7 @@ module.exports = {
       colors: {
         flora: {
           base: "#4baf56",
-          second: "e73f3f",
+          second: "#e73f3f",
           hover: "#4bffaa",
           black: "#393939",
           white: "#f1f7f2",
@@ -15,7 +15,7 @@ module.exports = {
       textColor: {
         flora: {
           base: "#4baf56",
-          second: "e73f3f",
+          second: "#e73f3f",
           hover: "#4bffaa",
           black: "#393939",
           white: "#f1f7f2",

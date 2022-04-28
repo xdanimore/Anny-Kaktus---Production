@@ -18,8 +18,8 @@ const Landing = () => {
       </div>
       <div className="h-auto flex flex-col items-center justify-center text-center">
         <div className="py-6 px-8">
-          <h1 className="font-bold text-xl mb-4">¡Decoración y detalles para alegrar el alma!</h1>
-          <Link to={"/productos"}>Comprar</Link>
+          <h1 className="font-bold text-2xl mb-4 md:text-3xl lg:text-4xl">¡Decoración y detalles para alegrar el alma!</h1>
+          <Link className="hover:text-flora-second duration-300 transition-all ease-in-out font-medium text-flora-black" to={"/productos"}>Comprar</Link>
         </div>
       </div>
     </div>
