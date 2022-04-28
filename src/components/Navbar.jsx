@@ -7,7 +7,7 @@ const Navbar = () => {
   const handleClick = () => setIsOpen(!isOpen);
 
   return (
-    <nav className="w-full h-20 flex justify-around items-center bg-flora-base text-flora-mwhite">
+    <nav className="w-full h-20 flex justify-around items-center bg-flora-base text-flora-white">
       <Link className="text-3xl font-bold" to={"/"}>
         Anny Kaktus
       </Link>
