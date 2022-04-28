@@ -1,4 +1,4 @@
-import React from "react"
+import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
@@ -17,30 +17,43 @@ const Landing = () => {
             opacity: [0, 1],
             transition: {
               duration: 1.25,
-            }
+            },
           }}
         />
-        <motion.h1 className="font-extrabold text-flora-white text-[27px] md:text-[46px]" animate={{
-          x: [100, 0],
-          opacity: [0, 1],
-          transition: {
-            duration: 1.25,
-          }
-        }}>
+        <motion.h1
+          className="font-extrabold text-flora-white text-[27px] md:text-[46px]"
+          animate={{
+            x: [100, 0],
+            opacity: [0, 1],
+            transition: {
+              duration: 1.25,
+            },
+          }}
+        >
           PLANTAS DECORATIVAS
         </motion.h1>
       </div>
       <div className="h-auto flex flex-col items-center justify-center text-center">
-        <motion.div className="py-6 px-8" animate={{
-          y: [100, 0],
-          opacity: [0, 1],
-          transition: {
-            duration: 1.25,
-            delay: 0.5,
-          }
-        }}>
-          <h1 className="font-extrabold text-2xl mb-4 md:text-3xl lg:text-4xl">¡Decoración y detalles para alegrar el alma!</h1>
-          <Link className="hover:text-flora-second duration-300 transition-all ease-in-out font-medium text-flora-black" to={"/productos"}>Comprar</Link>
+        <motion.div
+          className="py-6 px-8"
+          animate={{
+            y: [100, 0],
+            opacity: [0, 1],
+            transition: {
+              duration: 1.25,
+              delay: 1,
+            },
+          }}
+        >
+          <h1 className="font-extrabold text-2xl mb-4 md:text-3xl lg:text-4xl">
+            ¡Decoración y detalles para alegrar el alma!
+          </h1>
+          <Link
+            className="hover:text-flora-second duration-300 transition-all ease-in-out font-medium text-flora-black"
+            to={"/productos"}
+          >
+            Comprar
+          </Link>
         </motion.div>
       </div>
     </motion.div>
