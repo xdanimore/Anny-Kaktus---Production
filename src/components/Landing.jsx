@@ -1,28 +1,49 @@
-import React from "react";
+import React from "react"
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
 import Planta from "../assets/Planta-Proyecto.png";
 
 const Landing = () => {
   return (
-    <div>
+    <motion.div>
       <div className="h-[55vh] md:h-[65vh] bg-flora-base rounded-bl-[40px] rounded-br-[40px] lg:rounded-br-none lg:rounded-bl-none flex flex-col items-center justify-evenly lg:flex-row lg:items-center lg:justify-evenly">
-        <img
+        <motion.img
           src={Planta}
           alt="Planta"
           className="w-[440px] ml-7 md:w-[600px] lg:w-[700px] lg:ml-0"
+          animate={{
+            x: [-100, 0],
+            opacity: [0, 1],
+            transition: {
+              duration: 1.25,
+            }
+          }}
         />
-        <h1 className="font-extrabold text-flora-white text-[27px] md:text-[46px]">
+        <motion.h1 className="font-extrabold text-flora-white text-[27px] md:text-[46px]" animate={{
+          x: [100, 0],
+          opacity: [0, 1],
+          transition: {
+            duration: 1.25,
+          }
+        }}>
           PLANTAS DECORATIVAS
-        </h1>
+        </motion.h1>
       </div>
       <div className="h-auto flex flex-col items-center justify-center text-center">
-        <div className="py-6 px-8">
-          <h1 className="font-bold text-2xl mb-4 md:text-3xl lg:text-4xl">¡Decoración y detalles para alegrar el alma!</h1>
+        <motion.div className="py-6 px-8" animate={{
+          y: [100, 0],
+          opacity: [0, 1],
+          transition: {
+            duration: 1.25,
+            delay: 0.5,
+          }
+        }}>
+          <h1 className="font-extrabold text-2xl mb-4 md:text-3xl lg:text-4xl">¡Decoración y detalles para alegrar el alma!</h1>
           <Link className="hover:text-flora-second duration-300 transition-all ease-in-out font-medium text-flora-black" to={"/productos"}>Comprar</Link>
-        </div>
+        </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

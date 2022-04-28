@@ -18,6 +18,6 @@ html, body {
   }
 
   .mobile {
-    @apply my-7 text-xl
+    @apply my-4 text-xl
   }
 }

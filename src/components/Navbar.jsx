@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { RiCloseLine, RiMenu3Fill } from "react-icons/ri";
 
@@ -8,9 +9,14 @@ const Navbar = () => {
 
   return (
     <nav className="w-full h-20 flex justify-around items-center bg-flora-base text-flora-white">
-      <Link className="text-3xl font-bold" to={"/"}>
-        Anny Kaktus
-      </Link>
+      <motion.div animate={{
+        y: [-100, 0],
+        opacity: [0, 1],
+      }}>
+        <Link className="text-3xl font-bold" to={"/"}>
+          Anny Kaktus
+        </Link>
+      </motion.div>
 
       <ul className="hidden md:flex font-medium">
         <li className="nav-link">
@@ -27,15 +33,15 @@ const Navbar = () => {
         </li>
       </ul>
 
-      <div className="text-xl md:hidden z-10" onClick={handleClick}>
+      <motion.div className="text-xl md:hidden z-10" onClick={handleClick}>
         {isOpen ? <RiCloseLine /> : <RiMenu3Fill />}
-      </div>
+      </motion.div>
 
       <ul
         className={
           !isOpen
-            ? "hidden"
-            : "absolute top-0 left-0 w-[75vw] h-screen bg-flora-base flex flex-col justify-center items-center"
+            ? "absolute top-[-100%] left-0 w-screen h-[50vh] bg-flora-base flex flex-col justify-center items-center rounded-bl-[32px] rounded-br-[40px] ease-in-out duration-500"
+            : "absolute top-0 left-0 w-screen h-[50vh] bg-flora-base flex flex-col justify-center items-center rounded-bl-[32px] rounded-br-[40px] ease-in-out duration-500"
         }
       >
         <li className="mobile">
