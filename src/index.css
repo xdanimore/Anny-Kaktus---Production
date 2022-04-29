@@ -5,7 +5,7 @@
 @tailwind utilities;
 
 html, body {
-  overflow: hidden
+  overflow-x: hidden
 }
 
 @layer base {
