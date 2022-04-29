@@ -104,8 +104,8 @@ const Navbar = () => {
       <ul
         className={
           !isOpen
-            ? "absolute top-[-100%] left-0 w-screen h-[50vh] bg-flora-base flex flex-col justify-center items-center rounded-b-2xl ease-in-out duration-700"
-            : "absolute top-0 left-0 w-screen h-[50vh] bg-flora-base flex flex-col justify-center items-center rounded-b-2xl ease-in-out duration-700"
+            ? "absolute top-[-100%] left-0 w-screen h-[10vh] bg-flora-hover flex flex-col justify-center items-center rounded-b-2xl ease-in-out duration-700"
+            : "absolute top-0 left-0 w-screen h-[40vh] bg-flora-base shadow-sm flex flex-col justify-center items-center rounded-b-2xl ease-in-out duration-700"
         }
       >
         <li className="mobile">

@@ -7,7 +7,7 @@ import Planta from "../assets/Planta-Proyecto.png";
 const Landing = () => {
   return (
     <motion.div>
-      <div className="h-[55vh] md:h-[65vh] bg-flora-base rounded-bl-[40px] rounded-br-[40px] lg:rounded-b-3xl flex flex-col items-center justify-evenly lg:flex-row lg:items-center lg:justify-evenly">
+      <div className="h-[55vh] md:h-[65vh] bg-flora-base rounded-bl-[40px] rounded-br-[40px] lg:rounded-b-[64px] flex flex-col items-center justify-evenly lg:flex-row lg:items-center lg:justify-evenly">
         <motion.img
           src={Planta}
           alt="Planta"
@@ -45,7 +45,7 @@ const Landing = () => {
             },
           }}
         >
-          <h1 className="font-extrabold text-2xl mb-4 md:text-3xl lg:text-4xl">
+          <h1 className="font-extrabold text-2xl mb-4 md:text-3xl lg:text-5xl">
             ¡Decoración y detalles para alegrar el alma!
           </h1>
           <Link
