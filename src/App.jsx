@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Landing from "./components/Landing";
 import Productos from "./components/Productos";
+import Producto from "./components/Producto";
 import NotFound from "./components/NotFound";
 
 const App = () => {
@@ -13,6 +14,7 @@ const App = () => {
       <Routes>
         <Route index element={<Landing />} />
         <Route path="/productos" element={<Productos />} />
+        <Route path="/productos/:id" element={<Producto />} />
 
         <Route path="*" element={<NotFound />} />
       </Routes>

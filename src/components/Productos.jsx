@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Card from "./Card";
+import { useParams } from "react-router-dom";
 import { db } from "../firebase";
 import { collection, getDocs } from "firebase/firestore";
 import SkeletonCard from "./SkeletonCard";
 
 const Productos = () => {
+  const { id } = useParams();
   const [loading, setLoading] = useState(true);
   const [product, setProduct] = useState([]);
   const collectionRef = collection(db, "productos");
@@ -40,6 +42,7 @@ const Productos = () => {
                 title={val.title}
                 description={val.description}
                 price={`$${val.price}`}
+                to={`/productos/${val.id}`}
               />
             );
           })}

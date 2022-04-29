@@ -1,11 +1,12 @@
 import React from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import Monitor from "../assets/Render-Monitor-Angle1.jpg";
 
 const Card = (props) => {
+  const id = useParams();
   return (
     <div className="h-96 w-80 rounded-xl shadow-md">
       <div>
@@ -24,7 +25,7 @@ const Card = (props) => {
           <h1 className="font-bold text-xl">{props.price || <Skeleton />}</h1>
           <Link
             className="bg-flora-second py-1 px-4 rounded-md text-flora-white font-semibold transition-colors duration-300 hover:bg-flora-secondhover"
-            to={"/producto/${id}"}
+            to={'/productos/:id'}
           >
             Comprar
           </Link>
