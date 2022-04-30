@@ -3,7 +3,7 @@ import Card from "./Card";
 import { useParams } from "react-router-dom";
 import { db } from "../firebase";
 import { collection, getDocs } from "firebase/firestore";
-import SkeletonCard from "./SkeletonCard";
+import { Spinner } from "reactstrap";
 
 const Productos = () => {
   const { id } = useParams();
@@ -33,8 +33,8 @@ const Productos = () => {
           &#127807; PRODUCTOS &#127807;
         </h1>
         <div className="grid grid-cols-1 gap-10 place-content-center mx-auto md:grid-cols-2 lg:grid-cols-3 lg:gap-32">
-          {loading && Array(3).fill(<SkeletonCard />)}
-            
+          {loading && <Spinner />}
+
           {product.map((val, id) => {
             return (
               <Card

@@ -13,9 +13,9 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route index element={<Landing />} />
-        <Route path="/productos" element={<Productos />} />
-        <Route path="/productos/:id" element={<Producto />} />
-
+        <Route path="/productos" element={<Productos />}>
+          <Route path="/productos/:id" element={<Producto />} />
+        </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
