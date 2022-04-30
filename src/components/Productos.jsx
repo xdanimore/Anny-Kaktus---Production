@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import Card from "./Card";
 import { useParams } from "react-router-dom";
 import { db } from "../firebase";
 import { collection, getDocs } from "firebase/firestore";
 import { Spinner } from "reactstrap";
+import { motion } from "framer-motion";
 
 const Productos = () => {
   const { id } = useParams();
@@ -32,9 +33,22 @@ const Productos = () => {
         <h1 className="text-2xl font-extrabold text-center mt-3 mb-8 md:my-7 lg:my-10 md:text-3xl lg:text-4xl">
           &#127807; PRODUCTOS &#127807;
         </h1>
-        <div className="grid grid-cols-1 gap-10 place-content-center mx-auto md:grid-cols-2 lg:grid-cols-3 lg:gap-32">
-          {loading && <Spinner />}
+        {loading && <Spinner />}
 
+        <motion.div
+          initial={{
+            opacity: 0,
+            y: 200,
+          }}
+          animate={{
+            opacity: 1,
+            y: 0,
+            transition: {
+              duration: 2,
+            },
+          }}
+          className="grid grid-cols-1 gap-10 place-content-center mx-auto md:grid-cols-2 lg:grid-cols-3 lg:gap-32"
+        >
           {product.map((val, id) => {
             return (
               <Card
@@ -42,11 +56,10 @@ const Productos = () => {
                 title={val.title}
                 description={val.description}
                 price={`$${val.price}`}
-                to={`/productos/${val.id}`}
               />
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </div>
   );
