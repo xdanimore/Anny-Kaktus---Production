@@ -33,7 +33,11 @@ const Productos = () => {
         <h1 className="text-2xl font-extrabold text-center mt-3 mb-8 md:my-7 lg:my-10 md:text-3xl lg:text-4xl">
           &#127807; PRODUCTOS &#127807;
         </h1>
-        {loading && <SkeletonCard />}
+        {loading && (<div className="grid grid-cols-1 gap-10 place-content-center mx-auto md:grid-cols-2 lg:grid-cols-3 lg:gap-32">
+          <SkeletonCard />
+          <SkeletonCard />
+          <SkeletonCard />
+        </div>)}
 
         <motion.div
           initial={{

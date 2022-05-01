@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
 import Login from "./components/Login";
+import Admin from "./components/Admin";
 import Landing from "./components/Landing";
 import Productos from "./components/Productos";
 import Producto from "./components/Producto";
@@ -14,6 +15,7 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route path='/login' element={<Login />} />
+        <Route path='/admin' element={<Admin />} />
         <Route index element={<Landing />} />
         <Route path="/productos" element={<Productos />}>
           <Route path="/productos/:id" element={<Producto />} />
