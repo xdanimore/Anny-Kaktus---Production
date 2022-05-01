@@ -26,7 +26,7 @@ const Producto = () => {
 
   return (
     <div>
-      <h1>Sexo {id}</h1>
+      <h1>lorem {title}</h1>
     </div>
   );
 };
