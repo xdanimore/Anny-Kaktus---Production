@@ -3,12 +3,12 @@ import { collection, getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_KEY,
+  apiKey: "",
   authDomain: "anny-kaktus.firebaseapp.com",
   projectId: "anny-kaktus",
   storageBucket: "anny-kaktus.appspot.com",
   messagingSenderId: "471743892676",
-  appId: import.meta.env.VITE_FIREBASE_ID,
+  appId: "",
 };
 
 // Initialize Firebase
