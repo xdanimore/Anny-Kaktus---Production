@@ -1,20 +1,22 @@
 import React, { useState, useEffect, Suspense } from "react";
 import Card from "./Card";
 import { useParams } from "react-router-dom";
-import { db } from "../firebase";
-import { collection, getDocs } from "firebase/firestore";
+import { productos } from "../firebase";
+import { getDocs } from "firebase/firestore";
 import { Spinner } from "reactstrap";
 import { motion } from "framer-motion";
+import SkeletonCard from "./SkeletonCard";
+
+const Cards = React.lazy(() => import("./Card"));
 
 const Productos = () => {
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
   const [product, setProduct] = useState([]);
-  const collectionRef = collection(db, "productos");
 
   useEffect(() => {
     const getProducts = async () => {
-      const data = await getDocs(collectionRef);
+      const data = await getDocs(productos);
       setProduct(
         data.docs.map((doc) => ({
           ...doc.data(),
@@ -33,32 +35,32 @@ const Productos = () => {
         <h1 className="text-2xl font-extrabold text-center mt-3 mb-8 md:my-7 lg:my-10 md:text-3xl lg:text-4xl">
           &#127807; PRODUCTOS &#127807;
         </h1>
-        {loading && <Spinner />}
-
         <motion.div
           initial={{
             opacity: 0,
-            y: 200,
+            x: -100,
           }}
           animate={{
             opacity: 1,
-            y: 0,
+            x: 0,
             transition: {
               duration: 2,
             },
           }}
           className="grid grid-cols-1 gap-10 place-content-center mx-auto md:grid-cols-2 lg:grid-cols-3 lg:gap-32"
         >
-          {product.map((val, id) => {
-            return (
-              <Card
-                key={id}
-                title={val.title}
-                description={val.description}
-                price={`$${val.price}`}
-              />
-            );
-          })}
+          <Suspense fallback={<h1>Loading...</h1>}>
+            {product.map((val, id) => {
+              return (
+                <Cards
+                  key={id}
+                  title={val.title}
+                  description={val.description}
+                  price={`$${val.price}`}
+                />
+              );
+            })}
+          </Suspense>
         </motion.div>
       </div>
     </div>

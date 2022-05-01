@@ -104,21 +104,21 @@ const Navbar = () => {
       <ul
         className={
           !isOpen
-            ? "absolute top-[-100%] left-0 w-screen h-[10vh] bg-flora-hover flex flex-col justify-center items-center rounded-b-2xl ease-in-out duration-700"
-            : "absolute top-0 left-0 w-screen h-[40vh] bg-flora-base shadow-sm flex flex-col justify-center items-center rounded-b-2xl ease-in-out duration-700"
+            ? "absolute top-[-30%] left-0 w-screen h-[25vh] bg-flora-base opacity-75 flex flex-col justify-center items-center rounded-b-2xl ease-in-out duration-700"
+            : "absolute top-20 left-0 w-screen h-[40vh] bg-flora-base shadow-sm flex flex-col justify-center items-center rounded-b-2xl ease-in-out duration-700"
         }
       >
         <li className="mobile">
-          <Link to={"/"}>Inicio</Link>
+          <Link to={"/"} onClick={handleClick}>Inicio</Link>
         </li>
         <li className="mobile">
-          <Link to={"/productos"}>Productos</Link>
+          <Link to={"/productos"} onClick={handleClick}>Productos</Link>
         </li>
         <li className="mobile">
-          <Link to={"/contacto"}>Contacto</Link>
+          <Link to={"/contacto"} onClick={handleClick}>Contacto</Link>
         </li>
         <li className="mobile">
-          <Link to={"/carrito"}>Carrito</Link>
+          <Link to={"/carrito"} onClick={handleClick}>Carrito</Link>
         </li>
       </ul>
     </nav>

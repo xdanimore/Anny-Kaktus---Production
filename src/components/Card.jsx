@@ -27,7 +27,7 @@ const Card = (props) => {
             className="bg-flora-second py-1 px-4 rounded-md text-flora-white font-semibold transition-colors duration-300 hover:bg-flora-secondhover"
             onClick={() => nav(`/productos/${id}`)}
           >
-            Comprar
+            Ver más
           </button>
         </div>
       </div>

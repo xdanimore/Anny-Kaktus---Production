@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { db } from "../firebase";
+import { productos } from "../firebase";
 import { collection, getDocs } from "firebase/firestore";
 
 const Producto = () => {
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
   const [product, setProduct] = useState([]);
-  const collectionRef = collection(db, "productos");
 
   useEffect(() => {
     const getProducts = async () => {
-      const data = await getDocs(collectionRef);
+      const data = await getDocs(productos);
       setProduct(
         data.docs.map((doc) => ({
           ...doc.data(),
