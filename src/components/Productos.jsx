@@ -1,13 +1,11 @@
-import React, { useState, useEffect, Suspense } from "react";
+import React, { useState, useEffect } from "react";
 import Card from "./Card";
 import { useParams } from "react-router-dom";
 import { productos } from "../firebase";
 import { getDocs } from "firebase/firestore";
-import { Spinner } from "reactstrap";
 import { motion } from "framer-motion";
-import SkeletonCard from "./SkeletonCard";
 
-const Cards = React.lazy(() => import("./Card"));
+import SkeletonCard from './SkeletonCard'; 
 
 const Productos = () => {
   const { id } = useParams();
@@ -35,6 +33,8 @@ const Productos = () => {
         <h1 className="text-2xl font-extrabold text-center mt-3 mb-8 md:my-7 lg:my-10 md:text-3xl lg:text-4xl">
           &#127807; PRODUCTOS &#127807;
         </h1>
+        {loading && <SkeletonCard />}
+
         <motion.div
           initial={{
             opacity: 0,
@@ -49,18 +49,16 @@ const Productos = () => {
           }}
           className="grid grid-cols-1 gap-10 place-content-center mx-auto md:grid-cols-2 lg:grid-cols-3 lg:gap-32"
         >
-          <Suspense fallback={<h1>Loading...</h1>}>
-            {product.map((val, id) => {
-              return (
-                <Cards
-                  key={id}
-                  title={val.title}
-                  description={val.description}
-                  price={`$${val.price}`}
-                />
-              );
-            })}
-          </Suspense>
+          {product.map((val, id) => {
+            return (
+              <Card
+                key={id}
+                title={val.title}
+                description={val.description}
+                price={`$${val.price}`}
+              />
+            );
+          })}
         </motion.div>
       </div>
     </div>

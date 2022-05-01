@@ -23,7 +23,7 @@ const Navbar = () => {
         </Link>
       </motion.div>
 
-      <ul className="hidden md:flex font-semibold">
+      <ul className="hidden md:flex font-medium">
         <motion.li
           animate={{
             y: [-100, 0],
