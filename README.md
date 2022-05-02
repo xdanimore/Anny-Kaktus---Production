@@ -23,9 +23,11 @@ The purpose of the source code to be public, is to have proof of the hard work t
 - GitHub.
 - React.
 - React-Router-DOM.
+- React-Helmet-Async.
 - React-Hot-Toast.
+- React-Loading-Skeleton.
+- React-Icons.
 - Framer Motion.
-- Heroicons.
 - TailwindCSS.
 - Firebase.
 
