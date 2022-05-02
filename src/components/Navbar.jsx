@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { MenuFoldOutlined, CloseOutlined } from "@ant-design/icons";
+import { MenuOutlined, CloseOutlined } from "@ant-design/icons";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -90,7 +90,7 @@ const Navbar = () => {
           },
         }}
       >
-        {isOpen ? <CloseOutlined /> : <MenuFoldOutlined />}
+        {isOpen ? <CloseOutlined /> : <MenuOutlined />}
       </motion.div>
 
       <ul

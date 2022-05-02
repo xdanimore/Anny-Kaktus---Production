@@ -62,12 +62,12 @@ const Admin = () => {
   return (
     <HelmetProvider>
       <Helmet>
-        <title>Portal del Administrador</title>
+        <title>Añadir productos</title>
       </Helmet>
       <div className="h-[65vh] w-screen grid place-content-center place-self-center">
         <Toaster />
         <form
-          className="p-4 flex flex-col w-[350px] md:w-[540px] shadow-lg rounded-lg"
+          className="p-6 border-[1px] border-gray-200 flex flex-col w-[350px] md:w-[540px] shadow-lg rounded-lg"
           onSubmit={createProduct}
         >
           <input
@@ -101,8 +101,9 @@ const Admin = () => {
             type="file"
             name="imagen"
             id={id}
+            multiple
             accept="image/*"
-            className="w-2/4 rounded-md my-3 bg-flora-white cursor-pointer file:cursor-pointer file:transition-colors file:duration-300 file:bg-flora-base file:hover:bg-flora-hover file:border-none file:w-36 file:w-full file:p-4"
+            className="h-14 text-flora-black file:transition-all file:duration-300 file:hover:text-flora-black file:hover:bg-flora-hover file:px-3 file:cursor-pointer file:text-flora-white file:h-full file:w-2/2 file:bg-flora-base file:border-0 rounded-md my-3 bg-flora-white"
           />
           <button
             type="submit"
