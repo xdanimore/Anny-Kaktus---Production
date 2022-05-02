@@ -67,7 +67,7 @@ const Admin = () => {
       <div className="h-[65vh] w-screen grid place-content-center place-self-center">
         <Toaster />
         <form
-          className="p-6 border-[1px] border-gray-200 flex flex-col w-[350px] md:w-[540px] shadow-lg rounded-lg"
+          className="p-6 border-[1px] border-gray-200 flex flex-col w-[350px] md:w-[540px] shadow-lg rounded-xl"
           onSubmit={createProduct}
         >
           <input
@@ -103,11 +103,11 @@ const Admin = () => {
             id={id}
             multiple
             accept="image/*"
-            className="h-14 text-flora-black file:transition-all file:duration-300 file:hover:text-flora-black file:hover:bg-flora-hover file:px-3 file:cursor-pointer file:text-flora-white file:h-full file:w-2/2 file:bg-flora-base file:border-0 rounded-md my-3 bg-flora-white"
+            className="h-14 text-flora-black file:transition-all file:duration-300 file:hover:text-flora-white file:hover:bg-flora-secondhover file:px-3 file:cursor-pointer file:text-flora-white file:h-full file:w-2/2 file:bg-flora-second file:border-0 rounded-md my-3 bg-flora-white"
           />
           <button
             type="submit"
-            className="bg-flora-second p-4 rounded-md font-semibold text-flora-white transition-all duration-300 hover:bg-red-700"
+            className="bg-flora-base p-4 rounded-md font-semibold text-flora-white transition-all duration-300 hover:bg-green-600"
           >
             Submit
           </button>
