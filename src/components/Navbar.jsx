@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { RiCloseLine, RiMenu3Fill } from "react-icons/ri";
+import { MenuFoldOutlined, CloseOutlined } from "@ant-design/icons";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,9 +31,7 @@ const Navbar = () => {
             transition: {
               delay: 0.5,
               duration: 1.5,
-              
-            }
-    
+            },
           }}
           className="nav-link"
         >
@@ -44,11 +42,9 @@ const Navbar = () => {
             y: [-100, 0],
             opacity: [0, 1],
             transition: {
-              delay: .75,
+              delay: 0.75,
               duration: 1.5,
-              
             },
-    
           }}
           className="nav-link"
         >
@@ -61,9 +57,7 @@ const Navbar = () => {
             transition: {
               delay: 1,
               duration: 1.5,
-              
             },
-    
           }}
           className="nav-link"
         >
@@ -76,9 +70,7 @@ const Navbar = () => {
             transition: {
               delay: 1.25,
               duration: 1.5,
-              
             },
-    
           }}
           className="nav-link"
         >
@@ -98,7 +90,7 @@ const Navbar = () => {
           },
         }}
       >
-        {isOpen ? <RiCloseLine /> : <RiMenu3Fill />}
+        {isOpen ? <CloseOutlined /> : <MenuFoldOutlined />}
       </motion.div>
 
       <ul
@@ -109,16 +101,24 @@ const Navbar = () => {
         }
       >
         <li className="mobile">
-          <Link to={"/"} onClick={handleClick}>Inicio</Link>
+          <Link to={"/"} onClick={handleClick}>
+            Inicio
+          </Link>
         </li>
         <li className="mobile">
-          <Link to={"/productos"} onClick={handleClick}>Productos</Link>
+          <Link to={"/productos"} onClick={handleClick}>
+            Productos
+          </Link>
         </li>
         <li className="mobile">
-          <Link to={"/contacto"} onClick={handleClick}>Contacto</Link>
+          <Link to={"/contacto"} onClick={handleClick}>
+            Contacto
+          </Link>
         </li>
         <li className="mobile">
-          <Link to={"/carrito"} onClick={handleClick}>Carrito</Link>
+          <Link to={"/carrito"} onClick={handleClick}>
+            Carrito
+          </Link>
         </li>
       </ul>
     </nav>
