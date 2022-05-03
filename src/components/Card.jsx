@@ -8,10 +8,10 @@ const Card = (props) => {
   const nav = useNavigate();
 
   return (
-    <div className="h-96 w-80 rounded-xl shadow-md">
+    <div className="h-96 w-80 rounded-xl shadow-md bg-white">
       <div>
         <img
-          src={Monitor}
+          src={props.image}
           alt="Product"
           className="object-cover rounded-t-xl"
         />

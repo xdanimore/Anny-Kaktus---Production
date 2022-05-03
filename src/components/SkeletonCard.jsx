@@ -4,7 +4,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 const SkeletonCard = () => {
   return (
-    <div className="h-96 w-80 rounded-xl shadow-md">
+    <div className="h-96 w-80 rounded-xl shadow-md bg-white">
       <div className="py-4 px-6 h-[200px] overflow-hidden flex flex-col justify-between">
         <h1 className="font-bold text-xl">{<Skeleton />}</h1>
         <p className="text-flora-black text-sm">
