@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import Monitor from "../assets/Render-Monitor-Angle1.jpg";
 
@@ -27,6 +27,9 @@ const Card = (props) => {
           >
             Ver más
           </Link>
+          {/* <button onClick={handleNav(props.to)}>
+            Ver más
+          </button> */}
         </div>
       </div>
     </div>
