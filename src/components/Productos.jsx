@@ -68,6 +68,7 @@ const Productos = () => {
                   title={val.title}
                   description={val.description}
                   price={`$${val.price}`}
+                  to={val.id}
                 />
               );
             })}

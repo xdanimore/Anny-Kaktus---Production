@@ -8,24 +8,23 @@ const Producto = () => {
   const [loading, setLoading] = useState(true);
   const [product, setProduct] = useState([]);
 
-  useEffect(() => {
+  /* useEffect(() => {
     const getProducts = async () => {
       const data = await getDocs(productos);
-      setProduct(
-        data.docs.map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-        }))
-      );
+      data.forEach((element) => {
+        if (element.id === id) {
+          console.log(element.doc.data());
+        }
+      });
       setLoading(false);
     };
 
     getProducts();
-  }, []);
+  }, []); */
 
   return (
     <div>
-      <h1>lorem {title}</h1>
+      <h1>lorem ipsum</h1>
     </div>
   );
 };

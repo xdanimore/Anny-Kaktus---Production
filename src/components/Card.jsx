@@ -1,17 +1,15 @@
 import React from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import Monitor from "../assets/Render-Monitor-Angle1.jpg";
 
 const Card = (props) => {
-  const id = useParams();
-  const nav = useNavigate();
 
   return (
     <div className="h-96 w-80 rounded-xl shadow-md bg-white">
       <div>
         <img
-          src={props.image}
+          src={props.src}
           alt="Product"
           className="object-cover rounded-t-xl"
         />
@@ -23,12 +21,12 @@ const Card = (props) => {
         </p>
         <div className="flex justify-between items-center mt-4">
           <h1 className="font-bold text-xl">{props.price}</h1>
-          <button
+          <Link
             className="bg-flora-second py-1 px-4 rounded-md text-flora-white font-semibold transition-colors duration-300 hover:bg-flora-secondhover"
-            onClick={() => nav(`/productos/${id}`)}
+            to={`/productos/${props.to}`}
           >
             Ver más
-          </button>
+          </Link>
         </div>
       </div>
     </div>
