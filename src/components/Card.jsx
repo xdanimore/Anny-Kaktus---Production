@@ -1,8 +1,6 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import Monitor from "../assets/Render-Monitor-Angle1.jpg";
-
 const Card = (props) => {
 
   return (
@@ -11,7 +9,7 @@ const Card = (props) => {
         <img
           src={props.src}
           alt="Product"
-          className="object-cover rounded-t-xl"
+          className="object-cover w-full h-[180px] rounded-t-xl"
         />
       </div>
       <div className="py-4 px-6 h-[200px] overflow-hidden flex flex-col justify-between">
