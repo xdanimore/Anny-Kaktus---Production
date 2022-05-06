@@ -6,6 +6,7 @@ import Landing from "./components/Landing";
 import Productos from "./components/Productos";
 import Producto from "./components/Producto";
 import Contacto from "./components/Contacto";
+import Cart from "./components/Cart";
 import NotFound from "./components/NotFound";
 
 const App = () => {
@@ -18,6 +19,7 @@ const App = () => {
           <Route path=":to" element={<Producto />} />
         </Route>
         <Route path="contacto" element={<Contacto />} />
+        <Route path="carrito" element={<Cart />} />
 
         <Route path="*" element={<NotFound />} />
       </Routes>

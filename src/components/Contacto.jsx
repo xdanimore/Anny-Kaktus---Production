@@ -7,19 +7,27 @@ const Contacto = () => {
   const [surname, setSurname] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
-  const [tel, setTel] = useState();
+  const [tel, setTel] = useState('');
 
   const sendEmail = (ev) => {
     ev.preventDefault();
-    if (name === "" || surname === "" || email === "" || message === "") {
+    if (
+      name === "" ||
+      surname === "" ||
+      email === "" ||
+      tel === "" ||
+      message === ""
+    ) {
       toast.error("¡Tienes que rellenar los campos!");
     } else {
-      toast.success(`¡Correo enviado a ${email}!`);
+      toast('¡Correo enviado!', {
+          icon: '📧',
+      })
       setName("");
       setSurname("");
       setEmail("");
       setMessage("");
-      setTel("");
+      setTel('');
     }
   };
 
@@ -53,7 +61,7 @@ const Contacto = () => {
         }}
         transition={{
           delay: 0.5,
-            duration: 1.25,
+          duration: 1.25,
         }}
         onSubmit={sendEmail}
         className="bg-white rounded-2xl max-w-xs mx-auto py-5 h-[450px] shadow-lg md:max-w-md"
@@ -101,7 +109,7 @@ const Contacto = () => {
           <input
             type="submit"
             value="Enviar"
-            className="bg-flora-base px-8 py-3 cursor-pointer rounded-lg text-flora-white my-4 duration-300 transition-all hover:bg-green-600"
+            className="bg-flora-base px-10 py-3 cursor-pointer rounded-lg font-medium text-flora-white my-4 duration-300 transition-all hover:bg-green-600"
           />
         </div>
       </motion.form>

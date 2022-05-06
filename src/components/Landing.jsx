@@ -58,7 +58,7 @@ const Landing = () => {
               className="hover:text-flora-second duration-300 transition-all ease-in-out font-medium text-flora-black"
               to={"/productos"}
             >
-              Comprar
+              Ver catálogo
             </Link>
           </motion.div>
         </div>
