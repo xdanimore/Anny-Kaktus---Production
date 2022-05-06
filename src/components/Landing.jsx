@@ -51,7 +51,7 @@ const Landing = () => {
               },
             }}
           >
-            <h1 className="font-extrabold text-2xl mb-4 md:text-3xl lg:text-5xl">
+            <h1 className="font-bold text-2xl mb-4 md:text-3xl lg:text-5xl">
               ¡Decoración y detalles para alegrar el alma!
             </h1>
             <Link

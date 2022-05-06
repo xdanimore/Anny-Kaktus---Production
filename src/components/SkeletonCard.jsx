@@ -6,7 +6,7 @@ const SkeletonCard = () => {
   return (
     <div className="h-96 w-80 rounded-xl shadow-md bg-white">
       <div>
-        <Skeleton className="h-44 w-full" />
+        <Skeleton className="h-40 w-full" />
       </div>
       <div className="py-4 px-6 h-[200px] overflow-hidden flex flex-col justify-between">
         <h1 className="font-bold text-xl">{<Skeleton />}</h1>

@@ -9,12 +9,12 @@ const Card = (props) => {
         <img
           src={props.src}
           alt="Product"
-          className="object-cover w-full h-[180px] rounded-t-xl"
+          className="object-cover w-full h-44 rounded-t-xl"
         />
       </div>
       <div className="py-4 px-6 h-[200px] overflow-hidden flex flex-col justify-between">
         <h1 className="font-bold text-xl">{props.title}</h1>
-        <p className="text-flora-black text-sm">
+        <p className="text-neutral-500 text-sm">
           {props.description}
         </p>
         <div className="flex justify-between items-center mt-4">
@@ -25,9 +25,6 @@ const Card = (props) => {
           >
             Ver más
           </Link>
-          {/* <button onClick={handleNav(props.to)}>
-            Ver más
-          </button> */}
         </div>
       </div>
     </div>

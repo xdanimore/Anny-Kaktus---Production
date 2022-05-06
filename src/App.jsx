@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import Landing from "./components/Landing";
 import Productos from "./components/Productos";
 import Producto from "./components/Producto";
+import Contacto from "./components/Contacto";
 import NotFound from "./components/NotFound";
 
 const App = () => {
@@ -16,6 +17,8 @@ const App = () => {
         <Route path="productos" element={<Productos />}>
           <Route path=":to" element={<Producto />} />
         </Route>
+        <Route path="contacto" element={<Contacto />} />
+
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

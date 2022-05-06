@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { MenuOutlined, CloseOutlined, ShoppingCartOutlined } from "@ant-design/icons";
+import {
+  MenuOutlined,
+  CloseOutlined,
+  ShoppingCartOutlined,
+} from "@ant-design/icons";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -97,7 +101,7 @@ const Navbar = () => {
         className={
           !isOpen
             ? "absolute top-[-100%] left-0 w-screen h-[50vh] bg-flora-base flex flex-col justify-center items-center rounded-b-[40px] ease-in-out duration-1000"
-            : "absolute top-[75px] left-0 w-screen h-[50vh] bg-flora-base shadow-sm flex flex-col justify-center items-center rounded-b-[40px] ease-in-out duration-1000"
+            : "absolute top-[75px] left-0 w-screen h-[45vh] bg-flora-base shadow-sm flex flex-col justify-center items-center rounded-b-[40px] ease-in-out duration-1000"
         }
       >
         <li className="mobile">
@@ -116,7 +120,9 @@ const Navbar = () => {
           </Link>
         </li>
         <li className="mobile">
-          <Link to={"/carrito"} onClick={handleClick}><ShoppingCartOutlined className="text-2xl" /></Link>
+          <Link to={"/carrito"} onClick={handleClick}>
+            <ShoppingCartOutlined className="text-2xl" />
+          </Link>
         </li>
       </ul>
     </nav>
