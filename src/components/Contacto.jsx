@@ -1,6 +1,9 @@
 import React, { useState, useRef } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { motion } from "framer-motion";
+import emailjs from "@emailjs/browser";
+
+import { EMAILJS_PUBLIC_KEY } from "../api";
 
 const Contacto = () => {
   const [name, setName] = useState("");
@@ -19,7 +22,7 @@ const Contacto = () => {
         "service_z0p5mdr",
         "template_ejmobov",
         form.current,
-        import.meta.VITE_EMAILJS_PUBLIC
+        EMAILJS_PUBLIC_KEY
       );
       toast("¡Correo enviado!", {
         icon: "📧",
@@ -101,7 +104,7 @@ const Contacto = () => {
             value={message}
             name="message"
             onChange={(e) => setMessage(e.target.value)}
-            className="mb-4 py-2 px-4 w-[260px] md:w-[320px] lg:w-[360px] border-2 text-sm border-flora-black/30 rounded-lg placeholder:text-lg outline-flora-base"
+            className="mb-4 py-2 px-4 w-[260px] h-48 md:w-[320px] lg:w-[360px] border-2 border-flora-black/30 rounded-lg placeholder:text-lg outline-flora-base"
           />
 
           <input
