@@ -9,18 +9,12 @@ const SkeletonCard = () => {
         <Skeleton className="h-40 w-full" />
       </div>
       <div className="py-4 px-6 h-[200px] overflow-hidden flex flex-col justify-between">
-        <h1 className="font-bold text-xl">{<Skeleton />}</h1>
-        <p className="text-flora-black text-sm">
-          {<Skeleton />}
-        </p>
+        <h1 className="">{<Skeleton count={1} width={50}/>}</h1>
+        <p>{<Skeleton count={4} />}</p>
         <div className="flex justify-between items-center mt-4">
-          <h1 className="font-bold text-xl">{<Skeleton />}</h1>
-          <h1
-            className="bg-neutral-300 py-1 px-4 rounded-md text-flora-white font-semibold transition-colors duration-300 hover:bg-flora-secondhover"
-            to={"/producto/${id}"}
-          >
-            {<Skeleton />}
-          </h1>
+          <h1>{<Skeleton width={75} height={35} />}</h1>
+          <h1>{<Skeleton width={100} height={35}/>}</h1>
+
         </div>
       </div>
     </div>
