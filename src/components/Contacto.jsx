@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
 
 import { EMAILJS_PUBLIC_KEY } from "../api";
+import { CodeFilled } from "@ant-design/icons";
 
 const Contacto = () => {
   const [name, setName] = useState("");
@@ -49,7 +50,7 @@ const Contacto = () => {
         transition={{
           duration: 1.25,
         }}
-        className="text-center py-5 text-3xl text-flora-black font-semibold"
+        className="text-center py-5 text-3xl text-black font-semibold"
       >
         Contacto
       </motion.h1>
@@ -68,7 +69,7 @@ const Contacto = () => {
           duration: 1.25,
         }}
         onSubmit={sendEmail}
-        className="bg-white rounded-2xl max-w-xs mx-auto py-5 h-[450px] shadow-lg md:max-w-md"
+        className="bg-white rounded-2xl max-w-[350px] mx-auto py-5 h-[450px] shadow-lg md:max-w-md"
       >
         <div className="flex flex-col items-center justify-center h-full">
           <input
@@ -114,6 +115,94 @@ const Contacto = () => {
           />
         </div>
       </motion.form>
+      <motion.div
+        initial={{
+          x: 100,
+          opacity: 0,
+        }}
+        animate={{
+          x: 0,
+          opacity: 1,
+          transition: {
+            delay: 0.75,
+            duration: 1.5,
+          },
+        }}
+        className="flex flex-col items-center justify-center mx-auto max-w-[360px] md:max-w-xl lg:max-w-3xl bg-white rounded-xl p-4 mt-10 shadow-lg"
+      >
+        <motion.h1
+          initial={{
+            x: -100,
+            opacity: 0,
+          }}
+          animate={{
+            x: 0,
+            opacity: 1,
+            transition: {
+              duration: 1.25,
+              delay: 1,
+            },
+          }}
+          className="text-xl font-semibold"
+        >
+          Desarrollado en:
+        </motion.h1>
+        <img
+          src="https://web.udi.edu.co/files/img/logo-udi-web.png"
+          alt="Logo Universidad de Investigación y Desarrollo -UDI-"
+        />
+        <motion.h2 className="font-medium">Integrantes:</motion.h2>
+        <ul className="text-center">
+          <motion.li
+            initial={{
+              x: 100,
+              opacity: 0,
+            }}
+            animate={{
+              x: 0,
+              opacity: 1,
+              transition: {
+                duration: 1.25,
+                delay: 1.5,
+              },
+            }}
+          >
+            <p>Andrés Rodríguez</p>
+          </motion.li>
+          <motion.li
+            initial={{
+              x: 100,
+              opacity: 0,
+            }}
+            animate={{
+              x: 0,
+              opacity: 1,
+              transition: {
+                duration: 1.25,
+                delay: 1.75,
+              },
+            }}
+          >
+            <p>Nicolás Polo</p>
+          </motion.li>
+          <motion.li
+            initial={{
+              x: 100,
+              opacity: 0,
+            }}
+            animate={{
+              x: 0,
+              opacity: 1,
+              transition: {
+                duration: 1.25,
+                delay: 2,
+              },
+            }}
+          >
+            <p>Alejandro Quintero</p>
+          </motion.li>
+        </ul>
+      </motion.div>
     </div>
   );
 };

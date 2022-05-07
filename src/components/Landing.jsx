@@ -27,7 +27,7 @@ const Landing = () => {
             }}
           />
           <motion.h1
-            className="font-extrabold text-flora-white text-[27px] md:text-[46px]"
+            className="font-bold text-flora-white text-[27px] md:text-[46px]"
             animate={{
               x: [100, 0],
               opacity: [0, 1],
