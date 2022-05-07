@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { motion } from "framer-motion";
 
@@ -7,27 +7,27 @@ const Contacto = () => {
   const [surname, setSurname] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
-  const [tel, setTel] = useState('');
+
+  const form = useRef();
 
   const sendEmail = (ev) => {
     ev.preventDefault();
-    if (
-      name === "" ||
-      surname === "" ||
-      email === "" ||
-      tel === "" ||
-      message === ""
-    ) {
+    if (name === "" || surname === "" || email === "" || message === "") {
       toast.error("¡Tienes que rellenar los campos!");
     } else {
-      toast('¡Correo enviado!', {
-          icon: '📧',
-      })
+      emailjs.sendForm(
+        "service_z0p5mdr",
+        "template_ejmobov",
+        form.current,
+        import.meta.VITE_EMAILJS_PUBLIC
+      );
+      toast("¡Correo enviado!", {
+        icon: "📧",
+      });
       setName("");
       setSurname("");
       setEmail("");
       setMessage("");
-      setTel('');
     }
   };
 
@@ -51,6 +51,7 @@ const Contacto = () => {
         Contacto
       </motion.h1>
       <motion.form
+        ref={form}
         initial={{
           x: -100,
           opacity: 0,
@@ -72,12 +73,14 @@ const Contacto = () => {
             placeholder="Nombres"
             onChange={(e) => setName(e.target.value)}
             value={name}
+            name="name"
             autoComplete="off"
             className="contactinput"
           />
           <input
             type="text"
             placeholder="Apellidos"
+            name="surname"
             onChange={(e) => setSurname(e.target.value)}
             value={surname}
             autoComplete="off"
@@ -88,20 +91,15 @@ const Contacto = () => {
             placeholder="Email"
             onChange={(e) => setEmail(e.target.value)}
             value={email}
+            name="email"
             autoComplete="off"
-            className="contactinput"
-          />
-          <input
-            type="number"
-            placeholder="Teléfono"
-            value={tel}
-            onChange={(e) => setTel(e.target.value)}
             className="contactinput"
           />
 
           <textarea
             placeholder="Mensaje"
             value={message}
+            name="message"
             onChange={(e) => setMessage(e.target.value)}
             className="mb-4 py-2 px-4 w-[260px] md:w-[320px] lg:w-[360px] border-2 text-sm border-flora-black/30 rounded-lg placeholder:text-lg outline-flora-base"
           />
