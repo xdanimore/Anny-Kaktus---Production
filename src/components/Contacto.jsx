@@ -36,7 +36,7 @@ const Contacto = () => {
   };
 
   return (
-    <div className="h-screen bg-neutral-100 mx-auto">
+    <div className="min-h-screen bg-neutral-100">
       <Toaster />
       <motion.h1
         initial={{

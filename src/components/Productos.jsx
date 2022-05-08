@@ -33,9 +33,9 @@ const Productos = () => {
       <Helmet>
         <title>Productos</title>
       </Helmet>
-      <div className="h-[120vh] bg-neutral-100">
+      <div className="h-full bg-neutral-100">
         <div className="p-5 flex flex-col justify-center max-w-[400px] h-auto mx-auto md:max-w-[720px] lg:max-w-[1440px]">
-          <h1 className="text-2xl font-extrabold text-center mt-3 mb-8 md:my-7 lg:mb-10 lg:mt-3 md:text-3xl lg:text-4xl">
+          <h1 className="text-3xl font-bold text-center mt-3 mb-8 md:my-7 lg:mb-10 lg:mt-3 md:text-4xl">
             &#127807; PRODUCTOS &#127807;
           </h1>
           {loading && (
@@ -62,6 +62,7 @@ const Productos = () => {
           >
             {product.map((val, id) => {
               return (
+                
                 <Card
                   key={id}
                   src={val.url}
