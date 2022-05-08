@@ -69,7 +69,7 @@ const Contacto = () => {
           duration: 1.25,
         }}
         onSubmit={sendEmail}
-        className="bg-white rounded-2xl max-w-[350px] mx-auto py-5 h-[450px] shadow-lg md:max-w-md"
+        className="bg-white rounded-2xl max-w-[350px] mx-auto py-5 h-[450px] shadow-md md:max-w-md"
       >
         <div className="flex flex-col items-center justify-center h-full">
           <input
@@ -149,6 +149,7 @@ const Contacto = () => {
         </motion.h1>
         <img
           src="https://web.udi.edu.co/files/img/logo-udi-web.png"
+          width={400}
           alt="Logo Universidad de Investigación y Desarrollo -UDI-"
         />
         <motion.h2 className="font-medium">Integrantes:</motion.h2>

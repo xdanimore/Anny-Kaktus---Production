@@ -19,12 +19,13 @@ const Card = (props) => {
         </p>
         <div className="flex justify-between items-center mt-4">
           <h1 className="font-bold text-xl">{props.price}</h1>
-          <Link
-            className="bg-flora-second py-1 px-4 rounded-md text-flora-white font-semibold transition-colors duration-300 hover:bg-flora-secondhover"
-            to={`/productos/${props.to}`}
+          <a
+            className="bg-flora-second cursor-pointer py-1 px-4 rounded-md text-flora-white font-semibold transition-colors duration-300 hover:bg-flora-secondhover"
+            href={props.image}
+            target="_blank"
           >
-            Ver más
-          </Link>
+            Ver imagen
+          </a>
         </div>
       </div>
     </div>

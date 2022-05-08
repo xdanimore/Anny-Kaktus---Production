@@ -29,11 +29,13 @@ const Navbar = () => {
 
       <ul className="hidden md:flex font-medium">
         <motion.li
+          initial={{
+            opacity: 0,
+          }}
           animate={{
-            y: [-100, 0],
-            opacity: [0, 1],
+            y: 0,
+            opacity: 1,
             transition: {
-              delay: 0.25,
               duration: 1.5,
             },
           }}
@@ -42,11 +44,14 @@ const Navbar = () => {
           <Link to={"/"}>Inicio</Link>
         </motion.li>
         <motion.li
+          initial={{
+            opacity: 0,
+          }}
           animate={{
-            y: [-100, 0],
-            opacity: [0, 1],
+            y: 0,
+            opacity: 1,
             transition: {
-              delay: 0.5,
+              delay: 0.25,
               duration: 1.5,
             },
           }}
@@ -55,11 +60,14 @@ const Navbar = () => {
           <Link to={"/productos"}>Productos</Link>
         </motion.li>
         <motion.li
+          initial={{
+            opacity: 0,
+          }}
           animate={{
-            y: [-100, 0],
-            opacity: [0, 1],
+            y: 0,
+            opacity: 1,
             transition: {
-              delay: 0.75,
+              delay: 0.5,
               duration: 1.5,
             },
           }}
@@ -68,11 +76,14 @@ const Navbar = () => {
           <Link to={"/contacto"}>Contacto</Link>
         </motion.li>
         <motion.li
+          initial={{
+            opacity: 0,
+          }}
           animate={{
-            y: [-100, 0],
-            opacity: [0, 1],
+            y: 0,
+            opacity: 1,
             transition: {
-              delay: 1.25,
+              delay: 0.75,
               duration: 1.5,
             },
           }}
