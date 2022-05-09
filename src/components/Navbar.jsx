@@ -22,7 +22,11 @@ const Navbar = () => {
           },
         }}
       >
-        <Link className="text-3xl font-bold" to={"/"} onClick={handleClick}>
+        <Link
+          className="text-3xl font-bold"
+          to={"/"}
+          onClick={isOpen ? handleClick : null}
+        >
           Anny Kaktus
         </Link>
       </motion.div>
@@ -115,8 +119,8 @@ const Navbar = () => {
       <ul
         className={
           !isOpen
-            ? "absolute top-[-100%] left-0 w-screen h-0 bg-flora-base flex flex-col justify-center items-center rounded-b-[50px] ease-in-out duration-1000"
-            : "absolute top-[75px] left-0 w-screen h-[40vh] bg-flora-base shadow-sm flex flex-col justify-center rounded-b-[50px] items-center ease-in-out duration-1000"
+            ? "absolute top-[-100%] left-50% w-screen h-[20vh] bg-flora-base flex flex-col justify-center items-center rounded-b-[50px] ease-in duration-700"
+            : "absolute top-[75px] left-50% w-[90vw] h-[40vh] bg-flora-base shadow-sm flex flex-col justify-center rounded-b-[50px] items-center ease-out duration-700"
         }
       >
         <li className="mobile">

@@ -22,9 +22,10 @@ const Producto = () => {
     getProducts();
   }, []); */
 
+
   return (
     <div>
-      <h1>lorem ipsum</h1>
+      <h1>{id}</h1>
     </div>
   );
 };
