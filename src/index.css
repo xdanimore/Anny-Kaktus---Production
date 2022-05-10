@@ -30,4 +30,5 @@ body {
   .contactinput {
     @apply border-b-2 border-flora-black/20 focus:border-flora-base transition-all duration-300 mb-4 py-2 px-4 w-[260px] md:w-[320px] lg:w-[360px] placeholder:text-lg outline-none
   }
+
 }
