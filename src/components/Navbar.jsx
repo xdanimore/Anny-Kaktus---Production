@@ -11,6 +11,8 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const handleClick = () => setIsOpen(!isOpen);
 
+  const [isAdded, setIsAdded] = useState(false);
+
   return (
     <nav className="w-full h-20 flex justify-around items-center bg-flora-base text-flora-white">
       <motion.div
@@ -31,7 +33,7 @@ const Navbar = () => {
         </Link>
       </motion.div>
 
-      <ul className="hidden md:flex font-medium">
+      <ul className="hidden md:flex md:items-center font-medium">
         <motion.li
           initial={{
             opacity: 0,
@@ -61,7 +63,7 @@ const Navbar = () => {
           }}
           className="nav-link"
         >
-          <Link to={"/productos"}>Productos</Link>
+          <Link to={"/productos"}>Catálogo</Link>
         </motion.li>
         <motion.li
           initial={{
@@ -93,7 +95,9 @@ const Navbar = () => {
           }}
           className="nav-link"
         >
-          <Link to={"/carrito"}>Ver carrito</Link>
+          <Link to={"/carrito"}>
+            <ShoppingCartOutlined className="text-2xl" />
+          </Link>
         </motion.li>
       </ul>
 
@@ -130,7 +134,7 @@ const Navbar = () => {
         </li>
         <li className="mobile">
           <Link to={"/productos"} onClick={handleClick}>
-            Productos
+            Catálogo
           </Link>
         </li>
         <li className="mobile">
