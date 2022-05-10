@@ -9,9 +9,15 @@ import SkeletonCard from "./SkeletonCard";
 import { productos } from "../firebase";
 
 const Productos = () => {
-  const { id } = useParams();
   const [loading, setLoading] = useState(true);
   const [product, setProduct] = useState([]);
+
+  const formatPrice = (price) => {
+    return new Intl.NumberFormat('es-CO', {
+      style: 'currency',
+      currency: 'COP',
+    }).format(price)
+  };
 
   useEffect(() => {
     const getProducts = async () => {
@@ -69,7 +75,7 @@ const Productos = () => {
                     alt={val.title}
                     title={val.title}
                     description={val.description}
-                    price={`$${val.price} COP`}
+                    price={formatPrice(val.price)}
                     to={val.id}
                   />
                 );
