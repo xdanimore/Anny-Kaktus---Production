@@ -26,6 +26,7 @@ The purpose of the source code to be public, is to have proof of the hard work t
 - React-Helmet-Async.
 - React-Hot-Toast.
 - React-Loading-Skeleton.
+- EmailJS.
 - Ant-Design Icons.
 - Framer Motion.
 - TailwindCSS.
