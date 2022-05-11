@@ -17,7 +17,10 @@ const Contacto = () => {
   const sendEmail = (ev) => {
     ev.preventDefault();
     if (name === "" || surname === "" || email === "" || message === "") {
-      toast.error("¡Tienes que rellenar los campos!");
+      toast("¡Debes llenar todos los campos!", {
+        type: "error",
+        duration: 1250,
+      });
     } else {
       emailjs.sendForm(
         "service_z0p5mdr",
@@ -27,6 +30,7 @@ const Contacto = () => {
       );
       toast("¡Correo enviado!", {
         icon: "📧",
+        duration: 1250,
       });
       setName("");
       setSurname("");

@@ -9,11 +9,13 @@ import SkeletonCard from "./SkeletonCard";
 
 import { useCartContext } from "../context/cartContext";
 
+const getFromLocalStorage = JSON.parse(localStorage.getItem("cart") || '[]');
+
 const Producto = () => {
   const { id } = useParams();
   const [productInfo, setProductInfo] = useState(null);
   const [loading, setLoading] = useState(true);
-  const { cart, setCart } = useCartContext();
+  const { cart, setCart } = useCartContext(getFromLocalStorage);
 
   const addToCart = () => {
     setCart([...cart, productInfo]);
@@ -47,7 +49,7 @@ const Producto = () => {
       setLoading(false);
     };
     getInfo();
-  }, [id]);
+  }, [id, cart]);
 
   return (
     <div className="h-screen bg-neutral-100">
