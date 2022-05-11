@@ -5,24 +5,30 @@ import toast, { Toaster } from "react-hot-toast";
 import { db } from "../firebase";
 import { doc, collection, getDoc } from "firebase/firestore";
 import { ShoppingCartOutlined } from "@ant-design/icons";
+import SkeletonCard from "./SkeletonCard";
+
+import { useCartContext } from "../context/cartContext";
 
 const Producto = () => {
   const { id } = useParams();
   const [productInfo, setProductInfo] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const { cart, setCart } = useCartContext();
+
+  const addToCart = () => {
+    setCart([...cart, productInfo]);
+    toast("¡Producto agregado!", {
+      icon: "🛒",
+      position: "top-right",
+      duration: 1500,
+    });
+  };
 
   const formatPrice = (price) => {
     return new Intl.NumberFormat("es-CO", {
       style: "currency",
       currency: "COP",
     }).format(price);
-  };
-
-  const cartToast = () => {
-    toast("¡Producto agregado!", {
-      icon: "🛒",
-      position: "top-right",
-      duration: 1500,
-    });
   };
 
   const getProduct = async (prodID) => {
@@ -38,6 +44,7 @@ const Producto = () => {
     const getInfo = async () => {
       const prod = await getProduct(id);
       setProductInfo(prod);
+      setLoading(false);
     };
     getInfo();
   }, [id]);
@@ -51,6 +58,7 @@ const Producto = () => {
           src={productInfo?.url}
           alt={productInfo?.title}
         />
+        {loading && <SkeletonCard />}
 
         <div className="lg:flex lg:flex-col lg:w-[540px] lg:justify-between lg:ml-16 lg:h-full">
           <h1 className="text-3xl font-semibold my-4 lg:my-0">
@@ -62,17 +70,19 @@ const Producto = () => {
           <p className="font-bold text-2xl my-4 lg:text-4xl">
             {formatPrice(productInfo?.price)}
           </p>
-          <div className="w-52">
-            <button
-              onClick={cartToast}
-              className="bg-flora-second hover:bg-flora-secondhover transition-all duration-300 text-white flex text-md items-center justify-between font-semibold p-4 w-full rounded-lg"
-            >
-              <ShoppingCartOutlined className="text-xl" /> Añadir al carrito
-            </button>
-            <button className="bg-flora-black text-white mt-4 rounded-lg text-md font-semibold w-full p-4">
-              Comprar ahora
-            </button>
-          </div>
+          {loading || (
+            <div className="w-52">
+              <button
+                onClick={addToCart}
+                className="bg-flora-second hover:bg-flora-secondhover transition-all duration-300 text-white flex text-md items-center justify-between font-semibold p-4 w-full rounded-lg"
+              >
+                <ShoppingCartOutlined className="text-xl" /> Añadir al carrito
+              </button>
+              <button className="bg-flora-black text-white mt-4 rounded-lg text-md font-semibold w-full p-4">
+                Comprar ahora
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>

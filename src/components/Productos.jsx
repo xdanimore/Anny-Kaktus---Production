@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 import { getDocs } from "firebase/firestore";
 import { motion } from "framer-motion";
 import { Helmet, HelmetProvider } from "react-helmet-async";
