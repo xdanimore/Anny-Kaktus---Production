@@ -16,7 +16,7 @@ body {
 
 @layer base {
   body {
-    @apply font-[Poppins] min-h-screen;
+    @apply font-[Poppins] min-h-screen bg-neutral-100;
   }
 
   .nav-link {

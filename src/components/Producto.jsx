@@ -9,7 +9,7 @@ import SkeletonCard from "./SkeletonCard";
 
 import { useCartContext } from "../context/cartContext";
 
-const getFromLocalStorage = JSON.parse(localStorage.getItem("cart") || '[]');
+const getFromLocalStorage = JSON.parse(localStorage.getItem("cart") || "[]");
 
 const Producto = () => {
   const { id } = useParams();
@@ -73,14 +73,14 @@ const Producto = () => {
             {formatPrice(productInfo?.price)}
           </p>
           {loading || (
-            <div className="w-52">
+            <div className="w-48">
               <button
                 onClick={addToCart}
-                className="bg-flora-second hover:bg-flora-secondhover transition-all duration-300 text-white flex text-md items-center justify-between font-semibold p-4 w-full rounded-lg"
+                className="bg-flora-second hover:bg-flora-secondhover transition-all duration-300 text-white text-md font-semibold py-4 w-full rounded-lg"
               >
-                <ShoppingCartOutlined className="text-xl" /> Añadir al carrito
+                Añadir al carrito
               </button>
-              <button className="bg-flora-black text-white mt-4 rounded-lg text-md font-semibold w-full p-4">
+              <button className="bg-flora-black text-white mt-4 rounded-lg text-md font-semibold w-full py-4">
                 Comprar ahora
               </button>
             </div>
