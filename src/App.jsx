@@ -7,6 +7,7 @@ import Productos from "./components/Productos";
 import Producto from "./components/Producto";
 import Contacto from "./components/Contacto";
 import Cart from "./components/Cart";
+import Checkout from "./components/Checkout";
 import NotFound from "./components/NotFound";
 
 const App = () => {
@@ -17,8 +18,9 @@ const App = () => {
         <Route index element={<Landing />} />
         <Route path="/productos" element={<Productos />} />
         <Route path="/productos/:id" element={<Producto />} />
-        <Route path="contacto" element={<Contacto />} />
-        <Route path="carrito" element={<Cart />} />
+        <Route path="/contacto" element={<Contacto />} />
+        <Route path="/carrito" element={<Cart />} />
+        <Route path="/carrito/checkout" element={<Checkout />} />
 
         <Route path="*" element={<NotFound />} />
       </Routes>

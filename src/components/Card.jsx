@@ -1,20 +1,9 @@
-import { ShoppingCartOutlined } from "@ant-design/icons";
 import React from "react";
-import toast, { Toaster } from "react-hot-toast";
 import { Link } from "react-router-dom";
 
 const Card = (props) => {
-  const addToCart = () => {
-    toast("¡Producto añadido!", {
-      duration: 1250,
-      icon: "👌",
-      position: "top-right",
-    });
-  };
-
   return (
     <div className="h-96 w-80 rounded-xl shadow-md bg-white">
-      <Toaster />
       <img
         src={props.image}
         alt={props.alt}

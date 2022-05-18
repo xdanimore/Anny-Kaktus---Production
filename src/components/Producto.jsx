@@ -4,7 +4,6 @@ import toast, { Toaster } from "react-hot-toast";
 
 import { db } from "../firebase";
 import { doc, collection, getDoc } from "firebase/firestore";
-import { ShoppingCartOutlined } from "@ant-design/icons";
 import SkeletonCard from "./SkeletonCard";
 
 import { useCartContext } from "../context/cartContext";
