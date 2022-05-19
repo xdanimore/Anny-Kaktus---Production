@@ -5,7 +5,7 @@ import { HelmetProvider, Helmet } from "react-helmet-async";
 import emailjs from "@emailjs/browser";
 
 import { EMAILJS_PUBLIC_KEY } from "../api";
-import { CodeFilled } from "@ant-design/icons";
+import { validateEmail } from "../functions/validateEmail";
 
 const Contacto = () => {
   const [name, setName] = useState("");
@@ -17,10 +17,16 @@ const Contacto = () => {
 
   const sendEmail = (ev) => {
     ev.preventDefault();
+
     if (name === "" || surname === "" || email === "" || message === "") {
       toast("¡Debes llenar todos los campos!", {
         type: "error",
         duration: 1250,
+      });
+    } else if (!validateEmail(email)) {
+      toast("¡El email no es válido!", {
+        type: "error",
+        duration: 1000,
       });
     } else {
       emailjs.sendForm(
