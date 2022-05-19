@@ -5,13 +5,12 @@ import {
   MenuOutlined,
   CloseOutlined,
   ShoppingCartOutlined,
+  UserOutlined,
 } from "@ant-design/icons";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const handleClick = () => setIsOpen(!isOpen);
-
-  const [isAdded, setIsAdded] = useState(false);
 
   return (
     <nav className="w-full h-20 flex justify-around items-center bg-flora-base text-flora-white">
@@ -99,6 +98,11 @@ const Navbar = () => {
             <ShoppingCartOutlined className="text-2xl" />
           </Link>
         </motion.li>
+        <motion.li className="nav-link no-right">
+          <Link to={"/sesion"}>
+            <UserOutlined className="text-xl" />
+          </Link>
+        </motion.li>
       </ul>
 
       <motion.div
@@ -123,8 +127,8 @@ const Navbar = () => {
       <ul
         className={
           !isOpen
-            ? "absolute top-[-100%] left-50% w-screen h-[20vh] bg-flora-base flex flex-col justify-center items-center rounded-b-[50px] ease-in duration-700"
-            : "absolute top-[75px] left-50% w-[90vw] h-[40vh] bg-flora-base shadow-sm flex flex-col justify-center rounded-b-[50px] items-center ease-out duration-700"
+            ? "absolute top-[-100%] left-50% w-screen h-[35vh] bg-flora-base flex flex-col justify-center items-center rounded-b-[50px] ease-in duration-700"
+            : "absolute top-[75px] left-50% w-screen h-[60vh] bg-flora-base shadow-sm flex flex-col justify-center rounded-b-[50px] items-center ease-out duration-700"
         }
       >
         <li className="mobile">
@@ -145,6 +149,11 @@ const Navbar = () => {
         <li className="mobile">
           <Link to={"/carrito"} onClick={handleClick}>
             <ShoppingCartOutlined className="text-2xl" />
+          </Link>
+        </li>
+        <li className="mobile">
+          <Link to={"/sesion"} onClick={handleClick}>
+            <UserOutlined className="text-xl" />
           </Link>
         </li>
       </ul>

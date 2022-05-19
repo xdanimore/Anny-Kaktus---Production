@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { HelmetProvider, Helmet } from "react-helmet-async";
 import toast, { Toaster } from "react-hot-toast";
 
 import { db } from "../firebase";
@@ -51,42 +52,47 @@ const Producto = () => {
   }, [id, cart]);
 
   return (
-    <div className="h-screen bg-neutral-100">
-      <Toaster />
-      <div className="p-4 flex flex-col items-start bg-neutral-100 w-[350px] h-auto mx-auto md:justify-center md:content-center md:mx-auto md:w-[640px] md:h-auto md:py-10 lg:flex-row lg:justify-start lg:h-2/3 lg:items-start lg:w-[1366px] lg:p-10">
-        <img
-          className="w-full object-cover lg:w-[580px] lg:h-full rounded-xl"
-          src={productInfo?.url}
-          alt={productInfo?.title}
-        />
-        {loading && <SkeletonCard />}
+    <HelmetProvider>
+      <Helmet>
+        <title>{`Producto: ${productInfo?.title}`}</title>
+      </Helmet>
+      <div className="h-[calc(100vh-80px)] bg-neutral-100">
+        <Toaster />
+        <div className="p-4 flex flex-col items-start bg-neutral-100 w-[350px] h-auto mx-auto md:justify-center md:content-center md:mx-auto md:w-[640px] md:h-auto md:py-10 lg:flex-row lg:justify-start lg:h-2/3 lg:items-start lg:w-[1366px] lg:p-10">
+          <img
+            className="w-full object-fill lg:w-[580px] lg:h-full rounded-xl"
+            src={productInfo?.url}
+            alt={productInfo?.title}
+          />
+          {loading && <SkeletonCard />}
 
-        <div className="lg:flex lg:flex-col lg:w-[540px] lg:justify-between lg:ml-16 lg:h-full">
-          <h1 className="text-3xl font-semibold my-4 lg:my-0">
-            {productInfo?.title}
-          </h1>
-          <p className="text-md font-normal text-neutral-600">
-            {productInfo?.description}
-          </p>
-          <p className="font-bold text-2xl my-4 lg:text-4xl">
-            {formatPrice(productInfo?.price)}
-          </p>
-          {loading || (
-            <div className="w-48">
-              <button
-                onClick={addToCart}
-                className="bg-flora-second hover:bg-flora-secondhover transition-all duration-300 text-white text-md font-semibold py-4 w-full rounded-lg"
-              >
-                Añadir al carrito
-              </button>
-              <button className="bg-flora-black text-white mt-4 rounded-lg text-md font-semibold w-full py-4">
-                Comprar ahora
-              </button>
-            </div>
-          )}
+          <div className="lg:flex lg:flex-col lg:w-[540px] lg:justify-between lg:ml-16 lg:h-full">
+            <h1 className="text-3xl font-semibold my-4 lg:my-0">
+              {productInfo?.title}
+            </h1>
+            <p className="text-md font-normal text-neutral-600">
+              {productInfo?.description}
+            </p>
+            <p className="font-bold text-2xl my-4 lg:text-4xl">
+              {formatPrice(productInfo?.price)}
+            </p>
+            {loading || (
+              <div className="w-48">
+                <button
+                  onClick={addToCart}
+                  className="bg-flora-second hover:bg-flora-secondhover transition-all duration-300 text-white text-md font-semibold py-4 w-full rounded-lg"
+                >
+                  Añadir al carrito
+                </button>
+                <button className="bg-flora-black text-white mt-4 rounded-lg text-md font-semibold w-full py-4">
+                  Comprar ahora
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </HelmetProvider>
   );
 };
 

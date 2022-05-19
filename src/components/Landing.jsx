@@ -10,7 +10,10 @@ const Landing = () => {
     <HelmetProvider>
       <Helmet>
         <title>Anny Kaktus</title>
+        <meta charSet="utf-8" />
         <meta name="description" content="Anny Kaktus - Inicio" />
+        <meta name="keywords" content="Anny, Kaktus, Shopping, Compras, Ecommerce, Tienda" />
+        <meta name="author" content="Andrés Rodríguez - Pulgueta" />
       </Helmet>
       <motion.div>
         <div className="h-[55vh] md:h-[65vh] bg-flora-base rounded-bl-[40px] rounded-br-[40px] lg:rounded-b-[64px] flex flex-col items-center justify-evenly lg:flex-row lg:items-center lg:justify-evenly">
