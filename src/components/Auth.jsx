@@ -6,6 +6,7 @@ import {
 } from "firebase/auth";
 import toast, { Toaster } from "react-hot-toast";
 import { motion } from "framer-motion";
+import { HelmetProvider, Helmet } from "react-helmet-async";
 
 import { validateEmail } from "../functions/validateEmail";
 import { auth } from "../firebase";
@@ -97,121 +98,133 @@ const Auth = () => {
   };
 
   return (
-    <div className="h-[calc(100vh-80px)]">
-      <Toaster />
-      <div className="flex flex-col lg:flex-row lg:justify-between lg:mx-auto items-center p-10 w-full lg:w-[70%] lg:items-center">
-        <motion.div
-          initial={{
-            opacity: 0,
-            x: -100,
-          }}
-          animate={{
-            opacity: 1,
-            x: 0,
-            transition: {
-              duration: 1.25,
-            },
-          }}
-          className="px-4 py-8 bg-white w-80 md:w-[380px] lg:w-[420px] h-full rounded-lg shadow-md mb-16 lg:mb-0"
-        >
-          <form ref={login} onSubmit={handleLogin}>
-            <h1 className="text-center font-semibold text-xl">Inicia sesión</h1>
+    <HelmetProvider>
+      <Helmet>
+        <title>Iniciar Sesión | Registro</title>
+        <meta charSet="utf-8" />
+      </Helmet>
+      <div className="h-[calc(100vh-80px)]">
+        <Toaster />
+        <div className="flex flex-col lg:flex-row lg:justify-between lg:mx-auto items-center p-10 w-full lg:w-[70%] lg:items-center">
+          <motion.div
+            initial={{
+              opacity: 0,
+              x: -100,
+            }}
+            animate={{
+              opacity: 1,
+              x: 0,
+              transition: {
+                duration: 1.25,
+              },
+            }}
+            className="px-4 py-8 bg-white w-80 md:w-[380px] lg:w-[420px] h-full rounded-lg shadow-md mb-16 lg:mb-0"
+          >
+            <form ref={login} onSubmit={handleLogin}>
+              <h1 className="text-center font-semibold text-xl">
+                Inicia sesión
+              </h1>
 
-            <div className="bg-white mt-4 p-3">
-              <label htmlFor="email">Correo electrónico</label>
-              <input
-                type="email"
-                htmlFor="email"
-                name="email"
-                className="contactinput"
-                onChange={(e) => setData({ ...data, email: e.target.value })}
-                id={id}
-              />
+              <div className="bg-white mt-4 p-3">
+                <label htmlFor="email">Correo electrónico</label>
+                <input
+                  type="email"
+                  htmlFor="email"
+                  name="email"
+                  className="contactinput"
+                  onChange={(e) => setData({ ...data, email: e.target.value })}
+                  id={id}
+                />
 
-              <label htmlFor="password">Contraseña</label>
-              <input
-                type="password"
-                htmlFor="password"
-                name="password"
-                onChange={(e) => setData({ ...data, password: e.target.value })}
-                className="contactinput"
-                id={id}
-              />
-            </div>
+                <label htmlFor="password">Contraseña</label>
+                <input
+                  type="password"
+                  htmlFor="password"
+                  name="password"
+                  onChange={(e) =>
+                    setData({ ...data, password: e.target.value })
+                  }
+                  className="contactinput"
+                  id={id}
+                />
+              </div>
 
-            <div className="w-full flex items-center justify-center p-4">
-              <button
-                type="submit"
-                className="bg-flora-base text-white font-medium px-3 py-2 rounded-md"
-              >
-                Inicia Sesión
-              </button>
-            </div>
-          </form>
-          {user ? (
-            <div className="flex w-full items-center justify-center">
-              <button
-                className="bg-flora-second text-white font-medium px-3 py-2 rounded-md"
-                onClick={handleLogout}
-              >
-                Cerrar sesión
-              </button>
-            </div>
-          ) : null}
-        </motion.div>
+              <div className="w-full flex items-center justify-center p-4">
+                <button
+                  type="submit"
+                  className="bg-flora-base text-white font-medium px-3 py-2 rounded-md"
+                >
+                  Inicia Sesión
+                </button>
+              </div>
+            </form>
+            {user ? (
+              <div className="flex w-full items-center justify-center">
+                <button
+                  className="bg-flora-second text-white font-medium px-3 py-2 rounded-md"
+                  onClick={handleLogout}
+                >
+                  Cerrar sesión
+                </button>
+              </div>
+            ) : null}
+          </motion.div>
 
-        <motion.div
-          initial={{
-            opacity: 0,
-            x: 100,
-          }}
-          animate={{
-            opacity: 1,
-            x: 0,
-            transition: {
-              duration: 1.25,
-              delay: 0.5,
-            },
-          }}
-          className="p-4 bg-white w-80 md:w-[380px] lg:w-[420px] h-full rounded-lg shadow-md"
-        >
-          <form ref={register} onSubmit={handleRegister}>
-            <h1 className="text-center font-semibold text-xl">Regístrate</h1>
+          <motion.div
+            initial={{
+              opacity: 0,
+              x: 100,
+            }}
+            animate={{
+              opacity: 1,
+              x: 0,
+              transition: {
+                duration: 1.25,
+                delay: 0.5,
+              },
+            }}
+            className="p-4 bg-white w-80 md:w-[380px] lg:w-[420px] h-full rounded-lg shadow-md"
+          >
+            <form ref={register} onSubmit={handleRegister}>
+              <h1 className="text-center font-semibold text-xl">Regístrate</h1>
 
-            <div className="bg-white mt-4 p-3">
-              <label htmlFor="email">Correo electrónico</label>
-              <input
-                type="email"
-                htmlFor="email-reg"
-                name="email-reg"
-                onChange={(e) => setData({ ...data, email: e.target.value })}
-                className="contactinput"
-                id={id}
-              />
+              <div className="bg-white mt-4 p-3">
+                <label htmlFor="email">Correo electrónico</label>
+                <input
+                  type="email"
+                  htmlFor="email-reg"
+                  name="email-reg"
+                  onChange={(e) => setData({ ...data, email: e.target.value })}
+                  className="contactinput"
+                  id={id}
+                />
 
-              <label htmlFor="password">Contraseña</label>
-              <input
-                type="password"
-                htmlFor="password-reg"
-                name="password-reg"
-                onChange={(e) => setData({ ...data, password: e.target.value })}
-                className="contactinput"
-                id={id}
-              />
-            </div>
+                <label htmlFor="password">Contraseña</label>
+                <input
+                  type="password"
+                  htmlFor="password-reg"
+                  name="password-reg"
+                  onChange={(e) =>
+                    setData({ ...data, password: e.target.value })
+                  }
+                  className="contactinput"
+                  id={id}
+                />
+              </div>
 
-            <div className="w-full flex items-center justify-center p-4">
-              <button
-                type="submit"
-                className="bg-flora-base text-white font-medium px-3 py-2 rounded-md"
-              >
-                Registrar
-              </button>
-            </div>
-          </form>
-        </motion.div>
+              <div className="w-full flex items-center justify-center p-4">
+                <button
+                  type="submit"
+                  className="bg-flora-base text-white font-medium px-3 py-2 rounded-md"
+                >
+                  Registrar
+                </button>
+              </div>
+            </form>
+          </motion.div>
+        </div>
       </div>
-    </div>
+    </HelmetProvider>
   );
 };
 
