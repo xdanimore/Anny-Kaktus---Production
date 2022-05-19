@@ -28,12 +28,7 @@ const Cart = () => {
     }
   };
 
-  const formatPrice = (price) => {
-    return new Intl.NumberFormat("es-CO", {
-      style: "currency",
-      currency: "COP",
-    }).format(price);
-  };
+  
 
   useEffect(() => {
     const lStorage = localStorage.getItem("cart");
