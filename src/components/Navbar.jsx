@@ -36,6 +36,7 @@ const Navbar = () => {
         <motion.li
           initial={{
             opacity: 0,
+            y: -100,
           }}
           animate={{
             y: 0,
@@ -51,6 +52,7 @@ const Navbar = () => {
         <motion.li
           initial={{
             opacity: 0,
+            y: -100,
           }}
           animate={{
             y: 0,
@@ -67,6 +69,7 @@ const Navbar = () => {
         <motion.li
           initial={{
             opacity: 0,
+            y: -100,
           }}
           animate={{
             y: 0,
@@ -83,6 +86,7 @@ const Navbar = () => {
         <motion.li
           initial={{
             opacity: 0,
+            y: -100,
           }}
           animate={{
             y: 0,
@@ -98,7 +102,21 @@ const Navbar = () => {
             <ShoppingCartOutlined className="text-2xl" />
           </Link>
         </motion.li>
-        <motion.li className="nav-link no-right">
+        <motion.li
+          initial={{
+            opacity: 0,
+            y: -100,
+          }}
+          animate={{
+            y: 0,
+            opacity: 1,
+            transition: {
+              delay: 1,
+              duration: 1.5,
+            },
+          }}
+          className="nav-link no-right"
+        >
           <Link to={"/sesion"}>
             <UserOutlined className="text-xl" />
           </Link>
