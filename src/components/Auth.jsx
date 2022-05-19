@@ -5,6 +5,7 @@ import {
   signOut,
 } from "firebase/auth";
 import toast, { Toaster } from "react-hot-toast";
+import { motion } from "framer-motion";
 
 import { validateEmail } from "../functions/validateEmail";
 import { auth } from "../firebase";
@@ -48,11 +49,19 @@ const Auth = () => {
       signInWithEmailAndPassword(auth, data.email, data.password)
         .then((userCredential) => {
           const user = userCredential.user;
+          toast.success("¡Bienvenido!");
         })
         .catch((err) => {
-          toast.error("¡Error al iniciar sesión!");
+          toast.error(err.message, {
+            duration: 1500,
+          });
         });
       login.current.reset();
+
+      setData({
+        email: "",
+        password: "",
+      });
     }
   };
 
@@ -73,11 +82,17 @@ const Auth = () => {
       createUserWithEmailAndPassword(auth, data.email, data.password)
         .then((userCredential) => {
           const user = userCredential.user;
+          toast.success("¡Usuario creado y sesión iniciada!");
         })
         .catch((err) => {
-          toast.error(err);
+          toast.error(err.message);
         });
       register.current.reset();
+
+      setData({
+        email: "",
+        password: "",
+      });
     }
   };
 
@@ -85,7 +100,20 @@ const Auth = () => {
     <div className="h-[calc(100vh-80px)]">
       <Toaster />
       <div className="flex flex-col lg:flex-row lg:justify-between lg:mx-auto items-center p-10 w-full lg:w-[70%] lg:items-center">
-        <div className="px-4 py-8 bg-white w-80 md:w-[380px] lg:w-[420px] h-full rounded-lg shadow-md mb-16 lg:mb-0">
+        <motion.div
+          initial={{
+            opacity: 0,
+            x: -100,
+          }}
+          animate={{
+            opacity: 1,
+            x: 0,
+            transition: {
+              duration: 1.25,
+            },
+          }}
+          className="px-4 py-8 bg-white w-80 md:w-[380px] lg:w-[420px] h-full rounded-lg shadow-md mb-16 lg:mb-0"
+        >
           <form ref={login} onSubmit={handleLogin}>
             <h1 className="text-center font-semibold text-xl">Inicia sesión</h1>
 
@@ -130,9 +158,23 @@ const Auth = () => {
               </button>
             </div>
           ) : null}
-        </div>
+        </motion.div>
 
-        <div className="p-4 bg-white w-80 md:w-[380px] lg:w-[420px] h-full rounded-lg shadow-md">
+        <motion.div
+          initial={{
+            opacity: 0,
+            x: 100,
+          }}
+          animate={{
+            opacity: 1,
+            x: 0,
+            transition: {
+              duration: 1.25,
+              delay: 0.5,
+            },
+          }}
+          className="p-4 bg-white w-80 md:w-[380px] lg:w-[420px] h-full rounded-lg shadow-md"
+        >
           <form ref={register} onSubmit={handleRegister}>
             <h1 className="text-center font-semibold text-xl">Regístrate</h1>
 
@@ -167,7 +209,7 @@ const Auth = () => {
               </button>
             </div>
           </form>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

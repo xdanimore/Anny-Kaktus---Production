@@ -9,6 +9,7 @@ import SkeletonCard from "./SkeletonCard";
 
 import { useCartContext } from "../context/cartContext";
 import { formatPrice } from "../functions/formatPrice";
+import { ShoppingCartOutlined } from "@ant-design/icons";
 
 const getFromLocalStorage = JSON.parse(localStorage.getItem("cart") || "[]");
 
@@ -74,12 +75,9 @@ const Producto = () => {
               <div className="w-48">
                 <button
                   onClick={addToCart}
-                  className="bg-flora-second hover:bg-flora-secondhover transition-all duration-300 text-white text-md font-semibold py-4 w-full rounded-lg"
+                  className="bg-flora-second hover:bg-flora-secondhover flex items-center justify-between px-4 transition-all duration-300 text-white text-md font-semibold py-4 w-full rounded-lg"
                 >
-                  Añadir al carrito
-                </button>
-                <button className="bg-flora-black text-white mt-4 rounded-lg text-md font-semibold w-full py-4">
-                  Comprar ahora
+                  Añadir al carrito <ShoppingCartOutlined className="text-xl" />
                 </button>
               </div>
             )}
