@@ -11,7 +11,17 @@ import Cart from "./components/Cart";
 import Checkout from "./components/Checkout";
 import NotFound from "./components/NotFound";
 
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./firebase";
+import { useUserContext } from "./context/userContext";
+
 const App = () => {
+  const { user, setUser } = useUserContext();
+
+  onAuthStateChanged(auth, (fireUser) => {
+    fireUser ? setUser(fireUser) : setUser(null);
+  });
+
   return (
     <BrowserRouter>
       <Navbar />
