@@ -6,6 +6,7 @@ import { CloseOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 
 import { useCartContext } from "../context/cartContext";
 import { useUserContext } from "../context/userContext";
+import { formatPrice } from "../functions/formatPrice";
 
 const initialState = {
   currentCart: JSON.parse(localStorage.getItem("cart")) || null,
@@ -27,8 +28,6 @@ const Cart = () => {
       return false;
     }
   };
-
-  
 
   useEffect(() => {
     const lStorage = localStorage.getItem("cart");

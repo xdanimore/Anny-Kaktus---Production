@@ -21,7 +21,7 @@ const Contacto = () => {
     if (name === "" || surname === "" || email === "" || message === "") {
       toast("¡Debes llenar todos los campos!", {
         type: "error",
-        duration: 1250,
+        duration: 1000,
       });
     } else if (!validateEmail(email)) {
       toast("¡El email no es válido!", {

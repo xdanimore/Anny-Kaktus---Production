@@ -8,6 +8,7 @@ import { doc, collection, getDoc } from "firebase/firestore";
 import SkeletonCard from "./SkeletonCard";
 
 import { useCartContext } from "../context/cartContext";
+import { formatPrice } from "../functions/formatPrice";
 
 const getFromLocalStorage = JSON.parse(localStorage.getItem("cart") || "[]");
 
@@ -24,13 +25,6 @@ const Producto = () => {
       position: "top-right",
       duration: 1500,
     });
-  };
-
-  const formatPrice = (price) => {
-    return new Intl.NumberFormat("es-CO", {
-      style: "currency",
-      currency: "COP",
-    }).format(price);
   };
 
   const getProduct = async (prodID) => {
