@@ -45,7 +45,7 @@ const Productos = () => {
         <div className="h-full">
           <div className="px-5 pb-20 py-3 flex flex-col justify-center max-w-[400px] h-auto mx-auto md:max-w-[720px] lg:max-w-[1440px]">
             {loading && (
-              <div className="grid grid-cols-1 gap-10 place-content-center mx-auto md:grid-cols-2 lg:grid-cols-3 lg:gap-32">
+              <div className="grid grid-cols-1 gap-10 place-items-center mx-auto md:grid-cols-2 lg:grid-cols-3 lg:gap-32">
                 <SkeletonCard />
                 <SkeletonCard />
                 <SkeletonCard />

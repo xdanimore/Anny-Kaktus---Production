@@ -3,6 +3,7 @@ import { collection, getFirestore } from "firebase/firestore";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
 import { getStorage } from "firebase/storage";
+import { initializeAppCheck, ReCaptchaV3Provider } from "firebase/app-check";
 import { FIREBASE_API_KEY, FIREBASE_APP_ID } from "./api";
 
 const firebaseConfig = {
@@ -18,6 +19,10 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const appCheck = initializeAppCheck(app, {
+  provider: new ReCaptchaV3Provider('AIzaSyDVUY0qmQNXvgENN8fTswJIRspqeIaikDc'),
+  isTokenAutoRefreshEnabled: true,
+})
 const analytics = getAnalytics(app);
 export const db = getFirestore(app);
 export const productos = collection(db, "productos");

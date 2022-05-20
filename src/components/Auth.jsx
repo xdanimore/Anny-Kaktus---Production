@@ -183,7 +183,9 @@ const Auth = () => {
                 delay: 0.5,
               },
             }}
-            className="p-4 bg-white w-80 md:w-[380px] lg:w-[420px] h-full rounded-lg shadow-md"
+            className={`p-4 bg-white w-80 md:w-[380px] lg:w-[420px] h-full rounded-lg shadow-md ${
+              user ? "hidden" : "block"
+            }`}
           >
             <form ref={register} onSubmit={handleRegister}>
               <h1 className="text-center font-semibold text-xl">Regístrate</h1>
