@@ -21,7 +21,7 @@ const Contacto = () => {
     ev.preventDefault();
 
     if (captcha.current.getValue()) {
-      console.log('not a robot');
+      console.log("not a robot");
       if (name === "" || surname === "" || email === "" || message === "") {
         toast("¡Debes llenar todos los campos!", {
           type: "error",
@@ -43,6 +43,8 @@ const Contacto = () => {
           icon: "📧",
           duration: 1250,
         });
+        captcha.current.reset();
+
         setName("");
         setSurname("");
         setEmail("");

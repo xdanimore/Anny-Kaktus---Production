@@ -4,6 +4,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
+import { addDoc } from "firebase/firestore";
 import toast, { Toaster } from "react-hot-toast";
 import { motion } from "framer-motion";
 import { HelmetProvider, Helmet } from "react-helmet-async";
@@ -12,6 +13,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 import { validateEmail } from "../functions/validateEmail";
 import { auth } from "../firebase";
 import { useUserContext } from "../context/userContext";
+import { usuarios } from "../firebase";
 
 const Auth = () => {
   const id = useId();
@@ -68,7 +70,7 @@ const Auth = () => {
     }
   };
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
 
     if (captcha.current.getValue()) {
@@ -88,15 +90,20 @@ const Auth = () => {
           .then((userCredential) => {
             const user = userCredential.user;
             toast.success("¡Usuario creado y sesión iniciada!");
+            register.current.reset();
+            captcha.current.reset();
+
+            setData({
+              email: "",
+              password: "",
+            });
           })
           .catch((err) => {
             toast.error(err.message);
           });
-        register.current.reset();
 
-        setData({
-          email: "",
-          password: "",
+        await addDoc(usuarios, {
+          email: data.email,
         });
       }
     } else {
