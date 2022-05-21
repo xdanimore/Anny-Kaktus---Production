@@ -1,31 +1,48 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import toast, { Toaster } from "react-hot-toast";
-import { ShoppingCartOutlined } from "@ant-design/icons";
+import { LeftOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 
-import { db } from "../firebase";
-import { doc, collection, getDoc } from "firebase/firestore";
+import { db, usuarios } from "../firebase";
+import { doc, collection, getDoc, addDoc } from "firebase/firestore";
 import SkeletonCard from "./SkeletonCard";
 
 import { useCartContext } from "../context/cartContext";
+import { useUserContext } from "../context/userContext";
 import { formatPrice } from "../functions/formatPrice";
 
 const getFromLocalStorage = JSON.parse(localStorage.getItem("cart") || "[]");
 
 const Producto = () => {
   const { id } = useParams();
+
+  const navigate = useNavigate();
+
   const [productInfo, setProductInfo] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  const { user, setUser } = useUserContext();
   const { cart, setCart } = useCartContext(getFromLocalStorage);
 
-  const addToCart = () => {
-    setCart([...cart, productInfo]);
-    toast("¡Producto agregado!", {
-      icon: "🛒",
-      position: "top-right",
-      duration: 1500,
-    });
+  const addToCart = async () => {
+    if (user) {
+      toast("¡Producto agregado!", {
+        icon: "🛒",
+        position: "top-right",
+        duration: 1500,
+      });
+      setCart([...cart, productInfo]);
+
+      
+    } else {
+      navigate("/sesion");
+      toast("¡Debes iniciar sesión!", {
+        icon: "🎈",
+        position: "top-center",
+        duration: 1500,
+      });
+    }
   };
 
   const getProduct = async (prodID) => {
@@ -61,10 +78,15 @@ const Producto = () => {
           />
           {loading && <SkeletonCard />}
 
-          <div className="lg:flex lg:flex-col lg:w-[540px] lg:justify-between lg:ml-16 lg:h-full">
-            <h1 className="text-3xl font-semibold my-4 lg:my-0">
-              {productInfo?.title}
-            </h1>
+          <div className="lg:flex lg:flex-col w-full lg:justify-between lg:ml-16 lg:h-full">
+            <div className="flex justify-between items-center">
+              <h1 className="text-3xl font-semibold my-4 lg:my-0">
+                {productInfo?.title}
+              </h1>
+              <Link to="/productos">
+                <LeftOutlined className="text-xl bg-flora-base py-2 px-3 rounded-md text-white hover:bg-green-600 transition-all duration-300" />
+              </Link>
+            </div>
             <p className="text-md font-normal text-neutral-600">
               {productInfo?.description}
             </p>

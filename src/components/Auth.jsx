@@ -101,7 +101,7 @@ const Auth = () => {
           .catch((err) => {
             toast.error(err.message);
           });
-
+        
         await addDoc(usuarios, {
           email: data.email,
         });

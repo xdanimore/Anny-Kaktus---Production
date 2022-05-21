@@ -1,11 +1,9 @@
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import { CloseOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 
 import { useCartContext } from "../context/cartContext";
-import { useUserContext } from "../context/userContext";
 import { formatPrice } from "../functions/formatPrice";
 
 const initialState = {
@@ -14,20 +12,9 @@ const initialState = {
 
 const Cart = () => {
   const { cart } = useCartContext();
-  const { user, setUser } = useUserContext();
+
   const navigate = useNavigate();
 
-  const removeItem = () => {
-    localStorage.clear();
-  };
-
-  const isAuthenticated = () => {
-    user ? navigate("/carrito/checkout") : navigate("/sesion");
-  };
-
-  useEffect(() => {
-    const lStorage = localStorage.getItem("cart");
-  }, [cart.currentCart]);
   return (
     <HelmetProvider>
       <Helmet>
@@ -58,7 +45,7 @@ const Cart = () => {
                     </p>
                     <button
                       onClick={() => removeItem}
-                      className="px-3 flex items-center text-white font-medium bg-flora-second rounded-xl transition-all duration-300 hover:bg-flora-secondhover"
+                      className="lg:px-2 px-3 text-md lg:text-lg flex items-center text-white font-medium bg-flora-second rounded-md transition-all duration-300 hover:bg-flora-secondhover"
                     >
                       <CloseOutlined />
                     </button>
@@ -74,9 +61,9 @@ const Cart = () => {
             </div>
           ) : (
             <div className="flex flex-col max-w-full max-h-full bg-neutral-100 rounded-b-lg justify-center items-center py-4 mt-4">
-              <h1>Total a pagar: {}</h1>
+              <h1 className="font-medium py-3 mb-3">Total a pagar: {}</h1>
               <button
-                onClick={() => isAuthenticated()}
+                onClick={() => navigate("/carrito/checkout")}
                 className="bg-flora-base text-white font-medium flex items-center mb-5 justify-between w-36 px-5 py-2 rounded-md transition-all duration-300 ease-in hover:bg-green-600"
               >
                 Ir a pagar <ShoppingCartOutlined className="text-xl" />
