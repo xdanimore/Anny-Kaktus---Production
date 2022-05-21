@@ -3,6 +3,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { motion } from "framer-motion";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import emailjs from "@emailjs/browser";
+import ReCAPTCHA from "react-google-recaptcha";
 
 import { EMAILJS_PUBLIC_KEY } from "../api";
 import { validateEmail } from "../functions/validateEmail";
@@ -14,35 +15,44 @@ const Contacto = () => {
   const [message, setMessage] = useState("");
 
   const form = useRef();
+  const captcha = useRef(null);
 
   const sendEmail = (ev) => {
     ev.preventDefault();
 
-    if (name === "" || surname === "" || email === "" || message === "") {
-      toast("¡Debes llenar todos los campos!", {
-        type: "error",
-        duration: 1000,
-      });
-    } else if (!validateEmail(email)) {
-      toast("¡El email no es válido!", {
-        type: "error",
-        duration: 1000,
-      });
+    if (captcha.current.getValue()) {
+      console.log('not a robot');
+      if (name === "" || surname === "" || email === "" || message === "") {
+        toast("¡Debes llenar todos los campos!", {
+          type: "error",
+          duration: 1000,
+        });
+      } else if (!validateEmail(email)) {
+        toast("¡El email no es válido!", {
+          type: "error",
+          duration: 1000,
+        });
+      } else {
+        emailjs.sendForm(
+          "service_z0p5mdr",
+          "template_ejmobov",
+          form.current,
+          EMAILJS_PUBLIC_KEY
+        );
+        toast("¡Correo enviado!", {
+          icon: "📧",
+          duration: 1250,
+        });
+        setName("");
+        setSurname("");
+        setEmail("");
+        setMessage("");
+      }
     } else {
-      emailjs.sendForm(
-        "service_z0p5mdr",
-        "template_ejmobov",
-        form.current,
-        EMAILJS_PUBLIC_KEY
-      );
-      toast("¡Correo enviado!", {
-        icon: "📧",
+      toast("¡Debes marcar el captcha!", {
+        type: "error",
         duration: 1250,
       });
-      setName("");
-      setSurname("");
-      setEmail("");
-      setMessage("");
     }
   };
 
@@ -85,7 +95,7 @@ const Contacto = () => {
             duration: 1.25,
           }}
           onSubmit={sendEmail}
-          className="bg-white rounded-2xl max-w-[350px] mx-auto py-5 h-[450px] shadow-md md:max-w-md"
+          className="bg-white rounded-2xl max-w-[350px] mx-auto py-5 h-[540px] shadow-md md:max-w-md"
         >
           <div className="flex flex-col items-center justify-center h-full">
             <input
@@ -124,11 +134,17 @@ const Contacto = () => {
               className="mb-4 py-2 px-4 w-[260px] h-48 md:w-[320px] lg:w-[360px] border-2 border-flora-black/30 rounded-lg placeholder:text-lg outline-flora-base"
             />
 
-            <input
-              type="submit"
-              value="Enviar"
-              className="bg-flora-base px-10 py-3 cursor-pointer rounded-lg font-medium text-flora-white my-4 duration-300 transition-all hover:bg-green-600"
+            <ReCAPTCHA
+              ref={captcha}
+              sitekey="6Lf_yQggAAAAAMrO6gOezXH5hRTG7rNgOeyBIetd"
             />
+
+            <button
+              type="submit"
+              className="bg-flora-base px-6 py-3 cursor-pointer rounded-lg font-medium text-flora-white my-4 duration-300 transition-all hover:bg-green-600"
+            >
+              Enviar
+            </button>
           </div>
         </motion.form>
         <motion.div
