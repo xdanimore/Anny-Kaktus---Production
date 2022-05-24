@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useId } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import { CloseOutlined, ShoppingCartOutlined } from "@ant-design/icons";
@@ -11,9 +11,21 @@ const initialState = {
 };
 
 const Cart = () => {
+  const id = useId();
+
   const { cart } = useCartContext();
 
   const navigate = useNavigate();
+
+  const url = "https://checkout.wompi.co/p/";
+
+  const wompiPay = () => {
+    const initPayment = document.getElementById("wompiForm");
+
+    initPayment.submit();
+
+    console.log('wompi joined');
+  };
 
   return (
     <HelmetProvider>
@@ -25,7 +37,7 @@ const Cart = () => {
         <div className="bg-white shadow-lg md:pt-5 w-80 md:w-[720px] lg:w-[960px] mx-auto rounded-lg mb-10">
           {cart?.map((product) => (
             <ul
-              key={product.id + Date.now()}
+              key={product.id + id}
               className="py-5 md:py-1 max-w-xs mx-auto flex flex-col items-center md:flex-col md:justify-start"
             >
               <div className="border-2 max-w-[270px] md:max-w-xl md:bg-neutral-100 md:w-[576px] rounded-lg border-neutral-200 px-6 py-4 h-full md:flex md:justify-between md:items-center lg:items-center lg:h-full">
@@ -55,6 +67,19 @@ const Cart = () => {
             </ul>
           ))}
 
+          <div className="hidden">
+            <form action={url} method="GET" id="wompiForm">
+              <input
+                type="hidden"
+                name="public-key"
+                value="pub_test_Kw4aC0rZVgLZQn209NbEKPuXLzBD28Zx"
+              />
+              <input type="hidden" name="currency" value="COP" />
+              <input type="hidden" name="amount-in-cents" value={1000000} />
+              <input type="hidden" name="reference" value="123456789" />
+            </form>
+          </div>
+
           {cart?.length === 0 ? (
             <div className="flex justify-center p-4 md:pb-8">
               <h1 className="text-sm md:text-lg">Carrito vacío</h1>
@@ -63,7 +88,7 @@ const Cart = () => {
             <div className="flex flex-col max-w-full max-h-full bg-neutral-100 rounded-b-lg justify-center items-center py-4 mt-4">
               <h1 className="font-medium py-3 mb-3">Total a pagar: {}</h1>
               <button
-                onClick={() => navigate("/carrito/checkout")}
+                onClick={() => wompiPay()}
                 className="bg-flora-base text-white font-medium flex items-center mb-5 justify-between w-36 px-5 py-2 rounded-md transition-all duration-300 ease-in hover:bg-green-600"
               >
                 Ir a pagar <ShoppingCartOutlined className="text-xl" />

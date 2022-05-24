@@ -33,8 +33,6 @@ const Producto = () => {
         duration: 1500,
       });
       setCart([...cart, productInfo]);
-
-      
     } else {
       navigate("/sesion");
       toast("¡Debes iniciar sesión!", {
@@ -72,35 +70,34 @@ const Producto = () => {
         <Toaster />
         <div className="p-4 flex flex-col items-start bg-neutral-100 w-[350px] h-auto mx-auto md:justify-center md:content-center md:mx-auto md:w-[640px] md:h-auto md:py-10 lg:flex-row lg:justify-start lg:h-2/3 lg:items-start lg:w-[1366px] lg:p-10">
           <img
-            className="w-full object-fill lg:w-[580px] lg:h-full rounded-xl"
+            className="w-full object-cover h-[400px] md:h-[540px] lg:w-[580px] lg:h-full rounded-xl"
             src={productInfo?.url}
             alt={productInfo?.title}
           />
           {loading && <SkeletonCard />}
 
           <div className="lg:flex lg:flex-col w-full lg:justify-between lg:ml-16 lg:h-full">
-            <div className="flex justify-between items-center">
-              <h1 className="text-3xl font-semibold my-4 lg:my-0">
-                {productInfo?.title}
-              </h1>
-              <Link to="/productos">
-                <LeftOutlined className="text-xl bg-flora-base py-2 px-3 rounded-md text-white hover:bg-green-600 transition-all duration-300" />
-              </Link>
-            </div>
+            <h1 className="text-3xl font-semibold my-4 lg:my-0">
+              {productInfo?.title}
+            </h1>
+
             <p className="text-md font-normal text-neutral-600">
               {productInfo?.description}
             </p>
-            <p className="font-bold text-2xl my-4 lg:text-4xl">
+            <p className="font-semibold text-2xl my-4 lg:text-4xl">
               {formatPrice(productInfo?.price)}
             </p>
             {loading || (
-              <div className="w-48">
+              <div className="w-full flex items-center justify-between">
                 <button
                   onClick={addToCart}
-                  className="bg-flora-second hover:bg-flora-secondhover flex items-center justify-between px-4 transition-all duration-300 text-white text-md font-semibold py-4 w-full rounded-lg"
+                  className="bg-flora-second hover:bg-flora-secondhover flex items-center w-48 justify-between px-4 transition-all duration-300 text-white text-md font-semibold py-4 w-full rounded-lg"
                 >
                   Añadir al carrito <ShoppingCartOutlined className="text-xl" />
                 </button>
+                <Link to="/productos">
+                  <LeftOutlined className="text-xl bg-flora-base py-2 px-3 rounded-md text-white hover:bg-green-600 transition-all duration-300" />
+                </Link>
               </div>
             )}
           </div>
