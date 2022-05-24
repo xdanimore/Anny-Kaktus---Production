@@ -146,7 +146,11 @@ const Auth = () => {
                 duration: 1.25,
               },
             }}
-            className={`${!user ? ("px-4 py-10 bg-white w-80 md:w-[380px] lg:w-[420px] lg:h-[540px] h-full rounded-lg shadow-md mb-16 lg:mb-0") : ("w-full lg:w-full lg:h-full h-full")}`}
+            className={`${
+              !user
+                ? "px-4 py-10 bg-white w-80 md:w-[380px] lg:w-[420px] lg:h-[540px] h-full rounded-lg shadow-md mb-16 lg:mb-0"
+                : "w-full lg:w-full lg:h-full h-full"
+            }`}
           >
             <form
               ref={login}
