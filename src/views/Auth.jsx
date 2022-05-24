@@ -10,13 +10,11 @@ import { motion } from "framer-motion";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useNavigate } from "react-router-dom";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 import { validateEmail } from "../functions/validateEmail";
 import { auth } from "../firebase";
 import { useUserContext } from "../context/userContext";
 import { usuarios } from "../firebase";
-import Google from "../components/Google";
 
 const Auth = () => {
   const [data, setData] = useState({
@@ -33,27 +31,6 @@ const Auth = () => {
   const redirect = useNavigate();
 
   const { user, setUser } = useUserContext();
-
-  const provider = new GoogleAuthProvider();
-
-  const handleGoogleLogin = () => {
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
-        const user = result.user;
-        setUser(user);
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const credential = GoogleAuthProvider.credentialFromError(error);
-        
-        toast(errorCode, {
-          type: "error",
-          duration: 1250,
-        });
-      });
-  };
 
   const handleLogout = (e) => {
     e.preventDefault();
@@ -156,7 +133,7 @@ const Auth = () => {
       </Helmet>
       <div className="h-[calc(100vh-80px)]">
         <Toaster />
-        <div className="flex flex-col lg:flex-row lg:justify-between lg:mx-auto items-center p-10 w-full lg:w-[70%] lg:items-center">
+        <div className="flex flex-col lg:flex-row lg:justify-between lg:mx-auto items-center p-10 w-full lg:max-w-7xl lg:items-center">
           <motion.div
             initial={{
               opacity: 0,
@@ -171,14 +148,14 @@ const Auth = () => {
             }}
             className="px-4 py-10 bg-white w-80 md:w-[380px] lg:w-[420px] lg:h-[540px] h-full rounded-lg shadow-md mb-16 lg:mb-0"
           >
-            <form ref={login} onSubmit={handleLogin}>
+            <form ref={login} onSubmit={handleLogin} className="h-full flex flex-col justify-between">
               {!user ? (
                 <>
                   <h1 className="text-center font-semibold text-3xl">
                     Inicia sesión
                   </h1>
 
-                  <div className="bg-white mt-4 p-3">
+                  <div className="bg-white mt-5 p-3">
                     <label htmlFor="email">Correo electrónico</label>
                     <input
                       type="email"
@@ -218,22 +195,10 @@ const Auth = () => {
                     >
                       &iquest;Olvidaste tu contraseña?
                     </button>
-
-                    <p className="p-4 linetext relative text-black w-full text-md md:text-lg text-center">
-                      O también...
-                    </p>
                   </div>
                 </>
               ) : null}
             </form>
-            <div className="flex justify-center">
-              <button
-                onClick={handleGoogleLogin}
-                className="bg-black flex items-center justify-evenly text-white font-medium lg:px-20 md:px-16 px-8 py-2 w-11/12 rounded-md transition-all duration-300 hover:bg-neutral-800"
-              >
-                Iniciar sesión con <Google />
-              </button>
-            </div>
             {user ? (
               <div className="flex w-full items-center justify-center">
                 <button
@@ -263,10 +228,14 @@ const Auth = () => {
               user ? "hidden" : "block"
             }`}
           >
-            <form ref={register} onSubmit={handleRegister}>
+            <form
+              ref={register}
+              onSubmit={handleRegister}
+              className="bg-white h-full flex flex-col justify-between"
+            >
               <h1 className="text-center font-semibold text-3xl">Regístrate</h1>
 
-              <div className="bg-white mt-4 p-3">
+              <div className="bg-white rounded-md mt-4 p-3">
                 <label htmlFor="email">Correo electrónico</label>
                 <input
                   type="email"
@@ -290,7 +259,7 @@ const Auth = () => {
                 />
               </div>
 
-              <div className="w-full flex items-center justify-center p-4">
+              <div className="w-full flex items-center justify-center p-2">
                 <ReCAPTCHA
                   ref={captcha}
                   sitekey="6Lf_yQggAAAAAMrO6gOezXH5hRTG7rNgOeyBIetd"
