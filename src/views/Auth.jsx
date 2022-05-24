@@ -10,6 +10,7 @@ import { motion } from "framer-motion";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useNavigate } from "react-router-dom";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 import { validateEmail } from "../functions/validateEmail";
 import { auth } from "../firebase";
@@ -29,10 +30,30 @@ const Auth = () => {
   const register = useRef();
   const captcha = useRef(null);
 
-  const redirect = useNavigate()
+  const redirect = useNavigate();
 
   const { user, setUser } = useUserContext();
 
+  const provider = new GoogleAuthProvider();
+
+  const handleGoogleLogin = () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        const user = result.user;
+        setUser(user);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        
+        toast(errorCode, {
+          type: "error",
+          duration: 1250,
+        });
+      });
+  };
 
   const handleLogout = (e) => {
     e.preventDefault();
@@ -150,10 +171,7 @@ const Auth = () => {
             }}
             className="px-4 py-10 bg-white w-80 md:w-[380px] lg:w-[420px] lg:h-[540px] h-full rounded-lg shadow-md mb-16 lg:mb-0"
           >
-            <form
-              ref={login}
-              onSubmit={handleLogin}
-            >
+            <form ref={login} onSubmit={handleLogin}>
               {!user ? (
                 <>
                   <h1 className="text-center font-semibold text-3xl">
@@ -194,18 +212,28 @@ const Auth = () => {
                       Inicia Sesión
                     </button>
 
-                      <button onClick={() => redirect("/sesion/recuperar")} className="my-4 text-sm transition-colors duration-300 hover:text-flora-base">
+                    <button
+                      onClick={() => redirect("/sesion/recuperar")}
+                      className="my-4 text-sm transition-colors duration-300 hover:text-flora-base"
+                    >
                       &iquest;Olvidaste tu contraseña?
-                      </button>
-
-                    <p className="p-4 linetext relative text-black w-full text-md md:text-lg text-center">O también...</p>
-                    <button className="bg-black flex items-center justify-evenly text-white font-medium lg:px-20 md:px-16 px-8 py-2 w-full rounded-md transition-all duration-300 hover:bg-neutral-800">
-                      Iniciar sesión con <Google />
                     </button>
+
+                    <p className="p-4 linetext relative text-black w-full text-md md:text-lg text-center">
+                      O también...
+                    </p>
                   </div>
                 </>
               ) : null}
             </form>
+            <div className="flex justify-center">
+              <button
+                onClick={handleGoogleLogin}
+                className="bg-black flex items-center justify-evenly text-white font-medium lg:px-20 md:px-16 px-8 py-2 w-11/12 rounded-md transition-all duration-300 hover:bg-neutral-800"
+              >
+                Iniciar sesión con <Google />
+              </button>
+            </div>
             {user ? (
               <div className="flex w-full items-center justify-center">
                 <button
@@ -235,11 +263,7 @@ const Auth = () => {
               user ? "hidden" : "block"
             }`}
           >
-            <form
-              ref={register}
-              onSubmit={handleRegister}
-              className="flex flex-col content-center"
-            >
+            <form ref={register} onSubmit={handleRegister}>
               <h1 className="text-center font-semibold text-3xl">Regístrate</h1>
 
               <div className="bg-white mt-4 p-3">
