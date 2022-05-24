@@ -22,5 +22,6 @@ const analytics = getAnalytics(app);
 export const db = getFirestore(app);
 export const productos = collection(db, "productos");
 export const usuarios = collection(db, "usuarios");
+export const carrito = collection(db, `usuarios/{uid}/carrito`);
 export const auth = getAuth();
 export const storage = getStorage(app);

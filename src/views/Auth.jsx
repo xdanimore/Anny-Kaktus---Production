@@ -98,6 +98,8 @@ const Auth = () => {
             register.current.reset();
             captcha.current.reset();
 
+            setUser(user);
+
             setData({
               email: "",
               password: "",
