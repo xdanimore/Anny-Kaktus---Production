@@ -6,7 +6,7 @@ import { LeftOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 
 import { db, usuarios } from "../firebase";
 import { doc, collection, getDoc, addDoc } from "firebase/firestore";
-import SkeletonCard from "./SkeletonCard";
+import SkeletonCard from "../components/SkeletonCard";
 
 import { useCartContext } from "../context/cartContext";
 import { useUserContext } from "../context/userContext";

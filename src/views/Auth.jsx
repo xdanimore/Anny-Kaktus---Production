@@ -14,19 +14,25 @@ import { validateEmail } from "../functions/validateEmail";
 import { auth } from "../firebase";
 import { useUserContext } from "../context/userContext";
 import { usuarios } from "../firebase";
+import Google from "../components/Google";
+import { useNavigate } from "react-router-dom";
 
 const Auth = () => {
-  const id = useId();
-  const login = useRef();
-  const register = useRef();
-  const captcha = useRef(null);
-
-  const { user, setUser } = useUserContext();
-
   const [data, setData] = useState({
     email: "",
     password: "",
   });
+
+  const id = useId();
+
+  const login = useRef();
+  const register = useRef();
+  const captcha = useRef(null);
+
+  const redirect = useNavigate()
+
+  const { user, setUser } = useUserContext();
+
 
   const handleLogout = (e) => {
     e.preventDefault();
@@ -85,6 +91,7 @@ const Auth = () => {
           type: "error",
           duration: 1000,
         });
+        captcha.current.reset();
       } else {
         createUserWithEmailAndPassword(auth, data.email, data.password)
           .then((userCredential) => {
@@ -100,8 +107,14 @@ const Auth = () => {
           })
           .catch((err) => {
             toast.error(err.message);
+            register.current.reset();
+            setData({
+              email: "",
+              password: "",
+            });
+            captcha.current.reset();
           });
-        
+
         await addDoc(usuarios, {
           email: data.email,
         });
@@ -135,12 +148,16 @@ const Auth = () => {
                 duration: 1.25,
               },
             }}
-            className="px-4 py-8 bg-white w-80 md:w-[380px] lg:w-[420px] h-full rounded-lg shadow-md mb-16 lg:mb-0"
+            className="px-4 py-10 bg-white w-80 md:w-[380px] lg:w-[420px] lg:h-[540px] h-full rounded-lg shadow-md mb-16 lg:mb-0"
           >
-            <form ref={login} onSubmit={handleLogin}>
+            <form
+              ref={login}
+              onSubmit={handleLogin}
+              className="flex flex-col content-between h-full"
+            >
               {!user ? (
                 <>
-                  <h1 className="text-center font-semibold text-xl">
+                  <h1 className="text-center font-semibold text-3xl">
                     Inicia sesión
                   </h1>
 
@@ -170,12 +187,21 @@ const Auth = () => {
                     />
                   </div>
 
-                  <div className="w-full flex items-center justify-center p-4">
+                  <div className="w-full flex flex-col items-center justify-center p-4">
                     <button
                       type="submit"
-                      className="bg-flora-base text-white font-medium px-3 py-2 rounded-md"
+                      className="bg-flora-base text-white font-medium p-2 w-full rounded-md transition-all duration-300 hover:bg-green-600"
                     >
                       Inicia Sesión
+                    </button>
+
+                      <button onClick={() => redirect("/sesion/recuperar")} className="my-4 text-sm transition-colors duration-300 hover:text-flora-base">
+                      &iquest;Olvidaste tu contraseña?
+                      </button>
+
+                    <p className="p-4 linetext relative text-black w-full text-center">O también...</p>
+                    <button className="bg-black flex items-center justify-evenly text-white font-medium lg:px-20 md:px-16 px-8 py-2 w-full rounded-md transition-all duration-300 hover:bg-neutral-800">
+                      Iniciar sesión con <Google />
                     </button>
                   </div>
                 </>
@@ -206,12 +232,16 @@ const Auth = () => {
                 delay: 0.5,
               },
             }}
-            className={`p-4 bg-white w-80 md:w-[380px] lg:w-[420px] h-full rounded-lg shadow-md ${
+            className={`px-4 py-10 bg-white w-80 md:w-[380px] lg:w-[420px] lg:h-[540px] h-full rounded-lg shadow-md ${
               user ? "hidden" : "block"
             }`}
           >
-            <form ref={register} onSubmit={handleRegister}>
-              <h1 className="text-center font-semibold text-xl">Regístrate</h1>
+            <form
+              ref={register}
+              onSubmit={handleRegister}
+              className="flex flex-col content-center"
+            >
+              <h1 className="text-center font-semibold text-3xl">Regístrate</h1>
 
               <div className="bg-white mt-4 p-3">
                 <label htmlFor="email">Correo electrónico</label>
@@ -247,9 +277,9 @@ const Auth = () => {
               <div className="w-full flex items-center justify-center p-4">
                 <button
                   type="submit"
-                  className="bg-flora-base text-white font-medium px-3 py-2 rounded-md"
+                  className="bg-flora-base text-white w-full font-medium py-2 rounded-md transition-all duration-300 hover:bg-green-600"
                 >
-                  Registrar
+                  Registrarme
                 </button>
               </div>
             </form>

@@ -2,14 +2,15 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
-import Auth from "./components/Auth";
-import Landing from "./components/Landing";
-import Productos from "./components/Productos";
-import Producto from "./components/Producto";
-import Contacto from "./components/Contacto";
-import Cart from "./components/Cart";
-import Checkout from "./components/Checkout";
-import NotFound from "./components/NotFound";
+import Auth from "./views/Auth";
+import Forgot from "./views/Forgot";
+import Landing from "./views/Landing";
+import Productos from "./views/Productos";
+import Producto from "./views/Producto";
+import Contacto from "./views/Contacto";
+import Cart from "./views/Cart";
+import Checkout from "./views/Checkout";
+import NotFound from "./views/NotFound";
 
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
@@ -28,6 +29,7 @@ const App = () => {
       <Routes>
         <Route index element={<Landing />} />
         <Route path="/sesion" element={<Auth />} />
+        <Route path="/sesion/recuperar" element={<Forgot />} />
         <Route path="/productos" element={<Productos />} />
         <Route path="/productos/:id" element={<Producto />} />
         <Route path="/contacto" element={<Contacto />} />

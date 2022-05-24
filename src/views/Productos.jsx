@@ -3,8 +3,8 @@ import { getDocs } from "firebase/firestore";
 import { motion } from "framer-motion";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 
-import Card from "./Card";
-import SkeletonCard from "./SkeletonCard";
+import Card from "../components/Card";
+import SkeletonCard from "../components/SkeletonCard";
 import { productos } from "../firebase";
 
 const Productos = () => {

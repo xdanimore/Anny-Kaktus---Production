@@ -14,6 +14,43 @@ body {
   display: none;
 }
 
+.linetext::before {
+  content: "";
+  position: absolute;
+  width: 70px;
+  height: 1px;
+  background-color: black;
+  left: 0;
+  top: 50%;
+}
+
+.linetext::after {
+  content: "";
+  position: absolute;
+  width: 70px;
+  height: 1px;
+  background-color: black;
+  right: 0;
+  top: 50%;
+}
+
+@media screen and (min-width: 768px) {
+  .linetext::before {
+    width: 95px;
+  }
+  .linetext::after {
+    width: 95px;
+  }
+}
+ 
+@media screen and (min-width: 1024px) {
+  .linetext::before {
+    width: 115px;
+  }
+  .linetext::after {
+    width: 115px;
+  }
+}
 
 @layer base {
   body {
