@@ -35,7 +35,7 @@ const Auth = () => {
   const handleLogout = (e) => {
     e.preventDefault();
     toast("Cerrando sesión...", {
-      duration: 2000,
+      duration: 1250,
       icon: "⚠️",
     });
     signOut(auth);
@@ -146,9 +146,13 @@ const Auth = () => {
                 duration: 1.25,
               },
             }}
-            className="px-4 py-10 bg-white w-80 md:w-[380px] lg:w-[420px] lg:h-[540px] h-full rounded-lg shadow-md mb-16 lg:mb-0"
+            className={`${!user ? ("px-4 py-10 bg-white w-80 md:w-[380px] lg:w-[420px] lg:h-[540px] h-full rounded-lg shadow-md mb-16 lg:mb-0") : ("w-full lg:w-full lg:h-full h-full")}`}
           >
-            <form ref={login} onSubmit={handleLogin} className="h-full flex flex-col justify-between">
+            <form
+              ref={login}
+              onSubmit={handleLogin}
+              className="h-full flex flex-col justify-between"
+            >
               {!user ? (
                 <>
                   <h1 className="text-center font-semibold text-3xl">
@@ -181,7 +185,7 @@ const Auth = () => {
                     />
                   </div>
 
-                  <div className="w-full flex flex-col items-center justify-center p-4">
+                  <div className="w-full flex flex-col items-center justify-center px-4">
                     <button
                       type="submit"
                       className="bg-flora-base text-white font-medium p-2 w-full rounded-md transition-all duration-300 hover:bg-green-600"
@@ -200,7 +204,7 @@ const Auth = () => {
               ) : null}
             </form>
             {user ? (
-              <div className="flex w-full items-center justify-center">
+              <div className="flex justify-center">
                 <button
                   className="bg-flora-second text-white font-medium px-3 py-2 rounded-md"
                   onClick={handleLogout}
