@@ -9,13 +9,13 @@ import toast, { Toaster } from "react-hot-toast";
 import { motion } from "framer-motion";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import ReCAPTCHA from "react-google-recaptcha";
+import { useNavigate } from "react-router-dom";
 
 import { validateEmail } from "../functions/validateEmail";
 import { auth } from "../firebase";
 import { useUserContext } from "../context/userContext";
 import { usuarios } from "../firebase";
 import Google from "../components/Google";
-import { useNavigate } from "react-router-dom";
 
 const Auth = () => {
   const [data, setData] = useState({
@@ -153,7 +153,6 @@ const Auth = () => {
             <form
               ref={login}
               onSubmit={handleLogin}
-              className="flex flex-col content-between h-full"
             >
               {!user ? (
                 <>
@@ -199,7 +198,7 @@ const Auth = () => {
                       &iquest;Olvidaste tu contraseña?
                       </button>
 
-                    <p className="p-4 linetext relative text-black w-full text-center">O también...</p>
+                    <p className="p-4 linetext relative text-black w-full text-md md:text-lg text-center">O también...</p>
                     <button className="bg-black flex items-center justify-evenly text-white font-medium lg:px-20 md:px-16 px-8 py-2 w-full rounded-md transition-all duration-300 hover:bg-neutral-800">
                       Iniciar sesión con <Google />
                     </button>
