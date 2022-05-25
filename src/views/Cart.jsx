@@ -21,10 +21,9 @@ const Cart = () => {
   const url = "https://checkout.wompi.co/p/";
 
   const wompiPay = () => {
-    const initPayment = document.getElementById("wompiForm");
+    const wompiId = document.getElementById("wompiId");
 
-    initPayment.submit();
-
+    wompiId.submit();
     console.log("wompi joined");
   };
 
@@ -69,11 +68,17 @@ const Cart = () => {
           ))}
 
           <div className="hidden">
-            <form action={url} method="GET" id="wompiForm">
+            <form action={url} method="GET" id="wompiId">
               <input type="hidden" name="public-key" value={WOMPI_PUBLIC_KEY} />
               <input type="hidden" name="currency" value="COP" />
               <input type="hidden" name="amount-in-cents" value={1560000} />
               <input type="hidden" name="reference" value={id + Date.now()} />
+              <input type="hidden" name="redirect-url" value="http://localhost:3000/success" />
+              <input type="hidden" name="shipping-address:address-line-1" value="Calle 61 #18a 20" />
+              <input type="hidden" name="shipping-address:country" value="CO" />
+              <input type="hidden" name="shipping-address:phone-number" value="3014492053" />
+              <input type="hidden" name="shipping-address:city" value="Barrancabermeja" />
+              <input type="hidden" name="shipping-address:region" value="Caribe" />
             </form>
           </div>
 
