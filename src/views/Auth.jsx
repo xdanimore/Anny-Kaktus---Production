@@ -34,9 +34,8 @@ const Auth = () => {
 
   const handleLogout = (e) => {
     e.preventDefault();
-    toast("Cerrando sesión...", {
+    toast.loading("Cerrando sesión...", {
       duration: 1250,
-      icon: "⚠️",
     });
     signOut(auth);
   };
@@ -55,6 +54,9 @@ const Auth = () => {
         duration: 1000,
       });
     } else {
+      toast.loading("Iniciando sesión...", {
+        duration: 1000,
+      });
       signInWithEmailAndPassword(auth, data.email, data.password)
         .then((userCredential) => {
           const user = userCredential.user;
@@ -175,7 +177,7 @@ const Auth = () => {
                       onChange={(e) =>
                         setData({ ...data, email: e.target.value })
                       }
-                      id={id}
+                      id={id + "email"}
                     />
 
                     <label htmlFor="password">Contraseña</label>
@@ -187,7 +189,7 @@ const Auth = () => {
                         setData({ ...data, password: e.target.value })
                       }
                       className="contactinput"
-                      id={id}
+                      id={id + "email" + Date.now()}
                     />
                   </div>
 
@@ -253,7 +255,7 @@ const Auth = () => {
                   name="email-reg"
                   onChange={(e) => setData({ ...data, email: e.target.value })}
                   className="contactinput"
-                  id={id}
+                  id={id + "email-reg"}
                 />
 
                 <label htmlFor="password">Contraseña</label>
@@ -265,7 +267,7 @@ const Auth = () => {
                     setData({ ...data, password: e.target.value })
                   }
                   className="contactinput"
-                  id={id}
+                  id={id + "password-reg" + Date.now()}
                 />
               </div>
 

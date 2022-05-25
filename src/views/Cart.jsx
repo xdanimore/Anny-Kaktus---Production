@@ -5,6 +5,7 @@ import { CloseOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 
 import { useCartContext } from "../context/cartContext";
 import { formatPrice } from "../functions/formatPrice";
+import { WOMPI_PUBLIC_KEY } from "../api";
 
 const initialState = {
   currentCart: JSON.parse(localStorage.getItem("cart")) || null,
@@ -24,7 +25,7 @@ const Cart = () => {
 
     initPayment.submit();
 
-    console.log('wompi joined');
+    console.log("wompi joined");
   };
 
   return (
@@ -69,14 +70,10 @@ const Cart = () => {
 
           <div className="hidden">
             <form action={url} method="GET" id="wompiForm">
-              <input
-                type="hidden"
-                name="public-key"
-                value="pub_test_Kw4aC0rZVgLZQn209NbEKPuXLzBD28Zx"
-              />
+              <input type="hidden" name="public-key" value={WOMPI_PUBLIC_KEY} />
               <input type="hidden" name="currency" value="COP" />
-              <input type="hidden" name="amount-in-cents" value={1000000} />
-              <input type="hidden" name="reference" value="123456789" />
+              <input type="hidden" name="amount-in-cents" value={1560000} />
+              <input type="hidden" name="reference" value={id + Date.now()} />
             </form>
           </div>
 
