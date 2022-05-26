@@ -9,6 +9,7 @@ import Productos from "./views/Productos";
 import Producto from "./views/Producto";
 import Contacto from "./views/Contacto";
 import Cart from "./views/Cart";
+import Checkout from "./views/Checkout";
 import Success from "./views/Success";
 import NotFound from "./views/NotFound";
 
@@ -34,6 +35,7 @@ const App = () => {
         <Route path="/productos/:id" element={<Producto />} />
         <Route path="/contacto" element={<Contacto />} />
         <Route path="/carrito" element={<Cart />} />
+        <Route path="/carrito/checkout" element={<Checkout />} />
         <Route path="/success" element={<Success />} />
 
         <Route path="*" element={<NotFound />} />

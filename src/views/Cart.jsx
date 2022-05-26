@@ -7,9 +7,7 @@ import { useCartContext } from "../context/cartContext";
 import { formatPrice } from "../functions/formatPrice";
 import { WOMPI_PUBLIC_KEY } from "../api";
 
-const initialState = {
-  currentCart: JSON.parse(localStorage.getItem("cart")) || null,
-};
+export let subTotal = 0;
 
 const Cart = () => {
   const id = useId();
@@ -73,7 +71,7 @@ const Cart = () => {
               <input type="hidden" name="currency" value="COP" />
               <input type="hidden" name="amount-in-cents" value={1560000} />
               <input type="hidden" name="reference" value={id + Date.now()} />
-              <input type="hidden" name="redirect-url" value="http://localhost:3000/success" />
+              <input type="hidden" name="redirect-url" value="https://localhost:3000/success" />
               <input type="hidden" name="shipping-address:address-line-1" value="Calle 61 #18a 20" />
               <input type="hidden" name="shipping-address:country" value="CO" />
               <input type="hidden" name="shipping-address:phone-number" value="3014492053" />
@@ -88,13 +86,13 @@ const Cart = () => {
             </div>
           ) : (
             <div className="flex flex-col max-w-full max-h-full bg-neutral-100 rounded-b-lg justify-center items-center py-4 mt-4">
-              <h1 className="font-medium py-3 mb-3">Total a pagar: {}</h1>
-              <button
-                onClick={() => wompiPay()}
+              <h1 className="font-medium py-3 mb-3">Total a pagar: {subTotal}</h1>
+              <Link
+                to="/carrito/checkout"
                 className="bg-flora-base text-white font-medium flex items-center mb-5 justify-between w-36 px-5 py-2 rounded-md transition-all duration-300 ease-in hover:bg-green-600"
               >
                 Ir a pagar <ShoppingCartOutlined className="text-xl" />
-              </button>
+              </Link>
               <Link
                 to="/productos"
                 className="bg-flora-base text-white font-medium flex items-center justify-between w-46 px-5 py-2 rounded-md transition-all duration-300 ease-in hover:bg-green-600"

@@ -13,7 +13,7 @@ const Navbar = () => {
   const handleClick = () => setIsOpen(!isOpen);
 
   return (
-    <nav className="w-full h-20 flex justify-around items-center bg-flora-base text-flora-white">
+    <nav className="w-full h-20 flex px-10 justify-between lg:justify-around md:justify-evenly items-center bg-flora-base text-flora-white">
       <motion.div
         animate={{
           y: [-100, 0],
@@ -145,8 +145,8 @@ const Navbar = () => {
       <ul
         className={
           !isOpen
-            ? "absolute top-[-100%] left-50% w-screen h-[35vh] bg-flora-base flex flex-col justify-center items-center rounded-b-[50px] ease-in duration-700"
-            : "absolute top-[75px] left-50% w-screen h-[60vh] bg-flora-base shadow-sm flex flex-col justify-center rounded-b-[50px] items-center ease-out duration-700"
+            ? "absolute top-[-100%] left-0 w-screen h-[35vh] bg-flora-base flex flex-col justify-center items-center rounded-b-[50px] ease-in duration-700"
+            : "absolute top-[75px] left-0 w-screen h-[55vh] bg-flora-base shadow-sm flex flex-col justify-center rounded-b-[50px] items-center ease-out duration-700"
         }
       >
         <li className="mobile">

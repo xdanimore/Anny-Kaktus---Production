@@ -97,7 +97,7 @@ const Contacto = () => {
             duration: 1.25,
           }}
           onSubmit={sendEmail}
-          className="bg-white rounded-2xl max-w-[350px] mx-auto py-5 h-[540px] shadow-md md:max-w-md"
+          className="bg-white rounded-2xl max-w-[350px] mx-auto px-4 py-5 h-[540px] shadow-md md:max-w-md"
         >
           <div className="flex flex-col items-center justify-center h-full">
             <input
