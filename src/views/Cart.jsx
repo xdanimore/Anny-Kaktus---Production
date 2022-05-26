@@ -1,11 +1,10 @@
-import React, { useEffect, useId } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useId } from "react";
+import { Link } from "react-router-dom";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import { CloseOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 
 import { useCartContext } from "../context/cartContext";
 import { formatPrice } from "../functions/formatPrice";
-import { WOMPI_PUBLIC_KEY } from "../api";
 
 export let subTotal = 0;
 
@@ -13,17 +12,6 @@ const Cart = () => {
   const id = useId();
 
   const { cart } = useCartContext();
-
-  const navigate = useNavigate();
-
-  const url = "https://checkout.wompi.co/p/";
-
-  const wompiPay = () => {
-    const wompiId = document.getElementById("wompiId");
-
-    wompiId.submit();
-    console.log("wompi joined");
-  };
 
   return (
     <HelmetProvider>
@@ -65,28 +53,15 @@ const Cart = () => {
             </ul>
           ))}
 
-          <div className="hidden">
-            <form action={url} method="GET" id="wompiId">
-              <input type="hidden" name="public-key" value={WOMPI_PUBLIC_KEY} />
-              <input type="hidden" name="currency" value="COP" />
-              <input type="hidden" name="amount-in-cents" value={1560000} />
-              <input type="hidden" name="reference" value={id + Date.now()} />
-              <input type="hidden" name="redirect-url" value="https://localhost:3000/success" />
-              <input type="hidden" name="shipping-address:address-line-1" value="Calle 61 #18a 20" />
-              <input type="hidden" name="shipping-address:country" value="CO" />
-              <input type="hidden" name="shipping-address:phone-number" value="3014492053" />
-              <input type="hidden" name="shipping-address:city" value="Barrancabermeja" />
-              <input type="hidden" name="shipping-address:region" value="Caribe" />
-            </form>
-          </div>
-
           {cart?.length === 0 ? (
             <div className="flex justify-center p-4 md:pb-8">
               <h1 className="text-sm md:text-lg">Carrito vacío</h1>
             </div>
           ) : (
             <div className="flex flex-col max-w-full max-h-full bg-neutral-100 rounded-b-lg justify-center items-center py-4 mt-4">
-              <h1 className="font-medium py-3 mb-3">Total a pagar: {subTotal}</h1>
+              <h1 className="font-medium py-3 mb-3">
+                Total a pagar: {subTotal}
+              </h1>
               <Link
                 to="/carrito/checkout"
                 className="bg-flora-base text-white font-medium flex items-center mb-5 justify-between w-36 px-5 py-2 rounded-md transition-all duration-300 ease-in hover:bg-green-600"
