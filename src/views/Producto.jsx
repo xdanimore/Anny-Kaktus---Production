@@ -4,7 +4,7 @@ import { HelmetProvider, Helmet } from "react-helmet-async";
 import toast, { Toaster } from "react-hot-toast";
 import { LeftOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 
-import { db, usuarios } from "../firebase";
+import { db, usuarios, carrito, getCartContent } from "../firebase";
 import { doc, collection, getDoc, addDoc } from "firebase/firestore";
 import SkeletonCard from "../components/SkeletonCard";
 
@@ -25,6 +25,24 @@ const Producto = () => {
   const { user, setUser } = useUserContext();
   const { cart, setCart } = useCartContext(getFromLocalStorage);
 
+  let object = {
+    buyer: localStorage.getItem("userEmail"),
+    product: [productInfo],
+  };
+
+  const addToUserCart = async () => {
+    if (user) {
+      const content = await getCartContent();
+      if (content) {
+        
+      } else {
+        await addDoc(carrito, object);
+      }
+      console.log(object);
+      console.log(content);
+    }
+  };
+
   const addToCart = async () => {
     if (user) {
       toast("¡Producto agregado!", {
@@ -32,6 +50,7 @@ const Producto = () => {
         position: "top-right",
         duration: 1500,
       });
+
       setCart([...cart, productInfo]);
     } else {
       navigate("/sesion");
@@ -90,7 +109,7 @@ const Producto = () => {
             {loading || (
               <div className="w-full flex items-center justify-between">
                 <button
-                  onClick={addToCart}
+                  onClick={addToUserCart}
                   className="bg-flora-second hover:bg-flora-secondhover flex items-center w-48 justify-between px-4 transition-all duration-300 text-white text-md font-semibold py-4 w-full rounded-lg"
                 >
                   Añadir al carrito <ShoppingCartOutlined className="text-xl" />

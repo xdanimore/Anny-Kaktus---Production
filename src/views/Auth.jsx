@@ -38,6 +38,7 @@ const Auth = () => {
       duration: 1250,
     });
     signOut(auth);
+    localStorage.removeItem("userEmail")
   };
 
   const handleLogin = (e) => {
@@ -61,6 +62,9 @@ const Auth = () => {
         .then((userCredential) => {
           const user = userCredential.user;
           toast.success("¡Bienvenido!");
+          localStorage.setItem("userEmail", user.email);
+          // redirect("/productos")
+          console.log(user)
         })
         .catch((err) => {
           toast.error(err.message, {
@@ -100,6 +104,7 @@ const Auth = () => {
             register.current.reset();
             captcha.current.reset();
 
+            localStorage.setItem("userEmail", user.email);
             setUser(user);
 
             setData({
