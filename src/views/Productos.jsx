@@ -12,10 +12,10 @@ const Productos = () => {
   const [product, setProduct] = useState([]);
 
   const formatPrice = (price) => {
-    return new Intl.NumberFormat('es-CO', {
-      style: 'currency',
-      currency: 'COP',
-    }).format(price)
+    return new Intl.NumberFormat("es-CO", {
+      style: "currency",
+      currency: "COP",
+    }).format(price);
   };
 
   useEffect(() => {
@@ -39,9 +39,11 @@ const Productos = () => {
         <title>Productos</title>
       </Helmet>
       <div className="bg-neutral-100">
-        <h1 className="text-3xl font-semibold text-center py-8 md:py-7 lg:py-10 md:text-4xl text-black">
-          Productos
-        </h1>
+        <header>
+          <h1 className="text-3xl font-semibold text-center py-8 md:py-7 lg:py-10 md:text-4xl text-black">
+            Productos
+          </h1>
+        </header>
         <div className="h-full">
           <div className="px-5 pb-20 py-3 flex flex-col justify-center max-w-[400px] h-auto mx-auto md:max-w-[720px] lg:max-w-[1440px]">
             {loading && (

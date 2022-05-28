@@ -38,7 +38,7 @@ const Auth = () => {
       duration: 1250,
     });
     signOut(auth);
-    localStorage.removeItem("userEmail")
+    localStorage.removeItem("userEmail");
   };
 
   const handleLogin = (e) => {
@@ -64,7 +64,7 @@ const Auth = () => {
           toast.success("¡Bienvenido!");
           localStorage.setItem("userEmail", user.email);
           // redirect("/productos")
-          console.log(user)
+          console.log(user);
         })
         .catch((err) => {
           toast.error(err.message, {

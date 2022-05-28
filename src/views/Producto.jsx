@@ -32,9 +32,13 @@ const Producto = () => {
 
   const addToUserCart = async () => {
     if (user) {
+      toast("¡Producto agregado!", {
+        icon: "🛒",
+        position: "top-right",
+        duration: 1500,
+      });
       const content = await getCartContent();
       if (content) {
-        
       } else {
         await addDoc(carrito, object);
       }

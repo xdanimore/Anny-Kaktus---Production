@@ -66,22 +66,24 @@ const Contacto = () => {
       </Helmet>
       <div className="min-h-screen bg-neutral-100">
         <Toaster />
-        <motion.h1
-          initial={{
-            x: -100,
-            opacity: 0,
-          }}
-          animate={{
-            x: 0,
-            opacity: 1,
-          }}
-          transition={{
-            duration: 1.25,
-          }}
-          className="text-center py-5 text-3xl text-black font-semibold"
-        >
-          Contacto
-        </motion.h1>
+        <header>
+          <motion.h1
+            initial={{
+              x: -100,
+              opacity: 0,
+            }}
+            animate={{
+              x: 0,
+              opacity: 1,
+            }}
+            transition={{
+              duration: 1.25,
+            }}
+            className="text-center py-5 text-3xl text-black font-semibold"
+          >
+            Contacto
+          </motion.h1>
+        </header>
         <motion.form
           ref={form}
           initial={{
@@ -97,7 +99,7 @@ const Contacto = () => {
             duration: 1.25,
           }}
           onSubmit={sendEmail}
-          className="bg-white rounded-2xl max-w-[350px] mx-auto px-4 py-5 h-[540px] shadow-md md:max-w-md"
+          className="bg-white rounded-2xl max-w-[350px] mx-auto px-10 py-5 h-[540px] shadow-md md:max-w-md"
         >
           <div className="flex flex-col items-center justify-center h-full">
             <input

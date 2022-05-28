@@ -15,7 +15,7 @@ const Landing = () => {
         <meta name="keywords" content="Anny, Kaktus, Shopping, Compras, Ecommerce, Tienda" />
         <meta name="author" content="Andrés Rodríguez - Pulgueta" />
       </Helmet>
-      <motion.div>
+      <motion.header>
         <div className="h-[55vh] md:h-[65vh] bg-flora-base rounded-bl-[40px] rounded-br-[40px] lg:rounded-b-[64px] flex flex-col items-center justify-evenly lg:flex-row lg:items-center lg:justify-evenly">
           <motion.img
             src={Planta}
@@ -58,14 +58,14 @@ const Landing = () => {
               ¡Decoración y detalles para alegrar el alma!
             </h1>
             <Link
-              className="hover:text-flora-second duration-300 transition-all ease-in-out font-medium text-flora-black"
+              className="hover:text-flora-second lg:text-lg duration-300 transition-all ease-in-out font-medium text-flora-black"
               to={"/productos"}
             >
               Ver catálogo
             </Link>
           </motion.div>
         </div>
-      </motion.div>
+      </motion.header>
     </HelmetProvider>
   );
 };
