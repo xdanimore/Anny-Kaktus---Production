@@ -1,18 +1,61 @@
-import React, { useId } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect, useId } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { getDocs } from "firebase/firestore";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import { CloseOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 
 import { useCartContext } from "../context/cartContext";
 import { formatPrice } from "../functions/formatPrice";
-
-export let subTotal = 0;
+import { carrito, productos } from "../firebase";
 
 const Cart = () => {
+  const [product, setProduct] = useState([]);
+  const [load, setLoad] = useState(false);
+  const [subTotal, setSubTotal] = useState(0);
+
   const id = useId();
 
   const { cart } = useCartContext();
 
+  const redirect = useNavigate();
+
+  const userEmail = localStorage.getItem("userEmail");
+
+  const removeItem = (item) => {
+    console.log(item);
+  }
+
+  useEffect(() => {
+    const getCartProducts = async () => {
+      if (load) {
+        setLoad(false);
+      }
+      const data = await getDocs(carrito);
+      if (userEmail && data) {
+        let subTotal = 0;
+        let prodsArr = [];
+        let array = [];
+        data.forEach((product) => {
+          if (product.data().buyer === userEmail) {
+            prodsArr.push({ product: product.data().product, id: product.id });
+            array.push(product.data().product);
+          }
+        });
+        array[0].forEach((product) => {
+          subTotal += product.price;
+        });
+        setProduct(prodsArr);
+        setSubTotal(subTotal);
+      }
+    };
+
+    getCartProducts();
+  }, [load]);
+
+  const setToLocalStorage = () => {
+    localStorage.setItem("subTotal", subTotal);
+    redirect("/carrito/checkout");
+  };
   return (
     <HelmetProvider>
       <Helmet>
@@ -21,53 +64,54 @@ const Cart = () => {
       <div className="min-h-screen h-full bg-neutral-100">
         <h1 className="text-2xl text-center font-semibold py-5">Tu carrito</h1>
         <div className="bg-white shadow-lg md:pt-5 w-80 md:w-[720px] lg:w-[960px] mx-auto rounded-lg mb-10">
-          {cart?.map((product) => (
-            <ul
-              key={product.id + id}
-              className="py-5 md:py-1 max-w-xs mx-auto flex flex-col items-center md:flex-col md:justify-start"
-            >
-              <div className="border-2 max-w-[270px] md:max-w-xl md:bg-neutral-100 md:w-[576px] rounded-lg border-neutral-200 px-6 py-4 h-full md:flex md:justify-between md:items-center lg:items-center lg:h-full">
-                <img
-                  className="w-52 rounded-lg lg:w-32 lg:h-[128px] object-cover"
-                  src={product.url}
-                  alt={product.title}
-                />
-                <div className="md:flex md:flex-col md:w-56 lg:justify-around lg:w-72">
-                  <p className="text-lg font-medium my-2 lg:font-bold lg:my-1">
-                    {product.title}
-                  </p>
-
-                  <div className="flex justify-between">
-                    <p className="text-md font-medium my-2">
-                      {formatPrice(product.price)}
+          {product.length > 0 &&
+            product[0]["product"].map((productItem) => (
+              <ul
+                key={product[0]["id"] + id + productItem.title}
+                className="py-5 md:py-1 max-w-xs mx-auto flex flex-col items-center md:flex-col md:justify-start"
+              >
+                <div className="border-2 max-w-[270px] md:max-w-xl md:bg-neutral-100 md:w-[576px] rounded-lg border-neutral-200 px-6 py-4 h-full md:flex md:justify-between md:items-center lg:items-center lg:h-full">
+                  <img
+                    className="w-52 rounded-lg lg:w-32 lg:h-[128px] object-cover"
+                    src={productItem.url}
+                    alt={productItem.title}
+                  />
+                  <div className="md:flex md:flex-col md:w-56 lg:justify-around lg:w-72">
+                    <p className="text-lg font-medium my-2 lg:font-bold lg:my-1">
+                      {productItem.title}
                     </p>
-                    <button
-                      onClick={() => removeItem}
-                      className="lg:px-2 px-3 text-md lg:text-lg flex items-center text-white font-medium bg-flora-second rounded-md transition-all duration-300 hover:bg-flora-secondhover"
-                    >
-                      <CloseOutlined />
-                    </button>
+
+                    <div className="flex justify-between">
+                      <p className="text-md font-medium my-2">
+                        {formatPrice(productItem.price)}
+                      </p>
+                      <button
+                        onClick={() => removeItem(productItem[productItem])}
+                        className="lg:px-2 px-3 text-md lg:text-lg flex items-center text-white font-medium bg-flora-second rounded-md transition-all duration-300 hover:bg-flora-secondhover"
+                      >
+                        <CloseOutlined />
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </ul>
-          ))}
+              </ul>
+            ))}
 
-          {cart?.length === 0 ? (
+          {product.length === 0 ? (
             <div className="flex justify-center p-4 md:pb-8">
               <h1 className="text-sm md:text-lg">Carrito vacío</h1>
             </div>
           ) : (
             <div className="flex flex-col max-w-full max-h-full bg-neutral-100 rounded-b-lg justify-center items-center py-4 mt-4">
               <h1 className="font-medium py-3 mb-3">
-                Total a pagar: {subTotal}
+                Total a pagar: {formatPrice(subTotal)}
               </h1>
-              <Link
-                to="/carrito/checkout"
+              <button
+                onClick={() => setToLocalStorage()}
                 className="bg-flora-base text-white font-medium flex items-center mb-5 justify-between w-36 px-5 py-2 rounded-md transition-all duration-300 ease-in hover:bg-green-600"
               >
                 Ir a pagar <ShoppingCartOutlined className="text-xl" />
-              </Link>
+              </button>
               <Link
                 to="/productos"
                 className="bg-flora-base text-white font-medium flex items-center justify-between w-46 px-5 py-2 rounded-md transition-all duration-300 ease-in hover:bg-green-600"

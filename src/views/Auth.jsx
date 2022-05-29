@@ -67,7 +67,7 @@ const Auth = () => {
           console.log(user);
         })
         .catch((err) => {
-          toast.error(err.message, {
+          toast.error("¡No se ha encontrado el usuario!", {
             duration: 1500,
           });
         });
@@ -113,7 +113,7 @@ const Auth = () => {
             });
           })
           .catch((err) => {
-            toast.error(err.message);
+            toast.error("¡Ocurrió un error!");
             register.current.reset();
             setData({
               email: "",

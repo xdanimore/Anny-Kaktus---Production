@@ -7,16 +7,12 @@ import Card from "../components/Card";
 import SkeletonCard from "../components/SkeletonCard";
 import { productos } from "../firebase";
 
+import { formatPrice } from "../functions/formatPrice";
+
 const Productos = () => {
   const [loading, setLoading] = useState(true);
   const [product, setProduct] = useState([]);
-
-  const formatPrice = (price) => {
-    return new Intl.NumberFormat("es-CO", {
-      style: "currency",
-      currency: "COP",
-    }).format(price);
-  };
+  const [pages, setPages] = useState();
 
   useEffect(() => {
     const getProducts = async () => {

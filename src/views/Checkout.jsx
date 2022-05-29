@@ -1,10 +1,10 @@
 import React, { useState, useRef, useId } from "react";
 import { motion } from "framer-motion";
 import toast, { Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 
 import { WOMPI_PUBLIC_KEY } from "../api";
-import { subTotal } from "./Cart";
 import { formatPrice } from "../functions/formatPrice";
 import { validateEmail } from "../functions/validateEmail";
 
@@ -21,14 +21,21 @@ const Checkout = () => {
   const checkout = useRef();
 
   const id = useId();
+  
+  const redirect = useNavigate();
 
   const url = "https://checkout.wompi.co/p/";
+  const subTotal = localStorage.getItem("subTotal");
 
   const wompiPay = () => {
     const wompiId = document.getElementById("wompiId");
 
     wompiId.submit();
     console.log("wompi joined");
+  };
+
+  const goBack = () => {
+    redirect("/carrito");
   };
 
   const dataLogger = (e) => {
@@ -88,10 +95,17 @@ const Checkout = () => {
                 duration: 1.25,
               },
             }}
-            className="py-4"
+            className="py-8 flex justify-around items-center w-full"
           >
             <h1 className="text-2xl font-semibold">Datos del comprador</h1>
+            <button
+              onClick={goBack}
+              className="bg-flora-second text-white font-medium p-2 w-20 rounded-md transition-all duration-300 hover:bg-red-600"
+            >
+              Volver
+            </button>
           </motion.header>
+
           <motion.form
             initial={{
               opacity: 0,
@@ -108,7 +122,7 @@ const Checkout = () => {
             className="min-h-full flex flex-col justify-between w-[350px] md:w-[460px] lg:w-full"
             onSubmit={dataLogger}
           >
-            <div className="bg-white mt-5 px-6 py-8 rounded-lg shadow-md">
+            <div className="bg-white px-6 py-8 rounded-lg shadow-md">
               <label htmlFor="name">Nombres y Apellidos</label>
               <input
                 type="name"
@@ -164,7 +178,7 @@ const Checkout = () => {
                 id={id + "city"}
               />
               <p className="font-semibold">
-                Valor a pagar: {formatPrice(subTotal)}
+                Valor a pagar: {formatPrice(subTotal)} COP
               </p>
               <button
                 type="submit"
@@ -174,6 +188,7 @@ const Checkout = () => {
               </button>
             </div>
           </motion.form>
+
           <div className="hidden">
             <form action={url} method="GET" id="wompiId">
               <input type="hidden" name="public-key" value={WOMPI_PUBLIC_KEY} />

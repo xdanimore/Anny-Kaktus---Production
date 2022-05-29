@@ -8,6 +8,7 @@ import {
   where,
   getDoc,
   getDocs,
+  updateDoc,
 } from "firebase/firestore";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
@@ -35,9 +36,9 @@ export const carrito = collection(db, "carrito");
 export const auth = getAuth();
 export const storage = getStorage(app);
 
-export async function saveDoc(collectionName, documentName, data) {
+export const saveDoc = async (collectionName, documentName, data) => {
   await setDoc(doc(db, collectionName, documentName), data, { merge: true });
-}
+};
 
 export const getCartContent = async () => {
   const userEmail = localStorage.getItem("userEmail");
@@ -45,13 +46,27 @@ export const getCartContent = async () => {
   const q = query(carrito, where("buyer", "==", userEmail));
   const cartContent = await getDocs(q);
 
-  let flag = false;
+  let flag = {
+    state: false,
+    docID: "",
+  };
 
   cartContent.forEach((doc) => {
     if (doc.data()) {
-      flag = true;
+      flag.state = true;
+      flag.docID = doc.id;
     }
   });
 
   return flag;
+};
+
+export const updateData = async (collection, document, collectionObject) => {
+  const docRef = doc(db, collection, document);
+  await updateDoc(docRef, collectionObject);
+};
+
+export const queryDoc = async (collectionName, documentName) => {
+  let queryCollection = doc(db, collectionName, documentName);
+  return await getDoc(queryCollection);
 };

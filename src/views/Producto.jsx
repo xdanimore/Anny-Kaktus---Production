@@ -4,7 +4,14 @@ import { HelmetProvider, Helmet } from "react-helmet-async";
 import toast, { Toaster } from "react-hot-toast";
 import { LeftOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 
-import { db, usuarios, carrito, getCartContent } from "../firebase";
+import {
+  db,
+  usuarios,
+  carrito,
+  getCartContent,
+  updateData,
+  queryDoc,
+} from "../firebase";
 import { doc, collection, getDoc, addDoc } from "firebase/firestore";
 import SkeletonCard from "../components/SkeletonCard";
 
@@ -32,18 +39,36 @@ const Producto = () => {
 
   const addToUserCart = async () => {
     if (user) {
+      const content = await getCartContent();
+
+      if (content.state) {
+        let prodArr = [];
+
+        const dataDoc = await queryDoc("carrito", content.docID);
+        const data = dataDoc.data();
+
+        if (data) {
+          data.product.forEach((item) => {
+            prodArr.push(item);
+          });
+          prodArr.push(productInfo);
+          await updateData("carrito", content.docID, { product: prodArr });
+        }
+      } else {
+        await addDoc(carrito, object);
+      }
       toast("¡Producto agregado!", {
         icon: "🛒",
         position: "top-right",
         duration: 1500,
       });
-      const content = await getCartContent();
-      if (content) {
-      } else {
-        await addDoc(carrito, object);
-      }
-      console.log(object);
-      console.log(content);
+    } else {
+      navigate("/sesion");
+      toast("¡Debes iniciar sesión!", {
+        icon: "🎈",
+        position: "top-center",
+        duration: 1500,
+      });
     }
   };
 
