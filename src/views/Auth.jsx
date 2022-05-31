@@ -39,6 +39,8 @@ const Auth = () => {
     });
     signOut(auth);
     localStorage.removeItem("userEmail");
+    localStorage.removeItem("user");
+    localStorage.removeItem("subTotal");
   };
 
   const handleLogin = (e) => {
@@ -217,9 +219,14 @@ const Auth = () => {
               ) : null}
             </form>
             {user ? (
-              <div className="flex justify-center">
+              <div className="flex flex-col items-center justify-center">
+                <header className="py-4">
+                  <h1 className="text-center text-xl font-medium">
+                    ¡Sesión iniciada!
+                  </h1>
+                </header>
                 <button
-                  className="bg-flora-second text-white font-medium px-3 py-2 rounded-md"
+                  className="bg-flora-second w-36 text-white font-medium px-3 py-2 rounded-md"
                   onClick={handleLogout}
                 >
                   Cerrar sesión

@@ -146,7 +146,7 @@ const Navbar = () => {
         className={
           !isOpen
             ? "absolute top-[-100%] left-0 w-screen h-[35vh] bg-flora-base flex flex-col justify-center items-center rounded-b-[50px] ease-in duration-700"
-            : "absolute top-[75px] left-0 w-screen h-[55vh] bg-flora-base shadow-sm flex flex-col justify-center rounded-b-[50px] items-center ease-out duration-700"
+            : "absolute top-[75px] left-0 w-screen h-[55vh] z-10 bg-flora-base shadow-sm flex flex-col justify-center rounded-b-[50px] items-center ease-out duration-700"
         }
       >
         <li className="mobile">

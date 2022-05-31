@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useId } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { getDocs } from "firebase/firestore";
+import { deleteDoc, getDocs, doc } from "firebase/firestore";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import { CloseOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 
 import { useCartContext } from "../context/cartContext";
 import { formatPrice } from "../functions/formatPrice";
-import { carrito, productos } from "../firebase";
+import { carrito, productos, db } from "../firebase";
 
 const Cart = () => {
   const [product, setProduct] = useState([]);
@@ -21,9 +21,9 @@ const Cart = () => {
 
   const userEmail = localStorage.getItem("userEmail");
 
-  const removeItem = (item) => {
-    console.log(item);
-  }
+  const removeItem = async (item) => {
+    deleteDoc(doc(db, "carrito", item.id));
+  };
 
   useEffect(() => {
     const getCartProducts = async () => {
@@ -86,7 +86,7 @@ const Cart = () => {
                         {formatPrice(productItem.price)}
                       </p>
                       <button
-                        onClick={() => removeItem(productItem[productItem])}
+                        onClick={() => removeItem(product[0]["id"])}
                         className="lg:px-2 px-3 text-md lg:text-lg flex items-center text-white font-medium bg-flora-second rounded-md transition-all duration-300 hover:bg-flora-secondhover"
                       >
                         <CloseOutlined />
@@ -104,7 +104,7 @@ const Cart = () => {
           ) : (
             <div className="flex flex-col max-w-full max-h-full bg-neutral-100 rounded-b-lg justify-center items-center py-4 mt-4">
               <h1 className="font-medium py-3 mb-3">
-                Total a pagar: {formatPrice(subTotal)}
+                Total a pagar: {formatPrice(subTotal)} COP
               </h1>
               <button
                 onClick={() => setToLocalStorage()}

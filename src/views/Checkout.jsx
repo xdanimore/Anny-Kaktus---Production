@@ -198,7 +198,7 @@ const Checkout = () => {
                 name="amount-in-cents"
                 value={subTotal * 100}
               />
-              <input type="hidden" name="reference" value={id + Date.now()} />
+              <input type="hidden" name="reference" value={id + Date.now() + id} />
               <input
                 type="hidden"
                 name="redirect-url"
