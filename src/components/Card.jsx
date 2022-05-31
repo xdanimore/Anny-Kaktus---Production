@@ -10,7 +10,7 @@ const Card = (props) => {
         className="object-cover w-full h-[182px] rounded-t-xl"
       />
       <div className="py-3 px-6 h-[200px] overflow-hidden flex flex-col justify-between">
-        <h1 className="font-bold text-xl">{props.title}</h1>
+        <Link to={`/productos/${props.to}`} className="font-bold text-xl">{props.title}</Link>
         <p className="text-neutral-500 text-sm">{props.description}</p>
         <div className="flex justify-between items-center">
           <h1 className="font-bold text-xl">{props.price}</h1>

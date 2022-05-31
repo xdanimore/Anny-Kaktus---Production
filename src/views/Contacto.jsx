@@ -34,8 +34,8 @@ const Contacto = () => {
         });
       } else {
         emailjs.sendForm(
-          "service_z0p5mdr",
-          "template_ejmobov",
+          "service_uml50j3",
+          "template_9mymhop",
           form.current,
           EMAILJS_PUBLIC_KEY
         );
