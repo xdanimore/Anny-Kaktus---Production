@@ -1,4 +1,5 @@
-import React, { useState, useRef, useId } from "react";
+import React, { useState, useEffect, useRef, useId } from "react";
+import axios from "axios";
 import { motion } from "framer-motion";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
@@ -18,13 +19,20 @@ const Checkout = () => {
     city: "",
   });
 
+  const [location, setLocation] = useState({
+    state: "",
+    city: "",
+  });
+
   const checkout = useRef();
 
   const id = useId();
-  
+
   const redirect = useNavigate();
 
   const url = "https://checkout.wompi.co/p/";
+  const dptoURL =
+    "https://raw.githubusercontent.com/marcovega/colombia-json/master/colombia.min.json";
   const subTotal = localStorage.getItem("subTotal");
 
   const wompiPay = () => {
@@ -75,6 +83,22 @@ const Checkout = () => {
     console.log(data);
   };
 
+  useEffect(() => {
+    const getLocations = async () => {
+      const response = await axios.get(dptoURL);
+
+      const locationInfo = response.data;
+
+      for (let i = 0; i < locationInfo.length; i++) {
+        setLocation(location.state.locationInfo[i].departamento);
+        console.log(locationInfo[i].departamento);
+        console.log(locationInfo[i].ciudades);
+        setLocation(location.city.locationInfo[i].ciudades);
+      }
+    };
+
+    getLocations();
+  }, []);
   return (
     <HelmetProvider>
       <Helmet>
@@ -160,6 +184,14 @@ const Checkout = () => {
                 id={id + "address"}
               />
               <label htmlFor="state">Departamento</label>
+              <select name="state" id="state" className="contactinput">
+                <option value="">Selecciona un departamento</option>
+                {location.state.map((state) => (
+                  <option key={id} value={state.departamento}>
+                    {state.departamento}
+                  </option>
+                ))}
+              </select>
               <input
                 type="text"
                 htmlFor="state"
@@ -198,7 +230,11 @@ const Checkout = () => {
                 name="amount-in-cents"
                 value={subTotal * 100}
               />
-              <input type="hidden" name="reference" value={id + Date.now() + id} />
+              <input
+                type="hidden"
+                name="reference"
+                value={id + Date.now() + id}
+              />
               <input
                 type="hidden"
                 name="redirect-url"

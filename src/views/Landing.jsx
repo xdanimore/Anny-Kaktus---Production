@@ -9,10 +9,10 @@ const Landing = () => {
   return (
     <HelmetProvider>
       <Helmet>
-        <title>Anny Kaktus</title>
+        <title>Anny Kactus</title>
         <meta charSet="utf-8" />
-        <meta name="description" content="Anny Kaktus - Inicio" />
-        <meta name="keywords" content="Anny, Kaktus, Shopping, Compras, Ecommerce, Tienda" />
+        <meta name="description" content="Anny Kactus - Inicio" />
+        <meta name="keywords" content="Anny, Kactus, Shopping, Compras, Ecommerce, Tienda" />
         <meta name="author" content="Andrés Rodríguez - Pulgueta" />
       </Helmet>
       <motion.header>

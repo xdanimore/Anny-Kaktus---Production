@@ -28,7 +28,7 @@ const Navbar = () => {
           to={"/"}
           onClick={isOpen ? handleClick : null}
         >
-          Anny Kaktus
+          Anny Kactus
         </Link>
       </motion.div>
 
