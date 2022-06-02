@@ -36,4 +36,4 @@ The purpose of the source code to be public, is to have proof of the hard work t
 
 Soon, the link to the actual website will be available when is deployed to Firebase.
 
-Link to the production [website](https://annykaktus.web.app/)
+Link to the production [website](https://annykactus.com/)
