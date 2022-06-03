@@ -19,10 +19,8 @@ const Checkout = () => {
     city: "",
   });
 
-  const [location, setLocation] = useState({
-    state: "",
-    city: "",
-  });
+  const [loc, setLoc] = useState([]);
+  const [city, setCity] = useState([]);
 
   const checkout = useRef();
 
@@ -34,6 +32,15 @@ const Checkout = () => {
   const dptoURL =
     "https://raw.githubusercontent.com/marcovega/colombia-json/master/colombia.min.json";
   const subTotal = localStorage.getItem("subTotal");
+
+  const handleState = (dpto) => {
+    const state = loc.find((item) => item.departamento === dpto);
+    let stateArr = [];
+
+    stateArr.push(state);
+    setCity(stateArr);
+    setData({ ...data, state: dpto });
+  };
 
   const wompiPay = () => {
     const wompiId = document.getElementById("wompiId");
@@ -88,13 +95,13 @@ const Checkout = () => {
       const response = await axios.get(dptoURL);
 
       const locationInfo = response.data;
+      const arr = [];
 
-      for (let i = 0; i < locationInfo.length; i++) {
-        setLocation(location.state.locationInfo[i].departamento);
-        console.log(locationInfo[i].departamento);
-        console.log(locationInfo[i].ciudades);
-        setLocation(location.city.locationInfo[i].ciudades);
-      }
+      locationInfo.forEach((location) => {
+        arr.push(location);
+      });
+
+      setLoc(arr);
     };
 
     getLocations();
@@ -145,6 +152,7 @@ const Checkout = () => {
             ref={checkout}
             className="min-h-full flex flex-col justify-between w-[350px] md:w-[460px] lg:w-full"
             onSubmit={dataLogger}
+            action={url}
           >
             <div className="bg-white px-6 py-8 rounded-lg shadow-md">
               <label htmlFor="name">Nombres y Apellidos</label>
@@ -184,31 +192,52 @@ const Checkout = () => {
                 id={id + "address"}
               />
               <label htmlFor="state">Departamento</label>
-              <select name="state" id="state" className="contactinput">
+              <select
+                name="state"
+                id={id + "state"}
+                className="contactinput"
+                onChange={(e) => handleState(e.target.value)}
+              >
                 <option value="">Selecciona un departamento</option>
-                {location.state.map((state) => (
-                  <option key={id} value={state.departamento}>
+                {loc.map((state) => (
+                  <option key={id + state.id} value={state.departamento}>
                     {state.departamento}
                   </option>
                 ))}
               </select>
-              <input
-                type="text"
-                htmlFor="state"
-                name="state"
-                className="contactinput"
-                onChange={(e) => setData({ ...data, state: e.target.value })}
-                id={id + "state"}
-              />
-              <label htmlFor="email">Ciudad</label>
-              <input
-                type="text"
-                htmlFor="city"
-                name="city"
-                className="contactinput"
-                onChange={(e) => setData({ ...data, city: e.target.value })}
-                id={id + "city"}
-              />
+
+              {city.length > 0 &&
+                city.map((cty) => {
+                  return (
+                    <>
+                      <label htmlFor="city">
+                        Ciudad
+                      </label>
+                      <select
+                        name="city"
+                        id={id + "city"}
+                        className="contactinput"
+                        onChange={(e) =>
+                          setData({ ...data, city: e.target.value })
+                        }
+                      >
+                        <option
+                          value=""
+                        >
+                          Selecciona una ciudad
+                        </option>
+                        {cty.ciudades.map((mun) => (
+                          <option
+                            value={mun}
+                          >
+                            {mun}
+                          </option>
+                        ))}
+                      </select>
+                    </>
+                  );
+                })}
+
               <p className="font-semibold">
                 Valor a pagar: {formatPrice(subTotal)} COP
               </p>
@@ -218,6 +247,9 @@ const Checkout = () => {
               >
                 Ir a pagar
               </button>
+              {/* <button onClick={() => console.log(data)}>
+                ver data
+              </button> */}
             </div>
           </motion.form>
 
