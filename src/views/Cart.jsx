@@ -1,12 +1,20 @@
 import React, { useState, useEffect, useId } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { deleteDoc, getDocs, doc } from "firebase/firestore";
+import {
+  deleteDoc,
+  getDocs,
+  doc,
+  updateDoc,
+  deleteField,
+  arrayRemove,
+} from "firebase/firestore";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import { CloseOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 
 import { useCartContext } from "../context/cartContext";
 import { formatPrice } from "../functions/formatPrice";
 import { carrito, productos, db } from "../firebase";
+import toast, { Toaster } from "react-hot-toast";
 
 const Cart = () => {
   const [product, setProduct] = useState([]);
@@ -21,29 +29,42 @@ const Cart = () => {
 
   const userEmail = localStorage.getItem("userEmail");
 
-  const removeItem = async (item) => {
-    deleteDoc(doc(db, "carrito", item.id));
+  const removeItem = async (cartItem) => {
+    const cartRef = doc(db, "carrito", product[0].id);
+
+    await updateDoc(cartRef, {
+      product: arrayRemove(cartItem),
+    });
+
+    setLoad(true);
   };
 
   useEffect(() => {
     const getCartProducts = async () => {
+      let subTotal = 0;
+      let prodsArr = [];
+      let array = [];
+
       if (load) {
         setLoad(false);
       }
+
       const data = await getDocs(carrito);
+
       if (userEmail && data) {
-        let subTotal = 0;
-        let prodsArr = [];
-        let array = [];
         data.forEach((product) => {
           if (product.data().buyer === userEmail) {
-            prodsArr.push({ product: product.data().product, id: product.id });
+            prodsArr.push({
+              product: product.data().product,
+              id: product.id,
+            });
             array.push(product.data().product);
           }
         });
         array[0].forEach((product) => {
           subTotal += product.price;
         });
+
         setProduct(prodsArr);
         setSubTotal(subTotal);
       }
@@ -61,6 +82,7 @@ const Cart = () => {
       <Helmet>
         <title>Carrito</title>
       </Helmet>
+      <Toaster />
       <div className="min-h-screen h-full bg-neutral-100">
         <h1 className="text-2xl text-center font-semibold py-5">Tu carrito</h1>
         <div className="bg-white shadow-lg md:pt-5 w-80 md:w-[720px] lg:w-[960px] mx-auto rounded-lg mb-10">
@@ -86,7 +108,7 @@ const Cart = () => {
                         {formatPrice(productItem.price)}
                       </p>
                       <button
-                        onClick={() => removeItem(product[0]["id"])}
+                        onClick={() => removeItem(productItem)}
                         className="lg:px-2 px-3 text-md lg:text-lg flex items-center text-white font-medium bg-flora-second rounded-md transition-all duration-300 hover:bg-flora-secondhover"
                       >
                         <CloseOutlined />
