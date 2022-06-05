@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { deleteDoc, getDocs, doc } from "firebase/firestore";
 import emailjs from "@emailjs/browser";
 import { CheckCircleOutlined } from "@ant-design/icons";

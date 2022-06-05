@@ -1,4 +1,4 @@
-import React, { useState, useId, useRef } from "react";
+import { useState, useId, useRef } from "react";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,

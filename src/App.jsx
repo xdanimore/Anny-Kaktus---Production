@@ -1,4 +1,3 @@
-import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
@@ -18,7 +17,7 @@ import { auth } from "./firebase";
 import { useUserContext } from "./context/userContext";
 
 const App = () => {
-  const { user, setUser } = useUserContext();
+  const { setUser } = useUserContext();
 
   onAuthStateChanged(auth, (fireUser) => {
     fireUser ? setUser(fireUser) : setUser(null);

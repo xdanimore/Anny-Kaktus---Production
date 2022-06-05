@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import toast, { Toaster } from "react-hot-toast";
