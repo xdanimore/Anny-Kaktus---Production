@@ -38,7 +38,7 @@ const Forgot = () => {
           form.current.reset();
         })
         .catch(() => {
-          toast("¡No eres admin!", {
+          toast("¡Ocurrió un error!", {
             duration: 1250,
             icon: "🤨",
           });
