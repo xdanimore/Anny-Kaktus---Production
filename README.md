@@ -22,7 +22,9 @@ The purpose of the source code to be public, is to have proof of the hard work t
 - Git.
 - GitHub.
 - React.
+- Axios.
 - React-Router-DOM.
+- React-Google-ReCAPTCHA.
 - React-Helmet-Async.
 - React-Hot-Toast.
 - React-Loading-Skeleton.
