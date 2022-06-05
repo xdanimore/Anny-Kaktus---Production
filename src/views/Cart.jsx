@@ -7,12 +7,13 @@ import {
   updateDoc,
   arrayRemove,
 } from "firebase/firestore";
+import toast, { Toaster } from "react-hot-toast";
 import { HelmetProvider, Helmet } from "react-helmet-async";
-import { CloseOutlined, ShoppingCartOutlined } from "@ant-design/icons";
+import { ShoppingCartOutlined } from "@ant-design/icons";
 
 import { formatPrice } from "../functions/formatPrice";
 import { carrito, db } from "../firebase";
-import toast, { Toaster } from "react-hot-toast";
+import CartCard from "./CartCard";
 
 const Cart = () => {
   const [product, setProduct] = useState([]);
@@ -103,32 +104,16 @@ const Cart = () => {
                 key={product[0]["id"] + id + productItem.title}
                 className="py-5 md:py-1 max-w-xs mx-auto flex flex-col items-center md:flex-col md:justify-start"
               >
-                <div className="border-2 max-w-[270px] md:max-w-xl md:bg-neutral-100 md:w-[576px] rounded-lg border-neutral-200 px-6 py-4 h-full md:flex md:justify-between md:items-center lg:items-center lg:h-full">
-                  <img
-                    className="w-52 rounded-lg lg:w-32 lg:h-[128px] object-cover"
-                    src={productItem.url}
-                    alt={productItem.title}
-                  />
-                  <div className="md:flex md:flex-col md:w-56 lg:justify-around lg:w-72">
-                    <p className="text-lg font-medium my-2 lg:font-bold lg:my-1">
-                      {productItem.title}
-                    </p>
-
-                    <div className="flex justify-between">
-                      <p className="text-md font-medium my-2">
-                        {formatPrice(productItem.price)}
-                      </p>
-                      <button
-                        onClick={() => removeItem(productItem)}
-                        className="lg:px-2 px-3 text-md lg:text-lg flex items-center text-white font-medium bg-flora-second rounded-md transition-all duration-300 hover:bg-flora-secondhover"
-                      >
-                        <CloseOutlined />
-                      </button>
-                    </div>
-                  </div>
-                </div>
+                <CartCard
+                  url={productItem.url}
+                  alt={productItem.title}
+                  title={productItem.title}
+                  price={productItem.price}
+                  removeFromCart={() => removeItem(productItem)}
+                />
               </ul>
             ))}
+
           {/* Si no hay productos en el carrito, mostrará que el carrito está vacío, de lo contrario, mostrará cada tarjeta y su total a pagar */}
           {product.length === 0 ? (
             <div className="flex justify-center p-4 md:pb-8">
