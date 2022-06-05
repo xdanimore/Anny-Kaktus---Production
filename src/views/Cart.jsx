@@ -5,15 +5,13 @@ import {
   getDocs,
   doc,
   updateDoc,
-  deleteField,
   arrayRemove,
 } from "firebase/firestore";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import { CloseOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 
-import { useCartContext } from "../context/cartContext";
 import { formatPrice } from "../functions/formatPrice";
-import { carrito, productos, db } from "../firebase";
+import { carrito, db } from "../firebase";
 import toast, { Toaster } from "react-hot-toast";
 
 const Cart = () => {
@@ -22,8 +20,6 @@ const Cart = () => {
   const [subTotal, setSubTotal] = useState(0);
 
   const id = useId();
-
-  const { cart } = useCartContext();
 
   const redirect = useNavigate();
 
@@ -34,6 +30,11 @@ const Cart = () => {
 
     await updateDoc(cartRef, {
       product: arrayRemove(cartItem),
+    });
+
+    toast("Producto eliminado del carrito", {
+      icon: "😮‍💨",
+      duration: 1250,
     });
 
     setLoad(true);
@@ -61,12 +62,22 @@ const Cart = () => {
             array.push(product.data().product);
           }
         });
-        array[0].forEach((product) => {
-          subTotal += product.price;
-        });
 
-        setProduct(prodsArr);
-        setSubTotal(subTotal);
+        if (array[0].length > 0) {
+          array[0].forEach((product) => {
+            subTotal += product.price;
+          });
+        }
+
+        if (prodsArr[0].product.length === 0) {
+          await deleteDoc(doc(db, "carrito", prodsArr[0].id));
+          localStorage.removeItem("referenceId");
+          window.location.reload();
+        } else {
+          setProduct(prodsArr);
+          setSubTotal(subTotal);
+          localStorage.setItem("referenceId", prodsArr[0].id);
+        }
       }
     };
 

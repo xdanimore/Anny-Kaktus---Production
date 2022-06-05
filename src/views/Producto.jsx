@@ -3,23 +3,13 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import toast, { Toaster } from "react-hot-toast";
 import { LeftOutlined, ShoppingCartOutlined } from "@ant-design/icons";
-
-import {
-  db,
-  usuarios,
-  carrito,
-  getCartContent,
-  updateData,
-  queryDoc,
-} from "../firebase";
 import { doc, collection, getDoc, addDoc } from "firebase/firestore";
+
+import { db, carrito, getCartContent, updateData, queryDoc } from "../firebase";
 import SkeletonCard from "../components/SkeletonCard";
 
-import { useCartContext } from "../context/cartContext";
 import { useUserContext } from "../context/userContext";
 import { formatPrice } from "../functions/formatPrice";
-
-const getFromLocalStorage = JSON.parse(localStorage.getItem("cart") || "[]");
 
 const Producto = () => {
   const { id } = useParams();
@@ -29,8 +19,7 @@ const Producto = () => {
   const [productInfo, setProductInfo] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const { user, setUser } = useUserContext();
-  const { cart, setCart } = useCartContext(getFromLocalStorage);
+  const { user } = useUserContext();
 
   let object = {
     buyer: localStorage.getItem("userEmail"),
@@ -72,25 +61,6 @@ const Producto = () => {
     }
   };
 
-  const addToCart = async () => {
-    if (user) {
-      toast("¡Producto agregado!", {
-        icon: "🛒",
-        position: "top-right",
-        duration: 1500,
-      });
-
-      setCart([...cart, productInfo]);
-    } else {
-      navigate("/sesion");
-      toast("¡Debes iniciar sesión!", {
-        icon: "🎈",
-        position: "top-center",
-        duration: 1500,
-      });
-    }
-  };
-
   const getProduct = async (prodID) => {
     const colRef = collection(db, "productos");
     const docRef = doc(colRef, prodID);
@@ -107,7 +77,7 @@ const Producto = () => {
       setLoading(false);
     };
     getInfo();
-  }, [id, cart]);
+  }, [id]);
 
   return (
     <HelmetProvider>

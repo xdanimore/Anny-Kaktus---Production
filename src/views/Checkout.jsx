@@ -247,9 +247,6 @@ const Checkout = () => {
               >
                 Ir a pagar
               </button>
-              {/* <button onClick={() => console.log(data)}>
-                ver data
-              </button> */}
             </div>
           </motion.form>
 
@@ -265,12 +262,12 @@ const Checkout = () => {
               <input
                 type="hidden"
                 name="reference"
-                value={id + Date.now() + id}
+                value={localStorage.getItem("referenceId")}
               />
               <input
                 type="hidden"
                 name="redirect-url"
-                value="http://localhost:3000/success"
+                value="https://annykactus.com/success"
               />
               <input
                 type="hidden"

@@ -12,7 +12,6 @@ import { formatPrice } from "../functions/formatPrice";
 const Productos = () => {
   const [loading, setLoading] = useState(true);
   const [product, setProduct] = useState([]);
-  const [pages, setPages] = useState();
 
   useEffect(() => {
     const getProducts = async () => {
