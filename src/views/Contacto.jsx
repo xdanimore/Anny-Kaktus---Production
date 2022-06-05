@@ -22,19 +22,19 @@ const Contacto = () => {
 
     if (captcha.current.getValue()) {
       console.log("not a robot");
-      if (name === "" || surname === "" || email === "" || message === "") {
+      if (name === "" || surname === "" || email === "" || message === "") {    // Si alguno de los campos está vacío (name, surname, email, message) se muestra un toast de error
         toast("¡Debes llenar todos los campos!", {
           type: "error",
           duration: 1000,
         });
-      } else if (!validateEmail(email)) {
+      } else if (!validateEmail(email)) {   // Se valida si el email no es válido con la función validateEmail
         toast("¡El email no es válido!", {
           type: "error",
           duration: 1000,
         });
       } else {
         emailjs.sendForm(
-          "service_uml50j3",
+          "service_uml50j3",    // Se envía el email con el servicio de emailjs
           "template_9mymhop",
           form.current,
           EMAILJS_PUBLIC_KEY
@@ -51,7 +51,7 @@ const Contacto = () => {
         setMessage("");
       }
     } else {
-      toast("¡Debes marcar el captcha!", {
+      toast("¡Debes marcar el captcha!", {    // Si no se ha marcado el captcha se muestra un toast de error
         type: "error",
         duration: 1250,
       });

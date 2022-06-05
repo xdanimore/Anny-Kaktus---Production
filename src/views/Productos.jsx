@@ -17,7 +17,7 @@ const Productos = () => {
     const getProducts = async () => {
       const data = await getDocs(productos);
       setProduct(
-        data.docs.map((doc) => ({
+        data.docs.map((doc) => ({       // Esta función se encarga de obtener los productos cada vez que se cargue la página
           ...doc.data(),
           id: doc.id,
         }))
@@ -41,7 +41,7 @@ const Productos = () => {
         </header>
         <div className="h-full">
           <div className="px-5 pb-20 py-3 flex flex-col justify-center max-w-[400px] h-auto mx-auto md:max-w-[720px] lg:max-w-[1440px]">
-            {loading && (
+            {loading && (     // Aquí mientras se carga la página, se muestran tarjetas esqueleto
               <div className="grid grid-cols-1 gap-10 place-items-center mx-auto md:grid-cols-2 lg:grid-cols-3 lg:gap-32">
                 <SkeletonCard />
                 <SkeletonCard />
@@ -63,7 +63,7 @@ const Productos = () => {
               }}
               className="grid grid-cols-1 gap-10 place-content-center mx-auto md:grid-cols-2 lg:grid-cols-3 lg:gap-32 lg:gap-y-10"
             >
-              {product.map((val, id) => {
+              {product.map((val, id) => {     // Se recorre el arreglo de productos de la base de datos de Firebase y se asignan los valores a cada tarjeta
                 return (
                   <Card
                     key={id}

@@ -11,7 +11,7 @@ import { formatPrice } from "../functions/formatPrice";
 const Success = () => {
   const [product, setProduct] = useState({
     products: "",
-    total: "",
+    total: "",      /* Inicialización de los valores de cada producto */
     id: "",
   });
 
@@ -19,6 +19,7 @@ const Success = () => {
 
   const form = useRef();
 
+  // Asignando valores en el local storage del navegador
   const userEmail = localStorage.getItem("userEmail");
   const referenceId = localStorage.getItem("referenceId");
 
@@ -31,7 +32,7 @@ const Success = () => {
 
     const getCartProducts = async () => {
       let subTotal = 0;
-      let prodsArr = [];
+      let prodsArr = [];    // Esta función se encarga de obtener los productos del carrito
       let array = [];
 
       const data = await getDocs(carrito);
@@ -57,7 +58,7 @@ const Success = () => {
         });
         setProduct({
           products: invoiceProds.toString(),
-          total: formatPrice(subTotal),
+          total: formatPrice(subTotal),           // Aquí se asignan los valores de cada producto traídos desde la base de datos de Firebase
           id: localStorage.getItem("referenceId"),
         });
         setLoad(true);
@@ -75,7 +76,7 @@ const Success = () => {
         .sendForm(
           "service_uml50j3",
           "template_8z5qgtx",
-          form.current,
+          form.current,       // Aquí se asigna el formulario que se va a enviar
           EMAILJS_PUBLIC_KEY
         )
         .then(

@@ -34,7 +34,7 @@ const Auth = () => {
 
   const handleLogout = (e) => {
     e.preventDefault();
-    toast.loading("Cerrando sesión...", {
+    toast.loading("Cerrando sesión...", {   // Se cierra la sesión del usuario y se eliminan todos los valores del local storage
       duration: 1250,
     });
     signOut(auth);
@@ -47,22 +47,22 @@ const Auth = () => {
     e.preventDefault();
 
     if (data.email === "" || data.password === "") {
-      toast("¡Debes llenar todos los campos!", {
+      toast("¡Debes llenar todos los campos!", {    // Si no se llenan todos los campos se muestra un toast de error
         type: "error",
         duration: 1000,
       });
     } else if (!validateEmail(data.email)) {
-      toast("¡El email no es válido!", {
+      toast("¡El email no es válido!", {    // Si el email no es válido se muestra un toast de error
         type: "error",
         duration: 1000,
       });
     } else {
-      toast.loading("Iniciando sesión...", {
+      toast.loading("Iniciando sesión...", { // Se inicia la sesión del usuario
         duration: 1000,
       });
       signInWithEmailAndPassword(auth, data.email, data.password)
         .then((userCredential) => {
-          const user = userCredential.user;
+          const user = userCredential.user; // Se obtiene el usuario
           toast.success("¡Bienvenido!");
           localStorage.setItem("userEmail", user.email);
           // redirect("/productos")
@@ -86,21 +86,21 @@ const Auth = () => {
     e.preventDefault();
 
     if (captcha.current.getValue()) {
-      console.log("not a robot");
+      console.log("not a robot");   // Si el usuario no es un robot se muestra un toast de éxito
       if (data.email === "" || data.password === "") {
-        toast("¡Debes llenar todos los campos!", {
+        toast("¡Debes llenar todos los campos!", {  // Si no se llenan todos los campos se muestra un toast de error
           type: "error",
           duration: 1250,
         });
       } else if (!validateEmail(data.email)) {
         toast("¡El email no es válido!", {
-          type: "error",
+          type: "error",    // Si el email no es válido se muestra un toast de error
           duration: 1000,
         });
         captcha.current.reset();
       } else {
         createUserWithEmailAndPassword(auth, data.email, data.password)
-          .then((userCredential) => {
+          .then((userCredential) => {   // Se crea el usuario con los datos proporcionados
             const user = userCredential.user;
             toast.success("¡Usuario creado y sesión iniciada!");
             register.current.reset();
@@ -116,7 +116,7 @@ const Auth = () => {
           })
           .catch((err) => {
             toast.error("¡Ocurrió un error!");
-            register.current.reset();
+            register.current.reset();   // Si ocurre un error se muestra un toast de error
             setData({
               email: "",
               password: "",
@@ -125,11 +125,11 @@ const Auth = () => {
           });
 
         await addDoc(usuarios, {
-          email: data.email,
+          email: data.email,    // Se agrega el usuario a la base de datos y a los usuarios en Authentication - Firebase
         });
       }
     } else {
-      toast("¡Debes marcar el captcha!", {
+      toast("¡Debes marcar el captcha!", {    // Si el usuario no marcó el captcha se muestra un toast de error
         type: "error",
         duration: 1250,
       });
@@ -168,6 +168,7 @@ const Auth = () => {
               onSubmit={handleLogin}
               className="h-full flex flex-col justify-between"
             >
+              {/* Si no hay usuario, se muestran los forms para iniciar sesión y registro, caso contrario, se muestra el botón de cerrar sesión */}
               {!user ? (
                 <>
                   <h1 className="text-center font-semibold text-3xl">

@@ -36,7 +36,7 @@ const App = () => {
         <Route path="/carrito" element={<Cart />} />
         <Route path="/carrito/checkout" element={<Checkout />} />
         <Route path="/success" element={<Success />} />
-
+        {/* Rutas establecidas para las vistas de cada página, "*" significa que no se encontró la ruta */}
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

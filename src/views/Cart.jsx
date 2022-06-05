@@ -26,10 +26,10 @@ const Cart = () => {
   const userEmail = localStorage.getItem("userEmail");
 
   const removeItem = async (cartItem) => {
-    const cartRef = doc(db, "carrito", product[0].id);
+    const cartRef = doc(db, "carrito", product[0].id); // Referencia al documento del carrito
 
     await updateDoc(cartRef, {
-      product: arrayRemove(cartItem),
+      product: arrayRemove(cartItem), // Eliminando el producto del carrito acorde al index que se le pase
     });
 
     toast("Producto eliminado del carrito", {
@@ -57,7 +57,7 @@ const Cart = () => {
           if (product.data().buyer === userEmail) {
             prodsArr.push({
               product: product.data().product,
-              id: product.id,
+              id: product.id, // Se asignan los valores de cada producto del carrito para cada comprador en el local storage del navegador
             });
             array.push(product.data().product);
           }
@@ -65,16 +65,16 @@ const Cart = () => {
 
         if (array[0].length > 0) {
           array[0].forEach((product) => {
-            subTotal += product.price;
+            subTotal += product.price; // Se suma el subtotal por cada producto añadido
           });
         }
 
         if (prodsArr[0].product.length === 0) {
           await deleteDoc(doc(db, "carrito", prodsArr[0].id));
-          localStorage.removeItem("referenceId");
+          localStorage.removeItem("referenceId"); // Si no hay productos en el carrito, se elimina el documento del carrito y se actualiza la página
           window.location.reload();
         } else {
-          setProduct(prodsArr);
+          setProduct(prodsArr); // Si hay productos en el carrito, se agregan al documento en la base de datos
           setSubTotal(subTotal);
           localStorage.setItem("referenceId", prodsArr[0].id);
         }
@@ -129,7 +129,7 @@ const Cart = () => {
                 </div>
               </ul>
             ))}
-
+          {/* Si no hay productos en el carrito, mostrará que el carrito está vacío, de lo contrario, mostrará cada tarjeta y su total a pagar */}
           {product.length === 0 ? (
             <div className="flex justify-center p-4 md:pb-8">
               <h1 className="text-sm md:text-lg">Carrito vacío</h1>

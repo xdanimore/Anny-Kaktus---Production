@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
 
 const Card = (props) => {
+
+  // Este es un componente que hace referencia a la tarjeta de cada producto
+
   return (
     <div className="h-96 w-80 rounded-xl shadow-md bg-white">
       <img

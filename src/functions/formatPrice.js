@@ -4,3 +4,5 @@ export const formatPrice = (price) => {
     currency: "COP",
   }).format(price);
 };
+
+// Función para dar formato a un número, en este caso para el precio de un producto

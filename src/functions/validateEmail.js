@@ -3,3 +3,5 @@ export const validateEmail = (email) => {
     return true;
   }
 };
+
+// Función para evalar si un correo es válido mediante una expresión regular

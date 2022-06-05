@@ -28,23 +28,23 @@ const Checkout = () => {
 
   const redirect = useNavigate();
 
-  const url = "https://checkout.wompi.co/p/";
+  const url = "https://checkout.wompi.co/p/"; // URL de la API de Wompi
   const dptoURL =
-    "https://raw.githubusercontent.com/marcovega/colombia-json/master/colombia.min.json";
+    "https://raw.githubusercontent.com/marcovega/colombia-json/master/colombia.min.json"; // URL de la API de departamentos
   const subTotal = localStorage.getItem("subTotal");
 
   const handleState = (dpto) => {
     const state = loc.find((item) => item.departamento === dpto);
-    let stateArr = [];
+    let stateArr = [];  // Arreglo de estados
 
     stateArr.push(state);
-    setCity(stateArr);
+    setCity(stateArr);  // Estableciendo el arreglo de estados
     setData({ ...data, state: dpto });
   };
 
   const wompiPay = () => {
     const wompiId = document.getElementById("wompiId");
-
+    // Función para realizar el pago con Wompi
     wompiId.submit();
     console.log("wompi joined");
   };
@@ -60,7 +60,7 @@ const Checkout = () => {
       data.address === "" ||
       data.city === "" ||
       data.state === "" ||
-      data.phone === "" ||
+      data.phone === "" ||    // Si alguno de los campos está vacío se muestra un toast de error
       data.email === "" ||
       data.name === ""
     ) {
@@ -68,11 +68,11 @@ const Checkout = () => {
         duration: 1250,
       });
     } else if (!validateEmail(data.email)) {
-      toast.error("El email no es válido", {
+      toast.error("El email no es válido", {    // Se valida si el email no es válido con la función validateEmail
         duration: 1250,
       });
     } else {
-      toast.loading("Redirigiéndote hacia Wompi...", {
+      toast.loading("Redirigiéndote hacia Wompi...", {    // Se redirige a Wompi si todo está correcto
         duration: 1250,
       });
       wompiPay();
@@ -87,14 +87,13 @@ const Checkout = () => {
       checkout.current.reset();
     }
 
-    console.log(data);
   };
 
   useEffect(() => {
     const getLocations = async () => {
       const response = await axios.get(dptoURL);
 
-      const locationInfo = response.data;
+      const locationInfo = response.data;     // Cada que se cargue la página, se obtiene la información de los departamentos
       const arr = [];
 
       locationInfo.forEach((location) => {
@@ -209,7 +208,7 @@ const Checkout = () => {
               {city.length > 0 &&
                 city.map((cty) => {
                   return (
-                    <>
+                    <>        {/* Si no hay departamento seleccionado, no se mostrará la opción de escoger ciudad */}
                       <label htmlFor="city">
                         Ciudad
                       </label>

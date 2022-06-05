@@ -12,7 +12,7 @@ import { useUserContext } from "../context/userContext";
 import { formatPrice } from "../functions/formatPrice";
 
 const Producto = () => {
-  const { id } = useParams();
+  const { id } = useParams();   // Obteniendo el id del producto
 
   const navigate = useNavigate();
 
@@ -27,7 +27,7 @@ const Producto = () => {
   };
 
   const addToUserCart = async () => {
-    if (user) {
+    if (user) {   // Si el usuario está logueado se agrega al carrito y se obtiene su información
       const content = await getCartContent();
 
       if (content.state) {
@@ -61,7 +61,7 @@ const Producto = () => {
     }
   };
 
-  const getProduct = async (prodID) => {
+  const getProduct = async (prodID) => {        // Obteniendo la información del producto individual
     const colRef = collection(db, "productos");
     const docRef = doc(colRef, prodID);
     const snapDoc = await getDoc(docRef);
@@ -70,7 +70,7 @@ const Producto = () => {
     return product;
   };
 
-  useEffect(() => {
+  useEffect(() => {     // Cada que se carga la página se obtiene la información del producto
     const getInfo = async () => {
       const prod = await getProduct(id);
       setProductInfo(prod);

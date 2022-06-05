@@ -17,18 +17,18 @@ const Forgot = () => {
   const handleResetPassword = async (e) => {
     e.preventDefault();
 
-    if (email === "") {
+    if (email === "") {     // Si el email está vacío
       toast("¡Debes ingresar un email!", {
-        type: "error",
+        type: "error",      // Se muestra un toast de error
         duration: 1000,
       });
     } else if (!validateEmail(email)) {
-      toast("¡El email no es válido!", {
+      toast("¡El email no es válido!", {    // Se valida si el email no es válido con la función validateEmail
         type: "error",
         duration: 1000,
       });
     } else {
-      await sendPasswordResetEmail(auth, email)
+      await sendPasswordResetEmail(auth, email)   // Se envía el email de recuperación de contraseña con el correo electrónico ingresado
         .then(() => {
           toast("¡Revisa tu correo!", {
             type: "success",

@@ -2,6 +2,8 @@ import { useState, useContext, createContext } from "react";
 
 export const UserContext = createContext();
 
+// Aquí se crea el contexto para pasar la información entre componentes si hay o no un usuario
+
 export const UserContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
