@@ -253,7 +253,6 @@ const Checkout = () => {
             <form action={url} method="GET" id="wompiId">
               <input type="hidden" name="public-key" value={WOMPI_PUBLIC_KEY} />
               <input type="hidden" name="currency" value="COP" />
-              <input type="hidden" name="signature:integrity" value={WOMPI_INTEGRITY_KEY}/>
               <input
                 type="hidden"
                 name="amount-in-cents"
