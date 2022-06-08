@@ -17,18 +17,20 @@ const Forgot = () => {
   const handleResetPassword = async (e) => {
     e.preventDefault();
 
-    if (email === "") {     // Si el email está vacío
+    if (email === "") {
+      // Si el email está vacío
       toast("¡Debes ingresar un email!", {
-        type: "error",      // Se muestra un toast de error
+        type: "error", // Se muestra un toast de error
         duration: 1000,
       });
     } else if (!validateEmail(email)) {
-      toast("¡El email no es válido!", {    // Se valida si el email no es válido con la función validateEmail
+      toast("¡El email no es válido!", {
+        // Se valida si el email no es válido con la función validateEmail
         type: "error",
         duration: 1000,
       });
     } else {
-      await sendPasswordResetEmail(auth, email)   // Se envía el email de recuperación de contraseña con el correo electrónico ingresado
+      await sendPasswordResetEmail(auth, email) // Se envía el email de recuperación de contraseña con el correo electrónico ingresado
         .then(() => {
           toast("¡Revisa tu correo!", {
             type: "success",
@@ -69,7 +71,7 @@ const Forgot = () => {
               },
             }}
             ref={form}
-            className="bg-white shadow-md rounded-md max-w-3xl py-8 px-3 flex flex-col"
+            className="bg-white shadow-md rounded-md w-80 md:w-96 py-8 px-5 flex flex-col"
             onSubmit={handleResetPassword}
           >
             <h1 className="text-xl font-medium mb-6 text-center">

@@ -5,7 +5,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 
-import { WOMPI_PUBLIC_KEY } from "../api";
+import { WOMPI_INTEGRITY_KEY, WOMPI_PUBLIC_KEY } from "../api";
 import { formatPrice } from "../functions/formatPrice";
 import { validateEmail } from "../functions/validateEmail";
 
@@ -253,6 +253,7 @@ const Checkout = () => {
             <form action={url} method="GET" id="wompiId">
               <input type="hidden" name="public-key" value={WOMPI_PUBLIC_KEY} />
               <input type="hidden" name="currency" value="COP" />
+              <input type="hidden" name="signature:integrity" value={WOMPI_INTEGRITY_KEY}/>
               <input
                 type="hidden"
                 name="amount-in-cents"
